@@ -25,10 +25,10 @@ In order to be able to build the RITY SDK, one must first generate
 the configuration. Please run the following commands to generate the
 build configuration:
 
-.. code::
+.. prompt:: bash $
 
-	$ export TEMPLATECONF=${PWD}/src/meta-rity/meta/conf/
-	$ source src/poky/oe-init-build-env
+	export TEMPLATECONF=${PWD}/src/meta-rity/meta/conf/
+	source src/poky/oe-init-build-env
 
 This operation needs to be done only once and will
 create the following files:
@@ -47,7 +47,7 @@ Building an image
 
 To build an image you need to run the bitbake commands as follows:
 
-.. code::
+.. prompt:: bash $
 
 	DISTRO=rity-demo MACHINE=<machine> bitbake rity-demo-image
 
@@ -83,7 +83,7 @@ to the following:
 
 For example you can use the following command to build the `rity-demo-image`:
 
-.. code::
+.. prompt:: bash $
 
 	DISTRO=rity-demo MACHINE=<machine> bitbake rity-demo-image
 
@@ -103,7 +103,7 @@ to the following:
 
 For example you can use the following command to build the `rity-bringup-image`:
 
-.. code::
+.. prompt:: bash $
 
 	DISTRO=rity-bringup MACHINE=<machine> bitbake rity-bringup-image
 
@@ -122,6 +122,6 @@ BSP.
 
 For example you can use the following command to build the `mtk-image`:
 
-.. code::
+.. prompt:: bash $
 
 	DISTRO=poky bitbake MACHINE=<machine> mtk-image

@@ -22,9 +22,9 @@ part of the `dialout` group:
 If your users is not part of the `dialout` group, then you must add yourself
 to that group:
 
-.. code::
+.. prompt:: bash $
 
-	$ sudo usermod -a -G dialout $USER
+	sudo usermod -a -G dialout $USER
 
 This last command requires you to log out and log back in to your account to be
 in effect.
@@ -34,15 +34,15 @@ Connect to UART shell
 
 You can now connect to the UART using the following command:
 
-.. code::
+.. prompt:: bash $
 
-	$ picocom -b 921600 /dev/ttyUSB0
+	picocom -b 921600 /dev/ttyUSB0
 
 or using
 
-.. code::
+.. prompt:: bash $
 
-	$ screen /dev/ttyUSB0 921600
+	screen /dev/ttyUSB0 921600
 
 .. note::
 
@@ -71,9 +71,9 @@ All the boards are configured with the following static IP: `192.168.96.1`.
 
 You can connect to the board using the following command:
 
-.. code::
+.. prompt:: bash $ auto
 
-	$ ssh root@192.168.96.1
+	$ssh root@192.168.96.1
 	root@i300a-pumpkin:~#
 
 Connecting using the board avahi name
@@ -90,9 +90,9 @@ to see the list of all the boards/MACHINE available.
 For instance you can connect to the `i500-pumpkin` board using the following
 command:
 
-.. code::
+.. prompt:: bash $ auto
 
-	$ ssh root@pumpkin-i500.local
+	$ssh root@pumpkin-i500.local
 	root@i500-pumpkin:~#
 
 .. hint::

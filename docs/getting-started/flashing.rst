@@ -18,11 +18,11 @@ an user or a group.
 Please run the following command in order to create a udev rule that will
 grant access to the USB device that allows the host to talk to the SoC.
 
-.. code::
+.. prompt:: bash $
 
-	$ echo 'SUBSYSTEM=="usb", ATTR{idVendor}=="0e8d", ATTR{idProduct}=="201c", MODE="0660", GROUP="plugdev"' | sudo tee -a /etc/udev/rules.d/96-rity.rules
-	$ sudo udevadm control --reload-rules
-	$ sudo udevadm trigger
+	echo 'SUBSYSTEM=="usb", ATTR{idVendor}=="0e8d", ATTR{idProduct}=="201c", MODE="0660", GROUP="plugdev"' | sudo tee -a /etc/udev/rules.d/96-rity.rules
+	sudo udevadm control --reload-rules
+	sudo udevadm trigger
 
 Adding your user to the `plugdev` group
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -32,9 +32,9 @@ In order for your user to be able to talk to the SoC, your user must be part
 of the `plugdev` group. Run the following command to add yourself to the
 `plugdev` group.
 
-.. code::
+.. prompt:: bash $
 
-	$ sudo usermod -a -G plugdev $USER
+	sudo usermod -a -G plugdev $USER
 
 This last command requires you to log out and log back in to your account to be
 in effect.
@@ -46,10 +46,10 @@ To flash a entire image, please run the command below. <machine> should
 be replace to contain the value of the `MACHINE` variable that was used to
 build the SDK.
 
-.. code::
+.. prompt:: bash $ auto
 
-	$ cd rity/build/tmp/deploy/images/<machine>
-	$ ./flashimage.py -i rity-demo-image
+	$cd rity/build/tmp/deploy/images/<machine>
+	$./flashimage.py -i rity-demo-image
 	                    Checking image
 	----------------------------------------------------------------------------
 	                      MBR_EMMC : PASS

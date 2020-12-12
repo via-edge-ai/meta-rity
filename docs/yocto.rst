@@ -11,12 +11,12 @@ This section will explain the building instruction from
 the :ref:`getting-started/building:Building the RITY SDK` section. This section is assuming that the
 SDK source code has already been downloaded.
 
-.. code::
+.. prompt:: bash $
 
-	$ cd rity
-	$ export TEMPLATECONF=${PWD}/src/meta-rity/meta/conf/
-	$ source src/poky/oe-init-build-env
-	$ DISTRO=rity-demo bitbake rity-demo-image
+	cd rity
+	export TEMPLATECONF=${PWD}/src/meta-rity/meta/conf/
+	source src/poky/oe-init-build-env
+	DISTRO=rity-demo bitbake rity-demo-image
 
 Loading the Yocto build environment
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -24,10 +24,10 @@ Loading the Yocto build environment
 In order to be able to use the Yocto tools, you must first load the yocto
 environment settings. To do this you need to run the following command:
 
-.. code::
+.. prompt:: bash $
 
-	$ export TEMPLATECONF=${PWD}/src/meta-rity/meta/conf/
-	$ source src/poky/oe-init-build-env
+	export TEMPLATECONF=${PWD}/src/meta-rity/meta/conf/
+	source src/poky/oe-init-build-env
 
 Setting `TEMPLATECONF` is only needed the first time you will run the `source`
 command. Sourcing the `oe-init-build-env` script will add the Yocto tools
@@ -54,9 +54,9 @@ Building an image
 
 The command to build an image is:
 
-.. code::
+.. prompt:: bash $
 
-	$ DISTRO=rity-demo bitbake MACHINE=<machine> rity-demo-image
+	DISTRO=rity-demo bitbake MACHINE=<machine> rity-demo-image
 
 `bitbake` is the tool used to build images and packages. Setting the DISTRO and
 MACHINE variables on the command line allows to override their values set
