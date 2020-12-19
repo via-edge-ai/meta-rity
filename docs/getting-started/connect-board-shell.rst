@@ -47,8 +47,9 @@ or using
 .. note::
 
 	In general the baudrate for MediaTek boards is `921600`, but it can
-	sometimes differ, please refer to the BSP documentation to check
-	the baudrate for a particular board.
+	sometimes differ, please refer to the
+	:doc:`BSP documentation <bsp:boards/index>` to check the baudrate
+	for a particular board.
 
 .. note::
 
@@ -61,7 +62,7 @@ SSH over USB
 ------------
 
 RITY is shipping a SSH server and is configured to expose an SSH connection
-over USB. Please check the BSP documentation to see which USB port can be used
+over USB. Please check the :doc:`BSP documentation <bsp:boards/index>` to see which USB port can be used
 for SSH connections.
 
 Connecting using the board IP
@@ -84,8 +85,9 @@ RITY SDK is also including by default the
 
 The name of the board is by default the value of the `MACHINE` variable that
 was used to build the SDK. The `MACHINE` variable is used to choose the board
-for which the SDK is being built for. Please check the BSP documentation
-to see the list of all the boards/MACHINE available.
+for which the SDK is being built for. Please check the
+:doc:`BSP documentation <bsp:boards/index>` to see the list of all
+the boards/MACHINE available.
 
 For instance you can connect to the `i500-pumpkin` board using the following
 command:

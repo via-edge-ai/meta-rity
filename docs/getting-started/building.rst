@@ -55,7 +55,7 @@ The command above will build the `rity-demo-image`.
 
 The image can be found in `rity/build/tmp/deploy/images/<machine>/`
 
-The available values for `<machine>` can be found in the BSP documentation.
+The available values for `<machine>` can be found in the :doc:`BSP documentation <bsp:boards/index>`.
 
 Images
 ------
