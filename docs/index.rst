@@ -13,3 +13,4 @@ Welcome to RITY's documentation!
    getting-started
    releases
    yocto
+   faq
