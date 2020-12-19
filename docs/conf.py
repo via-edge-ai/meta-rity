@@ -21,6 +21,7 @@ release_codename = 'gatesgarth'
 # ones.
 extensions = [
     'sphinx.ext.autosectionlabel',
+    'sphinx.ext.intersphinx',
     'sphinx-prompt',
 ]
 
