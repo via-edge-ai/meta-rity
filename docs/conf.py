@@ -34,3 +34,8 @@ html_theme = 'sphinx_rtd_theme'
 
 
 autosectionlabel_prefix_document = True
+
+intersphinx_mapping = {
+    'bsp': ('https://baylibre.gitlab.io/rich-iot/meta-mediatek-bsp/',
+            ('./bsp-objects.inv', None)),
+}
