@@ -266,4 +266,25 @@ PACKAGECONFIG_append_pn-qemu-system-native = " sdl"
 # this doesn't mean anything to you.
 CONF_VERSION = "1"
 
+# Allow software that have a commercial license
 LICENSE_FLAGS_WHITELIST = "commercial"
+
+# Name exported by avahi and used to connect to the board.
+# By default the hostname is equal to `MACHINE`. In case several board with
+# the same machine runs on the same network, it is recommended to have an unique
+# hostname for each board. The hostname can either be changed in /etc/hosts
+# or at build by redefining the following variable.
+#hostname_pn-base-files = "myboard"
+
+# USB Gadget function to use to export an ethernet device over USB.
+# Options: ecm, rndis.
+# Note: ecm does not work well with all version of Windows
+#USB_GADGET_FUNCTION = "ecm"
+
+# TAR rootfs can be enabled to provide NFS rootfs.
+# IMAGE_FSTYPES_append = " tar "
+
+# By default the rootfs will just be big enough to fit its content. If you
+# need more space you can set the IMAGE_ROOTFS_EXTRA_SPACE variable to set
+# how much space in kB you need.
+IMAGE_ROOTFS_EXTRA_SPACE = "200000"
