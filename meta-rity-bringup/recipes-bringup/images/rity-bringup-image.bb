@@ -5,7 +5,7 @@ DESCRIPTION = "Rity Bringup Image"
 
 IMAGE_FEATURES += "ssh-server-dropbear"
 
-IMAGE_INSTALL = "\
+IMAGE_INSTALL += "\
 	packagegroup-base \
 	packagegroup-core-boot \
 	packagegroup-core-full-cmdline \

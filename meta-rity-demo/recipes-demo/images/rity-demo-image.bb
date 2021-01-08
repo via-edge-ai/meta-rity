@@ -5,7 +5,7 @@ DESCRIPTION = "Rity Demo Image"
 
 IMAGE_FEATURES += "ssh-server-dropbear"
 
-IMAGE_INSTALL = "\
+IMAGE_INSTALL += "\
 	packagegroup-base-extended \
 	packagegroup-core-base-utils \
 	packagegroup-core-boot \
