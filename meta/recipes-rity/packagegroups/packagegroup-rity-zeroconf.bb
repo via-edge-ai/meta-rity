@@ -13,7 +13,6 @@ PACKAGES = " \
 ZEROCONF_PKGS = " \
 	avahi-autoipd \
 	avahi-daemon \
-	avahi-dnsconfd \
 	avahi-utils \
 "
 
