@@ -11,6 +11,7 @@ Welcome to RITY's documentation!
    :caption: Contents:
 
    getting-started
+   create-own-layer
    releases
    yocto
    faq
