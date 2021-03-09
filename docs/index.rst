@@ -12,6 +12,7 @@ Welcome to RITY's documentation!
 
    getting-started
    create-own-layer
+   images/rity-demo-image
    releases
    yocto
    faq
