@@ -26,6 +26,9 @@ IMAGE_INSTALL += "\
 	gstreamer1.0-meta-video \
 	gstreamer1.0-python \
 	rity-demo-opencl \
+	python3-pip \
+	python3-opencv \
+	opkg \
 "
 
 require recipes-rity/images/rity-image.inc
