@@ -11,8 +11,8 @@ copyright = '2020, Fabien Parent'
 author = 'Fabien Parent <fparent@baylibre.com>'
 
 # The full version, including alpha/beta/rc tags
-release = 'rity/gatesgarth'
-release_codename = 'gatesgarth'
+release = 'rity/hardknott'
+release_codename = 'hardknott'
 
 # -- General configuration ---------------------------------------------------
 
