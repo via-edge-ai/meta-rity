@@ -62,8 +62,8 @@ build the SDK.
 
 .. prompt:: bash $ auto
 
-	$cd rity/build/tmp/deploy/images/<machine>
-	$rity-flash -i rity-demo-image
+	$ cd rity/build/tmp/deploy/images/<machine>
+	$ rity-flash -i rity-demo-image
 	Yocto Image:
 	        name:     Rity Demo Image (rity-demo-image)
 	        distro:   Rity demo 21.1-dev (rity-demo)
@@ -89,10 +89,10 @@ To flash just one partition, you can run the following command:
 
 .. prompt:: bash $ auto
 
-	$cd rity/build/tmp/deploy/images/<machine>
-	$rity-bootrom run-da
+	$ cd rity/build/tmp/deploy/images/<machine>
+	$ rity-bootrom run-da
 	<enter download mode>
-	$fastboot flash <partition> <file>
+	$ fastboot flash <partition> <file>
 
 <partition> should be replaced with one of the partition present in the `wic`
 file:

@@ -48,8 +48,8 @@ build the SDK.
 
 .. prompt:: bash $ auto
 
-	$cd rity/build/tmp/deploy/images/<machine>
-	$./flashimage.py -i rity-demo-image
+	$ cd rity/build/tmp/deploy/images/<machine>
+	$ ./flashimage.py -i rity-demo-image
 	                    Checking image
 	----------------------------------------------------------------------------
 	                      MBR_EMMC : PASS

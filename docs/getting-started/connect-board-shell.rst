@@ -74,7 +74,7 @@ You can connect to the board using the following command:
 
 .. prompt:: bash $ auto
 
-	$ssh root@192.168.96.1
+	$ ssh root@192.168.96.1
 	root@i300a-pumpkin:~#
 
 Connecting using the board avahi name
@@ -94,7 +94,7 @@ command:
 
 .. prompt:: bash $ auto
 
-	$ssh root@pumpkin-i500.local
+	$ ssh root@pumpkin-i500.local
 	root@i500-pumpkin:~#
 
 .. hint::
