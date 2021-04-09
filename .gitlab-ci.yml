@@ -14,6 +14,7 @@ build_pages:
     paths:
     - public
   only:
-  - branches
-  except:
-  - dunfell
+    refs:
+    - merge_requests
+    changes:
+    - docs/**/*
