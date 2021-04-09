@@ -1,7 +1,7 @@
 # Copyright (C) 2020 Fabien Parent <fparent@baylibre.com>
 # Released under the MIT license (see COPYING.MIT for the terms)
 
-SUMMARY = "Rity Network packages"
+SUMMARY = "Rity Development packages"
 
 inherit packagegroup
 
@@ -17,6 +17,7 @@ RDEPENDS_${PN} = " \
 	rsync \
 	strace \
 	valgrind \
+	clinfo \
 "
 
 RDEPENDS_${PN}-extended = " \

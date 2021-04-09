@@ -18,6 +18,7 @@ RDEPENDS_${PN} = " \
 	weston \
 	weston-examples \
 	weston-init \
+	read-edid \
 "
 
 RDEPENDS_${PN}_append_i300a= " \

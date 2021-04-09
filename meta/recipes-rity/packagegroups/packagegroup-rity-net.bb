@@ -13,6 +13,7 @@ PACKAGES = " \
 RDEPENDS_${PN} = " \
 	networkmanager \
 	networkmanager-nmcli \
+	iperf3 \
 "
 
 RDEPENDS_${PN}-extended = " \
