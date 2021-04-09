@@ -30,6 +30,12 @@ running `rity-config <https://baylibre.gitlab.io/rich-iot/tools/rity-tools/#rity
 In the case that your host machine is not correctly configured, `rity-config`
 will give you instructions on how to correctly configure your host machine.
 
+.. warning::
+
+	On Windows, `rity-config` is unable to fully check the correct
+	system configuration. Please follow the RITY tools documentation to make
+	sure it is correctly configured.
+
 Enter download mode
 -------------------
 

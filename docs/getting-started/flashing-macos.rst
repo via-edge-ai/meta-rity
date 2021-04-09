@@ -1,4 +1,4 @@
-Flashing (Windows and Mac OS X)
+Flashing (Mac OS X)
 ===============================
 
 Prerequisites
