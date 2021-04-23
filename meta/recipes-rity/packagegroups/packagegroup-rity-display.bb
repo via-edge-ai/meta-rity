@@ -19,11 +19,11 @@ RDEPENDS_${PN} = " \
 	weston-examples \
 	weston-init \
 	read-edid \
+	kmscube \
 "
 
 RDEPENDS_${PN}_append_i300a= " \
 	imgtec-pvr-tests \
-	kmscube \
 	vulkan-demos \
 	vulkan-tools \
 "
