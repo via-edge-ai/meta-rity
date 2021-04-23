@@ -24,7 +24,7 @@ RDEPENDS_${PN} = " \
 
 RDEPENDS_${PN}_append_i300a= " \
 	imgtec-pvr-tests \
-	vulkan-demos \
+	vulkan-samples \
 	vulkan-tools \
 "
 
