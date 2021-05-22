@@ -52,7 +52,9 @@ List of all the RITY releases:
 +------------+---------------+-----------+
 | Tag        | Yocto Release | Status    |
 +============+===============+===========+
-| rity-v21.0 | dunfell       | Supported |
+| rity-v21.1 | dunfell       | Supported |
++------------+---------------+-----------+
+| rity-v21.0 | dunfell       | Obsolete  |
 +------------+---------------+-----------+
 | rity-v20.2 | dunfell       | Obsolete  |
 +------------+---------------+-----------+
