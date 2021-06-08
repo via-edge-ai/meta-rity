@@ -114,7 +114,7 @@ variable.
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 One way to modify the kernel is to apply patches on top of the `linux-mtk`
-kernel. You can add custom patches by created a `linux-mtk_%.bbappend` file as
+kernel. You can add custom patches by creating a `linux-mtk_%.bbappend` file as
 below to modify the recipe provided by `meta-mediatek-bsp`.
 
 .. literalinclude:: ../meta-rity-skeleton/recipes-kernel/linux-mtk/linux-mtk_%.bbappend
