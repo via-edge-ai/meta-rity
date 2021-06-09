@@ -64,7 +64,6 @@ The RITY SDK is providing the following images:
 
 * rity-demo-image
 * rity-bringup-image
-* mtk-image (obsolete)
 
 rity-demo-image
 ^^^^^^^^^^^^^^^
@@ -106,22 +105,3 @@ For example you can use the following command to build the `rity-bringup-image`:
 .. prompt:: bash $
 
 	DISTRO=rity-bringup MACHINE=<machine> bitbake rity-bringup-image
-
-mtk-image (obsolete)
-^^^^^^^^^^^^^^^^^^^^
-
-MTK image is obsolete and should not be used anymore. It is kept for
-compatibility. The image is very minimal and just allow to demonstrate the
-BSP.
-
-`mtk-image` is designed to be build with the `poky` DISTRO.
-
-.. code::
-
-	DISTRO=poky
-
-For example you can use the following command to build the `mtk-image`:
-
-.. prompt:: bash $
-
-	DISTRO=poky bitbake MACHINE=<machine> mtk-image
