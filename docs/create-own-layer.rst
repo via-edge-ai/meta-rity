@@ -40,7 +40,7 @@ very useful to ship the two sample files `bblayers.conf.sample` and
 1.1. layer.conf
 ^^^^^^^^^^^^^^^
 
-The `layer.conf` file is mostly use to define the layer name, dependencies,
+The `layer.conf` file is mostly used to define the layer name, dependencies,
 priority and where to find recipes inside it.
 
  .. literalinclude:: ../meta-rity-skeleton/conf/layer.conf
@@ -82,7 +82,7 @@ applications and daemon are going to be part of your image.
 	:lines: 3-
 	:caption: recipes-skeleton/images/rity-skeleton-image.bb
 
-You can add package to your image by adding them to the `IMAGE_INSTALL`
+You can add packages to your image by adding them to the `IMAGE_INSTALL`
 variable.
 
 3. Modidying the kernel
