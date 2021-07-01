@@ -15,17 +15,21 @@ VULKAN_PKGS = " \
 	vulkan-tools \
 "
 
-RDEPENDS_${PN} = " \
-	dmidecode \
-	evtest \
-	libdrm-tests \
+WAYLAND_PKGS = " \
 	wayland \
 	weston \
 	weston-examples \
 	weston-init \
+"
+
+RDEPENDS_${PN} = " \
+	dmidecode \
+	evtest \
+	libdrm-tests \
 	read-edid \
 	kmscube \
 	${@bb.utils.contains("DISTRO_FEATURES", "vulkan", "${VULKAN_PKGS}", "", d)} \
+	${@bb.utils.contains("DISTRO_FEATURES", "wayland", "${WAYLAND_PKGS}", "", d)} \
 "
 
 RDEPENDS_${PN}_append_i300a= " \
