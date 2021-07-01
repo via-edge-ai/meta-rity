@@ -10,6 +10,11 @@ PACKAGES = " \
 	${PN}-extended \
 "
 
+VULKAN_PKGS = " \
+	vulkan-samples \
+	vulkan-tools \
+"
+
 RDEPENDS_${PN} = " \
 	dmidecode \
 	evtest \
@@ -20,12 +25,11 @@ RDEPENDS_${PN} = " \
 	weston-init \
 	read-edid \
 	kmscube \
+	${@bb.utils.contains("DISTRO_FEATURES", "vulkan", "${VULKAN_PKGS}", "", d)} \
 "
 
 RDEPENDS_${PN}_append_i300a= " \
 	imgtec-pvr-tests \
-	vulkan-samples \
-	vulkan-tools \
 "
 
 RDEPENDS_${PN}-extended = " \
