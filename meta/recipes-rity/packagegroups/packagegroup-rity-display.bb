@@ -32,10 +32,6 @@ RDEPENDS_${PN} = " \
 	${@bb.utils.contains("DISTRO_FEATURES", "wayland", "${WAYLAND_PKGS}", "", d)} \
 "
 
-RDEPENDS_${PN}_append_i300a= " \
-	imgtec-pvr-tests \
-"
-
 RDEPENDS_${PN}-extended = " \
 	${PN} \
 	gtk+3-demo \
