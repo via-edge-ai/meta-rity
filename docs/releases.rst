@@ -17,7 +17,7 @@ The RITY SDK can be downloaded using `repo` as follows:
 .. parsed-literal::
 
     $ mkdir rity; cd rity
-    $ repo init -u git@gitlab.com:baylibre/rich-iot/manifest.git -b |release|
+    $ repo init -u git@gitlab.com:mediatek/aiot/bsp/manifest.git -b |release|
     $ repo sync
 
 You can replace '|release|' with any of the :ref:`releases:releases tags`
@@ -38,8 +38,6 @@ development of the RITY SDK.
 +-----------------+---------------+
 | rity/dunfell    | Backport only |
 +-----------------+---------------+
-| rity/gatesgarth | Unmaintained  |
-+-----------------+---------------+
 
 Only one development branch is active at a time. The other branches will
 receive occasional backport from the active branch.
@@ -52,19 +50,5 @@ List of all the RITY releases:
 +------------+---------------+-----------+
 | Tag        | Yocto Release | Status    |
 +============+===============+===========+
-| rity-v21.1 | dunfell       | Supported |
-+------------+---------------+-----------+
-| rity-v21.0 | dunfell       | Obsolete  |
-+------------+---------------+-----------+
-| rity-v20.2 | dunfell       | Obsolete  |
-+------------+---------------+-----------+
-| rity-v20.1 | dunfell       | Obsolete  |
-+------------+---------------+-----------+
-| rity-v20.0 | zeus          | Obsolete  |
-+------------+---------------+-----------+
-| rity-3.0   | thud          | Obsolete  |
-+------------+---------------+-----------+
-| rity-2.0   | thud          | Obsolete  |
-+------------+---------------+-----------+
-| rity-1.0   | thud          | Obsolete  |
+| rity-v21.2 | dunfell       | Supported |
 +------------+---------------+-----------+
