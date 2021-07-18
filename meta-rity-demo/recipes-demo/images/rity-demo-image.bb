@@ -19,6 +19,7 @@ IMAGE_INSTALL += "\
 	packagegroup-rity-optee-extended \
 	packagegroup-rity-tools-extended \
 	packagegroup-rity-zeroconf-extended \
+	packagegroup-rity-demo-qt \
 	packagegroup-tools-bluetooth \
 	gstreamer1.0-meta-base \
 	gstreamer1.0-meta-audio \
