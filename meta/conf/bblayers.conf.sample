@@ -19,4 +19,5 @@ BBLAYERS ?= " \
   ##OEROOT##/../meta-rity/meta \
   ##OEROOT##/../meta-rity/meta-rity-bringup \
   ##OEROOT##/../meta-rity/meta-rity-demo \
+  ##OEROOT##/../meta-qt5 \
   "
