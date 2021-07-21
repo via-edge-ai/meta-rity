@@ -32,4 +32,8 @@ IMAGE_INSTALL += "\
 	opkg \
 "
 
+IMAGE_INSTALL_remove_i300b = " \
+	packagegroup-rity-demo-qt \
+"
+
 require recipes-rity/images/rity-image.inc
