@@ -21,7 +21,17 @@ For more information you can check the `Yocto Reference Manual`_.
 .. _IMAGE_ROOTFS_EXTRA_SPACE: https://www.yoctoproject.org/docs/latest/ref-manual/ref-manual.html#var-IMAGE_ROOTFS_EXTRA_SPACE
 .. _Yocto Reference Manual: https://www.yoctoproject.org/docs/latest/ref-manual/ref-manual.html#idm46031661356992
 
-2. How to add additional applications to my image
+2. My home partition is too small, how to make it larger?
+---------------------------------------------------------
+
+You can set the home partition size by setting the following variable in
+your `local.conf`:
+
+.. code::
+
+	IMAGE_HOME_SIZE = "500M"
+
+3. How to add additional applications to my image
 -------------------------------------------------
 
 If you want to add new applications to your image you can set the following
@@ -37,7 +47,7 @@ variable in your `local.conf`:
 The example above will add `gdb` and `htop` to the image that gets built by
 `bitbake`.
 
-3. Connecting to the board by ssh over USB does not work on Windows
+4. Connecting to the board by ssh over USB does not work on Windows
 -------------------------------------------------------------------
 
 By default the BSP uses the USB gadget `ecm` to provide a network interface
