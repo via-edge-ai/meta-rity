@@ -4,6 +4,6 @@ DISTRO = "rity"
 DISTRO_NAME = "Rity"
 DISTRO_VERSION = "21.2-dev"
 
-WKS_FILE = "rity.wks"
+WKS_FILE = "rity.wks.in"
 
 EXTRA_IMAGE_FEATURES += "read-only-rootfs"

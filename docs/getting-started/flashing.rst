@@ -97,10 +97,10 @@ To flash just one partition, you can run the following command:
 <partition> should be replaced with one of the partition present in the `wic`
 file:
 
- .. literalinclude:: ../../meta/wic/rity.wks
+ .. literalinclude:: ../../meta/wic/rity.wks.in
 	:linenos:
-	:emphasize-lines: 5-7
-	:caption: meta/wic/rity.wks
+	:emphasize-lines: 5-8
+	:caption: meta/wic/rity.wks.in
 
 In addition to the partitions defined in the wic, some special partitions are
 also available: `mmc0`, `mmc0boot0`, and `mmc0boot1`.
