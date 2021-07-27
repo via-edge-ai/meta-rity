@@ -6,5 +6,3 @@ DISTRO_VERSION = "21.2-dev"
 
 WKS_FILE = "rity.wks.in"
 IMAGE_HOME_SIZE = "200M"
-
-EXTRA_IMAGE_FEATURES += "read-only-rootfs"
