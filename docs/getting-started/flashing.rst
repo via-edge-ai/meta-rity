@@ -1,4 +1,4 @@
-Flashing (Linux & Windows)
+Flashing
 ==========================
 
 RITY tools
