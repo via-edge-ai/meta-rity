@@ -17,6 +17,7 @@ RDEPENDS_${PN} = " \
 	rsync \
 	strace \
 	valgrind \
+	opencl-icd-loader-dev \
 	clinfo \
 "
 
