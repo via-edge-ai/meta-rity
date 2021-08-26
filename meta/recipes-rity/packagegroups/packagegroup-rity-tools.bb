@@ -19,6 +19,7 @@ RDEPENDS_${PN} = " \
 	u-boot-fw-utils \
 	watchdog \
 	wireless-regdb-static \
+	serialcheck \
 "
 
 RDEPENDS_${PN}-extended = " \
