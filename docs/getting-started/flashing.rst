@@ -1,22 +1,22 @@
 Flashing
 ==========================
 
-RITY tools
+AIoT tools
 ----------
 
-RITY tools is a set of tools to configure or interact with MediaTek boards.
+AIoT tools is a set of tools to configure or interact with MediaTek boards.
 
 .. note::
 
-	This page is only a short introduction to using the RITY tools,
-	it is strongly advised to `fully read the RITY tools manual <https://baylibre.gitlab.io/rich-iot/tools/rity-tools>`_
-	in order to get the most out of the RITY tools.
+	This page is only a short introduction to using the AIoT tools,
+	it is strongly advised to `fully read the AIoT tools manual <http://mediatek.gitlab.io/aiot/bsp/aiot-tools/>`_
+	in order to get the most out of the AIoT tools.
 
-RITY tools installation
+AIoT tools installation
 -----------------------
 
 RITY flashing process requires you to install
-the `RITY tools <https://baylibre.gitlab.io/rich-iot/tools/rity-tools/>`_.
+the `AIoT tools <http://mediatek.gitlab.io/aiot/bsp/aiot-tools/>`_.
 
 Prerequisites
 -------------
@@ -26,21 +26,21 @@ board SoC. You need to make sure that the user session on your host machine
 has the right permission to talk to the SoC via USB.
 
 You can check if your host machine is correctly configured to talk to the SoC by
-running `rity-config <https://baylibre.gitlab.io/rich-iot/tools/rity-tools/#rity-config>`_.
-In the case that your host machine is not correctly configured, `rity-config`
+running `aiot-config <http://mediatek.gitlab.io/aiot/bsp/aiot-tools/#aiot-config>`_.
+In the case that your host machine is not correctly configured, `aiot-config`
 will give you instructions on how to correctly configure your host machine.
 
 .. warning::
 
-	On Windows, `rity-config` is unable to fully check the correct
-	system configuration. Please follow the RITY tools documentation to make
+	On Windows, `aiot-config` is unable to fully check the correct
+	system configuration. Please follow the AIoT tools documentation to make
 	sure it is correctly configured.
 
 Enter download mode
 -------------------
 
 In order to be able to flash, you often need to set the SoC in `download mode`,
-which will allow the RITY tools to download on the SoC's SRAM a binary that
+which will allow the AIoT tools to download on the SoC's SRAM a binary that
 will provide a `fastboot` interface.
 
 To enter download mode you need to press the board buttons as follows:
@@ -63,7 +63,7 @@ build the SDK.
 .. prompt:: bash $ auto
 
 	$ cd rity/build/tmp/deploy/images/<machine>
-	$ rity-flash -i rity-demo-image
+	$ aiot-flash -i rity-demo-image
 	Yocto Image:
 	        name:     Rity Demo Image (rity-demo-image)
 	        distro:   Rity demo 21.1-dev (rity-demo)
@@ -71,7 +71,7 @@ build the SDK.
 	        machine:  i300a-pumpkin
 	        overlays: []
 
-	INFO:rity:Looking for a MediaTek SoC matching USB 0e8d:0003
+	Looking for a MediaTek SoC matching USB device 0e8d:0003
 
 Once you see `Waiting for DA mode`, please :ref:`enter download mode <getting-started/flashing:enter download mode>`.
 
@@ -90,7 +90,7 @@ To flash just one partition, you can run the following command:
 .. prompt:: bash $ auto
 
 	$ cd rity/build/tmp/deploy/images/<machine>
-	$ rity-bootrom run-da
+	$ aiot-bootrom
 	<enter download mode>
 	$ fastboot flash <partition> <file>
 
