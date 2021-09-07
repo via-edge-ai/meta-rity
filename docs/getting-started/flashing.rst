@@ -73,7 +73,7 @@ build the SDK.
 
 	Looking for a MediaTek SoC matching USB device 0e8d:0003
 
-Once you see `Waiting for DA mode`, please :ref:`enter download mode <getting-started/flashing:enter download mode>`.
+Once you see `Looking for a MediaTek SoC`, please :ref:`enter download mode <getting-started/flashing:enter download mode>`.
 
 	1. press and keep pressing the `volume up` button
 	2. press and release the `reset` button
