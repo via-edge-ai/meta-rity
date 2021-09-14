@@ -10,7 +10,7 @@ PACKAGES = " \
 	${PN}-extended \
 "
 
-RDEPENDS_${PN} = " \
+RDEPENDS:${PN} = " \
 	gstreamer1.0 \
 	gstreamer1.0-plugins-base \
 	gstreamer1.0-plugins-good \
@@ -21,7 +21,7 @@ RDEPENDS_${PN} = " \
 	yavta \
 "
 
-RDEPENDS_${PN}-extended = " \
+RDEPENDS:${PN}-extended = " \
 	${PN} \
 	ffmpeg \
 	mpg123 \

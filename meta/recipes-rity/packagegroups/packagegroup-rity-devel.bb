@@ -10,7 +10,7 @@ PACKAGES = " \
 	${PN}-extended \
 "
 
-RDEPENDS_${PN} = " \
+RDEPENDS:${PN} = " \
 	curl \
 	gdb \
 	ldd \
@@ -21,6 +21,6 @@ RDEPENDS_${PN} = " \
 	clinfo \
 "
 
-RDEPENDS_${PN}-extended = " \
+RDEPENDS:${PN}-extended = " \
 	${PN} \
 "

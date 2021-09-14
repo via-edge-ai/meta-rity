@@ -22,7 +22,7 @@ WAYLAND_PKGS = " \
 	weston-init \
 "
 
-RDEPENDS_${PN} = " \
+RDEPENDS:${PN} = " \
 	dmidecode \
 	evtest \
 	libdrm-tests \
@@ -32,7 +32,7 @@ RDEPENDS_${PN} = " \
 	${@bb.utils.contains("DISTRO_FEATURES", "wayland", "${WAYLAND_PKGS}", "", d)} \
 "
 
-RDEPENDS_${PN}-extended = " \
+RDEPENDS:${PN}-extended = " \
 	${PN} \
 	gtk+3-demo \
 "

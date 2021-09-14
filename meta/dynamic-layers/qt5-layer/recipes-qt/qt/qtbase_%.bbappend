@@ -1,6 +1,6 @@
-RDEPENDS_${PN} += "fontconfig"
+RDEPENDS:${PN} += "fontconfig"
 
-PACKAGECONFIG_append = " \
+PACKAGECONFIG:append = " \
 	${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'gles2', '', d)} \
 	fontconfig \
 "

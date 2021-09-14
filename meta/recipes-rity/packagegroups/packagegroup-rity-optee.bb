@@ -10,12 +10,12 @@ PACKAGES = " \
 	${PN}-extended \
 "
 
-RDEPENDS_${PN} = " \
+RDEPENDS:${PN} = " \
 	optee-client \
 	optee-examples \
 	optee-test \
 "
 
-RDEPENDS_${PN}-extended = " \
+RDEPENDS:${PN}-extended = " \
 	${PN} \
 "

@@ -39,7 +39,7 @@ variable in your `local.conf`:
 
 .. code::
 
-	IMAGE_INSTALL_append = " \
+	IMAGE_INSTALL:append = " \
 		gdb                  \
 		htop                 \
 	"

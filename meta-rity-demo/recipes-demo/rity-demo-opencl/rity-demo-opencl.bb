@@ -7,7 +7,7 @@ SRC_URI = " \
 	file://demo-opencl.py \
 "
 
-RDEPENDS_${PN} = " \
+RDEPENDS:${PN} = " \
 	opencv \
 	python3 \
 	python3-opencv \
@@ -19,4 +19,4 @@ do_install() {
 	install -m 0744 ${WORKDIR}/demo-opencl.py ${D}/home/root/demos/
 }
 
-FILES_${PN} = "/home/root/demos/*"
+FILES:${PN} = "/home/root/demos/*"

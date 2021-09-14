@@ -10,12 +10,12 @@ PACKAGES = " \
 	${PN}-extended \
 "
 
-RDEPENDS_${PN} = " \
+RDEPENDS:${PN} = " \
 	networkmanager \
 	networkmanager-nmcli \
 	iperf3 \
 "
 
-RDEPENDS_${PN}-extended = " \
+RDEPENDS:${PN}-extended = " \
 	${PN} \
 "

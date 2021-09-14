@@ -10,7 +10,7 @@ PACKAGES = " \
 	${PN}-extended \
 "
 
-RDEPENDS_${PN} = " \
+RDEPENDS:${PN} = " \
 	alsa-state \
 	alsa-utils \
 "
@@ -26,7 +26,7 @@ PULSEAUDIO_PKGS = " \
 "
 
 
-RDEPENDS_${PN}-extended = " \
+RDEPENDS:${PN}-extended = " \
 	${PN} \
 	${@bb.utils.contains("DISTRO_FEATURES", "pulseaudio", "${PULSEAUDIO_PKGS}", "", d)} \
 "

@@ -16,10 +16,10 @@ ZEROCONF_PKGS = " \
 	avahi-utils \
 "
 
-RDEPENDS_${PN} = " \
+RDEPENDS:${PN} = " \
 	${@bb.utils.contains("DISTRO_FEATURES", "zeroconf", "${ZEROCONF_PKGS}", "", d)} \
 "
 
-RDEPENDS_${PN}-extended = " \
+RDEPENDS:${PN}-extended = " \
 	${PN} \
 "

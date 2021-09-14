@@ -228,14 +228,14 @@ BB_DISKMON_DIRS ??= "\
 #
 # By default native qemu will build with a builtin VNC server where graphical output can be
 # seen. The line below enables the SDL UI frontend too.
-PACKAGECONFIG_append_pn-qemu-system-native = " sdl"
+PACKAGECONFIG:append:pn-qemu-system-native = " sdl"
 # By default libsdl2-native will be built, if you want to use your host's libSDL instead of 
 # the minimal libsdl built by libsdl2-native then uncomment the ASSUME_PROVIDED line below.
 #ASSUME_PROVIDED += "libsdl2-native"
 
 # You can also enable the Gtk UI frontend, which takes somewhat longer to build, but adds
 # a handy set of menus for controlling the emulator.
-#PACKAGECONFIG_append_pn-qemu-system-native = " gtk+"
+#PACKAGECONFIG:append:pn-qemu-system-native = " gtk+"
 
 #
 # Hash Equivalence
@@ -274,7 +274,7 @@ LICENSE_FLAGS_WHITELIST = "commercial"
 # the same machine runs on the same network, it is recommended to have an unique
 # hostname for each board. The hostname can either be changed in /etc/hosts
 # or at build by redefining the following variable.
-#hostname_pn-base-files = "myboard"
+#hostname:pn-base-files = "myboard"
 
 # USB Gadget function to use to export an ethernet device over USB.
 # Options: ecm, rndis.
@@ -282,7 +282,7 @@ LICENSE_FLAGS_WHITELIST = "commercial"
 #USB_GADGET_FUNCTION = "ecm"
 
 # TAR rootfs can be enabled to provide NFS rootfs.
-# IMAGE_FSTYPES_append = " tar "
+# IMAGE_FSTYPES:append = " tar "
 
 # By default the rootfs will just be big enough to fit its content. If you
 # need more space you can set the IMAGE_ROOTFS_EXTRA_SPACE variable to set
@@ -295,5 +295,5 @@ MULTILIBS = "multilib:lib32"
 DEFAULTTUNE_virtclass-multilib-lib32 = "armv7athf-neon"
 
 # Video Encode on i300a is only supported in the 32-bits binaries
-IMAGE_INSTALL_remove_i300a = "mtk-vpud"
-IMAGE_INSTALL_append_i300a = "lib32-mtk-vpud"
+IMAGE_INSTALL:remove:i300a = "mtk-vpud"
+IMAGE_INSTALL:append:i300a = "lib32-mtk-vpud"

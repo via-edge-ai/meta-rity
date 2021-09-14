@@ -60,7 +60,7 @@ Configuration
 
 	PACKAGE_CLASSES ?= "package_deb"
 	PACKAGE_FEED_URIS ?= "http://192.168.96.20:9876"
-	EXTRA_IMAGE_FEATURES_append = " package-management "
+	EXTRA_IMAGE_FEATURES:append = " package-management "
 
 The above variable can be modified in your `local.conf` if you need a different
 configuration.

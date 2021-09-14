@@ -1,10 +1,10 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
 inherit systemd
 
 USB_GADGET_FUNCTION ?= "ecm"
 
-SRC_URI_append = " \
+SRC_URI:append = " \
 	file://udhcpd.conf \
 	file://usbgadget-net.sh \
 	file://usbnet.service \
@@ -13,7 +13,7 @@ SRC_URI_append = " \
 	file://wireless.network \
 "
 
-do_install_append() {
+do_install:append() {
 	install -d ${D}${systemd_unitdir}/system
 	install -d ${D}${sysconfdir}/init.d
 
@@ -34,8 +34,8 @@ do_install_append() {
 }
 
 SYSTEMD_PACKAGES = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '${PN}', '', d)}"
-SYSTEMD_SERVICE_${PN} = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'usbnet.service', '', d)}"
-FILES_${PN} += " \
+SYSTEMD_SERVICE:${PN} = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'usbnet.service', '', d)}"
+FILES:${PN} += " \
 	${systemd_unitdir}/usbgadget-net.sh \
 	${systemd_unitdir}/system/usbnet.service \
 	${sysconfdir}/systemd/system/multi-user.target.wants/usbnet.service \

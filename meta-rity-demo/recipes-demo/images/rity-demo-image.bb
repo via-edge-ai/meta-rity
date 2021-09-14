@@ -32,7 +32,7 @@ IMAGE_INSTALL += "\
 	opkg \
 "
 
-IMAGE_INSTALL_remove_i300b = " \
+IMAGE_INSTALL:remove:i300b = " \
 	packagegroup-rity-demo-qt \
 "
 

@@ -1,1 +1,1 @@
-PACKAGECONFIG_append = " gtk"
+PACKAGECONFIG:append = " gtk"

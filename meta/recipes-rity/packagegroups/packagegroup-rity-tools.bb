@@ -10,7 +10,7 @@ PACKAGES = " \
 	${PN}-extended \
 "
 
-RDEPENDS_${PN} = " \
+RDEPENDS:${PN} = " \
 	htop \
 	ldd \
 	pm-utils \
@@ -22,7 +22,7 @@ RDEPENDS_${PN} = " \
 	serialcheck \
 "
 
-RDEPENDS_${PN}-extended = " \
+RDEPENDS:${PN}-extended = " \
 	${PN} \
 	lsof \
 	sed \

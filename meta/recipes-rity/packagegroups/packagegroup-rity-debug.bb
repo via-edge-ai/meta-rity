@@ -10,7 +10,7 @@ PACKAGES = " \
 	${PN}-extended \
 "
 
-RDEPENDS_${PN} = " \
+RDEPENDS:${PN} = " \
 	devmem2 \
 	gdb \
 	i2c-tools \
@@ -22,6 +22,6 @@ RDEPENDS_${PN} = " \
 	powertop \
 "
 
-RDEPENDS_${PN}-extended = " \
+RDEPENDS:${PN}-extended = " \
 	${PN} \
 "

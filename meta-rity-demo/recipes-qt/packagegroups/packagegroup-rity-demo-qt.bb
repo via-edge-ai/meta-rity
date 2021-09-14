@@ -5,7 +5,7 @@ SUMMARY = "Rity Qt5 and Qt6 Demo packages"
 
 inherit packagegroup
 
-RDEPENDS_${PN} = " \
+RDEPENDS:${PN} = " \
 	qtbase-examples \
 	${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'qtwayland', '', d)} \
 "

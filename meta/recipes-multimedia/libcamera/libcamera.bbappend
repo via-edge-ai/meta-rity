@@ -1,1 +1,1 @@
-DEPENDS_append = " libevent"
+DEPENDS:append = " libevent"

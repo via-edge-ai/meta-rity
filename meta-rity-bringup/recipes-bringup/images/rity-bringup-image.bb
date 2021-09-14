@@ -18,7 +18,7 @@ IMAGE_INSTALL += "\
 	packagegroup-rity-zeroconf \
 "
 
-IMAGE_INSTALL_remove_i300b = " \
+IMAGE_INSTALL:remove:i300b = " \
 	packagegroup-display \
 	packagegroup-multimedia \
 "

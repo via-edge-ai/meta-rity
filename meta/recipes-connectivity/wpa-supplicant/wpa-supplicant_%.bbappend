@@ -1,12 +1,12 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
 inherit systemd
 
-SRC_URI_append = " \
+SRC_URI:append = " \
 	file://wpa_supplicant-wlan0.conf \
 "
 
-do_install_append() {
+do_install:append() {
 	install -d ${D}${sysconfdir}/wpa_supplicant
 	install -m 0644 ${WORKDIR}/wpa_supplicant-wlan0.conf ${D}${sysconfdir}/wpa_supplicant/
 
@@ -17,9 +17,9 @@ do_install_append() {
 }
 
 SYSTEMD_PACKAGES = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '${PN}', '', d)}"
-SYSTEMD_SERVICE_${PN} += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'wpa_supplicant@wlan0.service', '', d)}"
+SYSTEMD_SERVICE:${PN} += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'wpa_supplicant@wlan0.service', '', d)}"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
 	/lib \
 	/lib/systemd \
 	/lib/systemd/system \
