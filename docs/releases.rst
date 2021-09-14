@@ -4,7 +4,7 @@ RITY releases
 The RITY SDK supports the following Yocto release:
 
 	* Yocto 3.1, codename: Dunfell (LTS)
-	* Yocto 3.3, codename: Hardknott (Stable)
+	* Yocto 3.4, codename: Honister (Stable)
 
 RITY is getting a new release about every 3 months, the latest one is
 |release|.
@@ -34,7 +34,9 @@ development of the RITY SDK.
 +-----------------+---------------+
 | Branch name     | Status        |
 +=================+===============+
-| rity/hardknott  | Active        |
+| rity/honister   | Active        |
++-----------------+---------------+
+| rity/hardknott  | Obsolete      |
 +-----------------+---------------+
 | rity/dunfell    | Backport only |
 +-----------------+---------------+

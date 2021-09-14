@@ -17,7 +17,7 @@ This helps keep everything well compartementalized and will make upgrade easier.
 This chapter will provide a small guide on how build a new layer on top of the RITY
 SDK. The code from this chapter can be found under: `meta-rity/meta-rity-skeleton`_.
 
-.. _meta-rity/meta-rity-skeleton: https://gitlab.com/mediatek/aiot/rity/meta-rity/-/tree/hardknott/meta-rity-skeleton
+.. _meta-rity/meta-rity-skeleton: https://gitlab.com/mediatek/aiot/rity/meta-rity/-/tree/honister/meta-rity-skeleton
 
 1. Basic layer structure
 ------------------------
