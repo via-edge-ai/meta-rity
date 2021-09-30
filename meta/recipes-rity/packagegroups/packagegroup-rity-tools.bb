@@ -20,6 +20,7 @@ RDEPENDS:${PN} = " \
 	watchdog \
 	wireless-regdb-static \
 	serialcheck \
+	spidev-test \
 "
 
 RDEPENDS:${PN}-extended = " \
