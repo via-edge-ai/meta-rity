@@ -5,6 +5,7 @@ inherit core-image
 
 IMAGE_INSTALL:append:i300a = " mtk-vpud"
 IMAGE_INSTALL:append:i500 = " mtk-vpud"
+IMAGE_INSTALL:append:i350 = " mtk-vpud"
 
 my_postprocess_rootfs() {
 	if ${@bb.utils.contains('DISTRO_FEATURES','wayland','true','false',d)}; then
