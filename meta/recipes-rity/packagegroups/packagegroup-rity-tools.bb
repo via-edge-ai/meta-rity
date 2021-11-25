@@ -11,6 +11,7 @@ PACKAGES = " \
 "
 
 RDEPENDS:${PN} = " \
+	android-tools-adbd \
 	htop \
 	ldd \
 	pm-utils \
