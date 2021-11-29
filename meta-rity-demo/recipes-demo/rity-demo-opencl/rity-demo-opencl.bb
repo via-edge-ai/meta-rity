@@ -14,9 +14,8 @@ RDEPENDS:${PN} = " \
 "
 
 do_install() {
-	install -d -m 0755 ${D}/home/root/
-	install -d -m 0755 ${D}/home/root/demos/
-	install -m 0744 ${WORKDIR}/demo-opencl.py ${D}/home/root/demos/
+	install -d -m 0755 ${D}${ROOT_HOME}/demos/
+	install -m 0744 ${WORKDIR}/demo-opencl.py ${D}${ROOT_HOME}/demos/
 }
 
-FILES:${PN} = "/home/root/demos/*"
+FILES:${PN} = "${ROOT_HOME}/demos/*"
