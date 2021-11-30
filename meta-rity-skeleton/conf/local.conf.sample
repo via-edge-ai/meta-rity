@@ -273,11 +273,6 @@ CONF_VERSION = "1"
 # or at build by redefining the following variable.
 #hostname:pn-base-files = "myboard"
 
-# USB Gadget function to use to export an ethernet device over USB.
-# Options: ecm, rndis.
-# Note: ecm does not work well with all version of Windows
-#USB_GADGET_FUNCTION = "ecm"
-
 # By default the rootfs will just be big enough to fit its content. If you
 # need more space you can set the IMAGE_ROOTFS_EXTRA_SPACE variable to set
 # how much space in kB you need.
