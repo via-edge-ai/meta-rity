@@ -50,14 +50,10 @@ The example above will add `gdb` and `htop` to the image that gets built by
 4. Connecting to the board by ssh over USB does not work on Windows
 -------------------------------------------------------------------
 
-By default the BSP uses the USB gadget `ecm` to provide a network interface
-over USB. Windows does not support well `ecm`. so if you plan to connect
-to the board  by ssh over USB on Windows, it is recommended to build an image
-that will use the USB gadget `rndis` instead of `ecm`.
+By default the BSP uses the USB gadget `adb+rndis` to provide both debug and
+network interface over USB. Install Google's USB driver for `adb` interface,
+and Windows built-in `rndis` driver.
 
-To use the `rndis` USB gadget instead of `ecm`, please add the following in
-your `local.conf`:
+For more information you can check the `Get the Google USB Driver`_.
 
-.. code::
-
-	USB_GADGET_FUNCTION = "rndis"
+.. _Get the Google USB Driver: https://developer.android.com/studio/run/win-usb
