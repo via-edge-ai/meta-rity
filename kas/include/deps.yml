@@ -1,0 +1,61 @@
+header:
+  version: 11
+
+repos:
+  poky:
+    url: https://git.yoctoproject.org/git/poky
+    path: layers/poky
+    refspec: honister
+    layers:
+      meta:
+      meta-poky:
+      meta-yocto-bsp:
+
+  meta-openembedded:
+    url: https://git.openembedded.org/meta-openembedded
+    path: layers/meta-openembedded
+    refspec: honister
+    layers:
+      meta-oe:
+      meta-python:
+      meta-networking:
+      meta-multimedia:
+
+  meta-arm:
+    url: https://git.yoctoproject.org/git/meta-arm
+    path: layers/meta-arm
+    refspec: honister
+    layers:
+      meta-arm:
+      meta-arm-toolchain:
+
+  meta-qt5:
+    url: https://github.com/meta-qt5/meta-qt5.git
+    path: layers/meta-qt5
+    refspec: honister
+
+  meta-rity:
+    layers:
+      meta:
+      meta-rity-demo:
+      meta-rity-bringup:
+
+  meta-mediatek-bsp:
+    url: git@gitlab.com:mediatek/aiot/rity/meta-mediatek-bsp.git
+    path: layers/meta-mediatek-bsp
+    refspec: honister
+
+  meta-nn:
+    url: git@gitlab.com:mediatek/aiot/rity/meta-nn.git
+    path: layers/meta-nn
+    refspec: honister
+
+  meta-tensorflow:
+    url: git://git.yoctoproject.org/meta-tensorflow.git
+    path: layers/meta-nn
+    refspec: master
+
+  meta-clang:
+    url: https://github.com/kraj/meta-clang.git
+    path: layers/meta-clang
+    refspec: honister
