@@ -2,6 +2,7 @@
 # Released under the MIT license (see COPYING.MIT for the terms)
 
 inherit core-image
+inherit image-buildinfo
 
 IMAGE_INSTALL:append:i300a = " mtk-vpud"
 IMAGE_INSTALL:append:i500 = " mtk-vpud"
