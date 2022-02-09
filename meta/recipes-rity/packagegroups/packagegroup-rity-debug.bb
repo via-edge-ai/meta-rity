@@ -20,6 +20,7 @@ RDEPENDS:${PN} = " \
 	strace \
 	stress-ng \
 	powertop \
+	perf \
 "
 
 RDEPENDS:${PN}-extended = " \
