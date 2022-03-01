@@ -18,7 +18,7 @@ local_conf_header:
     TCLIBCAPPEND = ""
 
   licence: |
-    LICENSE_FLAGS_WHITELIST = "commercial"
+    LICENSE_FLAGS_ACCEPTED = "commercial"
 
   multi-lib: |
     require conf/multilib.conf

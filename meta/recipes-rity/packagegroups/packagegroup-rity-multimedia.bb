@@ -3,6 +3,8 @@
 
 SUMMARY = "Rity Multimedia packages"
 
+PACKAGE_ARCH = "${TUNE_PKGARCH}"
+
 inherit packagegroup
 
 PACKAGES = " \
