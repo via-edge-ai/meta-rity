@@ -11,7 +11,9 @@ BBLAYERS ?= " \
   ##OEROOT##/meta-yocto-bsp \
   ##OEROOT##/../meta-arm/meta-arm \
   ##OEROOT##/../meta-arm/meta-arm-toolchain \
+  ##OEROOT##/../meta-clang \
   ##OEROOT##/../meta-mediatek-bsp \
+  ##OEROOT##/../meta-nn \
   ##OEROOT##/../meta-openembedded/meta-multimedia \
   ##OEROOT##/../meta-openembedded/meta-networking \
   ##OEROOT##/../meta-openembedded/meta-oe \
@@ -19,5 +21,6 @@ BBLAYERS ?= " \
   ##OEROOT##/../meta-rity/meta \
   ##OEROOT##/../meta-rity/meta-rity-bringup \
   ##OEROOT##/../meta-rity/meta-rity-demo \
+  ##OEROOT##/../meta-tensorflow \
   ##OEROOT##/../meta-qt5 \
   "

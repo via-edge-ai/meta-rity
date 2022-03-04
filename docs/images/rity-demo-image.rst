@@ -47,6 +47,11 @@ command:
 	Some boards do not include any antennas by default, please
 	refer to the board documentation for more information.
 
+Machine Learning
+----------------
+
+The `RITY Demo Image` enables several frameworks for machine learning. Please refer to its `doc <https://mediatek.gitlab.io/aiot/rity/meta-nn/index.html>`_ .
+
 Package Management
 ------------------
 

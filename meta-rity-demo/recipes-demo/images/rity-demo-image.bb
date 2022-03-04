@@ -20,6 +20,7 @@ IMAGE_INSTALL += "\
 	packagegroup-rity-tools-extended \
 	packagegroup-rity-zeroconf-extended \
 	packagegroup-rity-demo-qt \
+	packagegroup-rity-ai-ml \
 	packagegroup-tools-bluetooth \
 	gstreamer1.0-meta-base \
 	gstreamer1.0-meta-audio \
@@ -34,6 +35,14 @@ IMAGE_INSTALL += "\
 
 IMAGE_INSTALL:remove:i300b = " \
 	packagegroup-rity-demo-qt \
+"
+
+IMAGE_INSTALL:append:i350 = " \
+	packagegroup-rity-nnapi \
+"
+
+IMAGE_INSTALL:append:i500 = " \
+	packagegroup-rity-nnapi \
 "
 
 require recipes-rity/images/rity-image.inc
