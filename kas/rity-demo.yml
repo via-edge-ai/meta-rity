@@ -34,3 +34,6 @@ local_conf_header:
 
   extra-image-features: |
     EXTRA_IMAGE_FEATURES ?= "debug-tweaks"
+
+  extra-package-config: |
+    PACKAGECONFIG:append:pn-qemu-system-native = " sdl"
