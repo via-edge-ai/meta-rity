@@ -9,6 +9,8 @@ modified for backporting to android-tools_5.1.1.r37.
 
 [1] https://android.googlesource.com/platform/system/core/+/d6ee9f26a5163af4121f4380264fcbd4e6851a17%5E%21
 
+Upstream-Status: Submitted [openembedded-devel@lists.openembedded.org]
+
 Signed-off-by: Macpaul Lin <macpaul.lin@mediatek.com>
 Signed-off-by: Jiacheng Liu <jiacheng.liu@mediatek.com>
 ---
