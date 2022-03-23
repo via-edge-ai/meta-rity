@@ -291,3 +291,7 @@ DEFAULTTUNE:virtclass-multilib-lib32 = "armv7athf-neon"
 # Video Encode on i300a is only supported in the 32-bits binaries
 IMAGE_INSTALL:remove:i300a = "mtk-vpud"
 IMAGE_INSTALL:append:i300a = "lib32-mtk-vpud"
+
+# Xtensa hal only works on i350/i500
+PREFERRED_PROVIDER_virtual/libvendor-nn-hal:i350 = "xtensa-ann-bin"
+PREFERRED_PROVIDER_virtual/libvendor-nn-hal:i500 = "xtensa-ann-bin"
