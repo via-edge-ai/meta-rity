@@ -18,6 +18,11 @@ To download the RITY SDK, please run the following commands:
 The commands above will download all the yocto layers of the RITY SDK into
 the `rity/src/` directory.
 
+.. note::
+
+	The repo command can be installed using instructions from its official
+	`documentation <https://gerrit.googlesource.com/git-repo/+/HEAD/README.md#install>`_
+
 Generation of the build configuration
 -------------------------------------
 
