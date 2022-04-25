@@ -7,7 +7,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'RITY SDK manual'
-copyright = 'Copyright 2021 MediaTek Inc. Copyright 2020-2021 BayLibre, SAS'
+copyright = 'Copyright 2022 MediaTek Inc. Copyright 2020-2022 BayLibre, SAS'
 author = 'MediaTek Inc. and BayLibre, SAS'
 
 # The full version, including alpha/beta/rc tags
