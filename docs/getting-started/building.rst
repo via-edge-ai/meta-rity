@@ -12,7 +12,7 @@ To download the RITY SDK, please run the following commands:
 .. parsed-literal::
 
 	$ mkdir rity; cd rity
-	$ repo init -u git@gitlab.com:mediatek/aiot/bsp/manifest.git -b |release|
+	$ repo init -u https://gitlab.com/mediatek/aiot/bsp/manifest.git -b |release|
 	$ repo sync
 
 The commands above will download all the yocto layers of the RITY SDK into

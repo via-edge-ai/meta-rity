@@ -16,7 +16,7 @@ The RITY SDK can be downloaded using `repo` as follows:
 .. parsed-literal::
 
     $ mkdir rity; cd rity
-    $ repo init -u git@gitlab.com:mediatek/aiot/bsp/manifest.git -b |release|
+    $ repo init -u https://gitlab.com/mediatek/aiot/bsp/manifest.git -b |release|
     $ repo sync
 
 You can replace '|release|' with any of the :ref:`releases:releases tags`
