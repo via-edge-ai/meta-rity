@@ -41,12 +41,12 @@ repos:
       meta-rity-bringup:
 
   meta-mediatek-bsp:
-    url: git@gitlab.com:mediatek/aiot/rity/meta-mediatek-bsp.git
+    url: https://gitlab.com/mediatek/aiot/rity/meta-mediatek-bsp.git
     path: layers/meta-mediatek-bsp
     refspec: kirkstone
 
   meta-nn:
-    url: git@gitlab.com:mediatek/aiot/rity/meta-nn.git
+    url: https://gitlab.com/mediatek/aiot/rity/meta-nn.git
     path: layers/meta-nn
     refspec: kirkstone
 
