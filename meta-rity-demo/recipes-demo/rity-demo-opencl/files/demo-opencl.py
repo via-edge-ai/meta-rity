@@ -18,7 +18,22 @@ def detect(gray, frame):
                           (0, 0, 255), 2)
     return frame
 
-video_capture = cv2.VideoCapture(int(sys.argv[1]))
+if len(sys.argv) < 2:
+    print("Usage: " + sys.argv[0] + " filename\n")
+    print("filename: cam_id          Camera ID. (e.g. 3)")
+    print("          cam_device      Camera device. (e.g. /dev/video3)")
+    print("          gst_pipeline    GStreamer pipeline. (e.g. \"v4l2src device=/dev/video3 ! videoconvert ! appsink\")")
+    exit(-1)
+
+filename = sys.argv[1]
+if filename.isdigit():
+    filename = int(sys.argv[1])
+
+video_capture = cv2.VideoCapture(filename)
+if video_capture.isOpened() != True:
+    print("Open video failed")
+    exit(-1)
+
 while True:
     # Captures video_capture frame by frame
     _, frame = video_capture.read()
