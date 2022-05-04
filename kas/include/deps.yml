@@ -51,9 +51,9 @@ repos:
     refspec: kirkstone
 
   meta-tensorflow:
-    url: git://git.yoctoproject.org/meta-tensorflow.git
+    url: git@gitlab.com:mediatek/aiot/rity/meta-tensorflow.git
     path: layers/meta-tensorflow
-    refspec: master
+    refspec: kirkstone
 
   meta-clang:
     url: https://github.com/kraj/meta-clang.git
