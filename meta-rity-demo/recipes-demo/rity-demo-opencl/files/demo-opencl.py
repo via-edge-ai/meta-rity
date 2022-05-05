@@ -36,7 +36,10 @@ if video_capture.isOpened() != True:
 
 while True:
     # Captures video_capture frame by frame
-    _, frame = video_capture.read()
+    ret, frame = video_capture.read()
+    if ret != True:
+        print("Read frame failed")
+        break
 
     # To capture image in monochrome
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
