@@ -291,3 +291,31 @@ DEFAULTTUNE:virtclass-multilib-lib32 = "armv7athf-neon"
 # Video Encode on i300a is only supported in the 32-bits binaries
 IMAGE_INSTALL:remove:i300a = "mtk-vpud"
 IMAGE_INSTALL:append:i300a = "lib32-mtk-vpud"
+
+# Xtensa hal only works on i350/i500
+PREFERRED_PROVIDER_virtual/libvendor-nn-hal:i350 = "xtensa-ann-bin"
+PREFERRED_PROVIDER_virtual/libvendor-nn-hal:i500 = "xtensa-ann-bin"
+
+# Device-Tree overlays to autoload at boot. Device-Tree overlays are used to
+# customized features at build time. For instance not all the i500-evb
+# board have the same display. The device-tree overlay allows to choose
+# which display will be loaded at boot time.
+# Loading the wrong device-tree overlay for a specific hardware will result
+# in a non-working functionality.
+#
+#KERNEL_DEVICETREE_OVERLAYS_AUTOLOAD:i500-evb += "panel-tpv-otm1901a.dtbo"
+#KERNEL_DEVICETREE_OVERLAYS_AUTOLOAD:i500-evb += "panel-truly-r63350a.dtbo"
+#KERNEL_DEVICETREE_OVERLAYS_AUTOLOAD:i500-pumpkin += "panel-urt-umo9465md.dtbo"
+#KERNEL_DEVICETREE_OVERLAYS_AUTOLOAD:i500-pumpkin += "panel-raspberrypi.dtbo"
+#KERNEL_DEVICETREE_OVERLAYS_AUTOLOAD:i500-pumpkin += "camera-ar0330-single.dtbo"
+#KERNEL_DEVICETREE_OVERLAYS_AUTOLOAD:i500-pumpkin += "camera-ar0330-dual.dtbo"
+#KERNEL_DEVICETREE_OVERLAYS_AUTOLOAD:i500-pumpkin += "camera-ap1302-ar0330-single.dtbo"
+#KERNEL_DEVICETREE_OVERLAYS_AUTOLOAD:i500-pumpkin += "camera-ap1302-ar0144-single.dtbo"
+#KERNEL_DEVICETREE_OVERLAYS_AUTOLOAD:i500-pumpkin += "camera-ap1302-ar0144-dual.dtbo"
+#KERNEL_DEVICETREE_OVERLAYS_AUTOLOAD:i500-pumpkin += "camera-ap1302-ar0330-single-ar0144-single.dtbo"
+#KERNEL_DEVICETREE_OVERLAYS_AUTOLOAD:i500-pumpkin += "camera-ap1302-ar0330-single-ar0144-dual.dtbo"
+#KERNEL_DEVICETREE_OVERLAYS_AUTOLOAD:i300a-pumpkin += "panel-raspberrypi.dtbo"
+#KERNEL_DEVICETREE_OVERLAYS_AUTOLOAD:i300a-pumpkin += "panel-avd-tt70ws-cn-134-a.dtbo"
+#KERNEL_DEVICETREE_OVERLAYS_AUTOLOAD:i300a-pumpkin += "camera-ov5645.dtbo"
+#KERNEL_DEVICETREE_OVERLAYS_AUTOLOAD:i300a-sb30 += "panel-raspberrypi.dtbo"
+#KERNEL_DEVICETREE_OVERLAYS_AUTOLOAD:i300a-coral += "camera-ov5645.dtbo"
