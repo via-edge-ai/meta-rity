@@ -1,1 +1,1 @@
-PACKAGECONFIG:append = " gtk"
+PACKAGECONFIG:append = " gtk dnn"
