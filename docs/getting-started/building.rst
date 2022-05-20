@@ -62,6 +62,10 @@ The image can be found in `rity/build/tmp/deploy/images/<machine>/`
 
 The available values for `<machine>` can be found in the :doc:`BSP documentation <bsp:boards/index>`.
 
+.. note::
+
+	If you have signed a NDA with MediaTek, it's possible to enable more features by adding ``NDA_BUILD = "1"`` to your ``local.conf``
+
 Images
 ------
 
