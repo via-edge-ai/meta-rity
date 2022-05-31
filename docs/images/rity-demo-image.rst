@@ -52,6 +52,38 @@ Machine Learning
 
 The `RITY Demo Image` enables several frameworks for machine learning. Please refer to its `doc <https://mediatek.gitlab.io/aiot/rity/meta-nn/index.html>`_ .
 
+Add peripheral with device tree overlay
+---------------------------------------
+
+Rity layer has a custom Yocto feature `KERNEL_DEVICETREE_OVERLAYS_AUTOLOAD`,
+which help to integrate DTBO (Device Tree Blob Overlay).
+
+You can find some overlay for some boards here:
+https://gitlab.com/mediatek/aiot/rity/meta-mediatek-bsp/-/tree/kirkstone/recipes-kernel/dtbo
+
+For example, to use the peripheral "startek panel" on the DSI display port
+of the i350-evk board (mt8365-evk):
+
+- Retrieve the exact name of the overlay for this board from BSP repository link above.
+
+`https://gitlab.com/mediatek/aiot/rity/meta-mediatek-bsp/-/tree/kirkstone/recipes-kernel/dtbo/mt8365-evk/panel-startek-kd070fhfid015.dts`
+
+- Then, you need to add the following to your `local.conf`:
+
+.. code::
+
+	KERNEL_DEVICETREE_OVERLAYS_AUTOLOAD += " \
+		panel-startek-kd070fhfid015.dtbo \
+	"
+
+.. warning::
+
+	Take care to change the overlay file name from XXXX.dts to XXXX.dtbo
+
+.. note::
+
+	You can add multiple overlay.
+
 Package Management
 ------------------
 
