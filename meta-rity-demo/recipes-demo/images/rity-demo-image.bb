@@ -46,4 +46,6 @@ IMAGE_INSTALL:append:i500 = " \
 	packagegroup-rity-nnapi \
 "
 
+IMAGE_INSTALL:append:i1200 = "${@bb.utils.contains("DISTRO_FEATURES", "nda-mtk", "packagegroup-rity-mtk-neuropilot", "", d)}"
+
 require recipes-rity/images/rity-image.inc

@@ -17,6 +17,4 @@ RDEPENDS:${PN} = " \
 	apusys \
 	apusys-firmwares \
 	neuropilot-bin \
-	libstdc++ \
-	python3-pillow \
 "
