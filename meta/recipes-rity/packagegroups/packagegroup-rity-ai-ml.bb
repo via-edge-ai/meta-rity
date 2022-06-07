@@ -7,11 +7,16 @@ inherit packagegroup
 
 PACKAGES = " \
 	${PN} \
+	${PN}-extended \
 "
 
 RDEPENDS:${PN} = " \
 	tensorflow-lite \
 	armnn \
+"
+
+RDEPENDS:${PN}-extended = " \
+	${PN} \
 	onnxruntime-staticdev \
 	onnxruntime-examples \
 	onnxruntime \
