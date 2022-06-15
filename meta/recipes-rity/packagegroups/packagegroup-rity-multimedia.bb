@@ -19,7 +19,6 @@ RDEPENDS:${PN} = " \
 	gstreamer1.0-plugins-bad \
 	gstreamer1.0-libav \
 	libcamera \
-	libcamera-dev \
 	libcamera-gst \
 	v4l-utils \
 	yavta \
