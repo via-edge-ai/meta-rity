@@ -292,10 +292,6 @@ DEFAULTTUNE:virtclass-multilib-lib32 = "armv7athf-neon"
 IMAGE_INSTALL:remove:i300a = "mtk-vpud"
 IMAGE_INSTALL:append:i300a = "lib32-mtk-vpud"
 
-# Xtensa hal only works on i350/i500
-PREFERRED_PROVIDER_virtual/libvendor-nn-hal:i350 = "xtensa-ann-bin"
-PREFERRED_PROVIDER_virtual/libvendor-nn-hal:i500 = "xtensa-ann-bin"
-
 # Device-Tree overlays to autoload at boot. Device-Tree overlays are used to
 # customized features at build time. For instance not all the i500-evb
 # board have the same display. The device-tree overlay allows to choose
