@@ -22,7 +22,6 @@ IMAGE_INSTALL += "\
 	packagegroup-rity-demo-qt \
 	packagegroup-rity-ai-ml \
 	packagegroup-tools-bluetooth \
-	packagegroup-rity-graphics \
 	gstreamer1.0-meta-base \
 	gstreamer1.0-meta-audio \
 	gstreamer1.0-meta-debug \
