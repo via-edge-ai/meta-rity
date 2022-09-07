@@ -2,7 +2,7 @@ Building the RITY SDK
 =====================
 
 The RITY SDK must be built on a Linux-based OS. Please use one of the
-officially `supported Linux Distributions <https://yoctoproject.org/docs/current/ref-manual/ref-manual.html#detailed-supported-distros>`_ by the Yocto Project.
+officially `supported Linux Distributions <https://docs.yoctoproject.org/ref-manual/system-requirements.html#supported-linux-distributions>`_ by the Yocto Project.
 
 Downloading the RITY SDK
 ------------------------
