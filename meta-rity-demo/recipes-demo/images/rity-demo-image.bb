@@ -49,4 +49,12 @@ IMAGE_INSTALL:append:i1200 = " \
 	${@bb.utils.contains("DISTRO_FEATURES", "nda-mtk", "packagegroup-rity-mtk-neuropilot", "", d)} \
 "
 
+IMAGE_INSTALL:append:i350 = " \
+	packagegroup-rity-mtk-video \
+"
+
+IMAGE_INSTALL:append:i1200 = " \
+	packagegroup-rity-mtk-video \
+"
+
 require recipes-rity/images/rity-image.inc
