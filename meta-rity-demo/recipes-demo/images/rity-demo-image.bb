@@ -31,6 +31,7 @@ IMAGE_INSTALL += "\
 	python3-pip \
 	python3-opencv \
 	opkg \
+	e2fsprogs-resize2fs \
 "
 
 IMAGE_INSTALL:remove:i300b = " \
