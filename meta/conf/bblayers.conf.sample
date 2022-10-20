@@ -20,6 +20,7 @@ BBLAYERS ?= " \
   ##OEROOT##/../meta-openembedded/meta-python \
   ##OEROOT##/../meta-rity/meta \
   ##OEROOT##/../meta-rity/meta-rity-bringup \
+  ##OEROOT##/../meta-rity/meta-rity-bsp \
   ##OEROOT##/../meta-rity/meta-rity-demo \
   ##OEROOT##/../meta-tensorflow \
   ##OEROOT##/../meta-qt5 \
