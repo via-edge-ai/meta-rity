@@ -1,0 +1,24 @@
+diff --git a/build.sh b/build.sh
+index 81d092d..e087878 100755
+--- a/build.sh
++++ b/build.sh
+@@ -1,6 +1,6 @@
+ #!/bin/bash
+ 
+-SUBDIRS="coremark c-ray dhrystone lmbench perf_mem stream whetstone_sp glmark2 benchmark_model"
++SUBDIRS="coremark c-ray dhrystone lmbench perf_mem stream whetstone_sp"
+ FAILS=""
+ 
+ for s in $SUBDIRS; do
+diff --git a/scripts/run.sh b/scripts/run.sh
+index 658dfb3..952609b 100755
+--- a/scripts/run.sh
++++ b/scripts/run.sh
+@@ -1,6 +1,6 @@
+ #!/bin/bash
+ 
+-SUBDIRS="coremark dhrystone c-ray stream lmbench whetstone perf_mem glmark2 benchmark_model"
++SUBDIRS="coremark dhrystone c-ray stream lmbench whetstone perf_mem"
+ 
+ for s in $SUBDIRS; do
+ 	cd $s
