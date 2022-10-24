@@ -22,6 +22,10 @@ RDEPENDS:${PN} = " \
 	wireless-regdb-static \
 	serialcheck \
 	spidev-test \
+	dmidecode \
+	evtest \
+	libdrm-tests \
+	read-edid \
 "
 
 RDEPENDS:${PN}-extended = " \
