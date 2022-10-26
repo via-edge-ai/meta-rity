@@ -26,3 +26,7 @@ IMAGE_INSTALL:append:i350 = " \
 IMAGE_INSTALL:append:i500 = " \
 	packagegroup-rity-nnapi \
 "
+
+IMAGE_INSTALL:append:i1200 = " \
+	packagegroup-rity-tsn \
+"

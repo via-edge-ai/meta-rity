@@ -13,6 +13,7 @@ BBLAYERS ?= " \
   ##OEROOT##/../meta-arm/meta-arm-toolchain \
   ##OEROOT##/../meta-clang \
   ##OEROOT##/../meta-mediatek-bsp \
+  ##OEROOT##/../meta-mediatek-tsn \
   ##OEROOT##/../meta-nn \
   ##OEROOT##/../meta-stress-test \
   ##OEROOT##/../meta-openembedded/meta-multimedia \

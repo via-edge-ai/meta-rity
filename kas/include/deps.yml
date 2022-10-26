@@ -45,6 +45,11 @@ repos:
     path: layers/meta-mediatek-bsp
     refspec: kirkstone
 
+  meta-mediatek-tsn:
+    url: https://gitlab.com/mediatek/aiot/rity/meta-mediatek-tsn.git
+    path: layers/meta-mediatek-tsn
+    refspec: kirkstone
+
   meta-nn:
     url: https://gitlab.com/mediatek/aiot/rity/meta-nn.git
     path: layers/meta-nn
