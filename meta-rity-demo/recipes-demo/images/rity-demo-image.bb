@@ -22,6 +22,8 @@ IMAGE_INSTALL:remove:i300b = " \
 
 IMAGE_INSTALL:append:i350 = " \
 	packagegroup-rity-nnapi \
+	r2inference \
+	gstinference \
 "
 
 IMAGE_INSTALL:append:i500 = " \
@@ -30,4 +32,6 @@ IMAGE_INSTALL:append:i500 = " \
 
 IMAGE_INSTALL:append:i1200 = " \
 	packagegroup-rity-tsn \
+	r2inference \
+	gstinference \
 "
