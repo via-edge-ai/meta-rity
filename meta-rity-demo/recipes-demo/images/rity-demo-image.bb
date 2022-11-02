@@ -13,6 +13,7 @@ IMAGE_INSTALL += "\
 	python3-opencv \
 	opkg \
 	benchmark-suite \
+	ltp \
 "
 
 IMAGE_INSTALL:remove:i300b = " \
