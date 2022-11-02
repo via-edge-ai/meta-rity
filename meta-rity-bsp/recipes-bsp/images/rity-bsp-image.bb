@@ -35,13 +35,12 @@ IMAGE_INSTALL:remove:i300b = " \
 "
 
 IMAGE_INSTALL:append:i1200 = " \
+	packagegroup-rity-mtk-video \
 	${@bb.utils.contains("DISTRO_FEATURES", "nda-mtk", "packagegroup-rity-mtk-neuropilot", "", d)} \
+	${@bb.utils.contains("DISTRO_FEATURES", "nda-mtk", "packagegroup-rity-mtk-camisp", "", d)} \
 "
 
 IMAGE_INSTALL:append:i350 = " \
 	packagegroup-rity-mtk-video \
 "
 
-IMAGE_INSTALL:append:i1200 = " \
-	packagegroup-rity-mtk-video \
-"
