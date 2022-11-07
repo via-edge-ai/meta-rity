@@ -16,6 +16,10 @@ IMAGE_INSTALL += "\
 	ltp \
 "
 
+IMAGE_INSTALL:append:genio-700 = " \
+	packagegroup-rity-tsn \
+"
+
 IMAGE_INSTALL:remove:i300b = " \
 	packagegroup-rity-demo-qt \
 "
