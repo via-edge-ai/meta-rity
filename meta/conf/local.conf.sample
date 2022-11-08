@@ -283,14 +283,14 @@ LICENSE_FLAGS_ACCEPTED = "commercial"
 # how much space in kB you need.
 IMAGE_ROOTFS_EXTRA_SPACE = "200000"
 
-# Define multilib target
-require conf/multilib.conf
-MULTILIBS = "multilib:lib32"
-DEFAULTTUNE:virtclass-multilib-lib32 = "armv7athf-neon"
+# Uncomment to enable multilib support
+#require conf/multilib.conf
+#MULTILIBS = "multilib:lib32"
+#DEFAULTTUNE:virtclass-multilib-lib32 = "armv7athf-neon"
 
 # Video Encode on i300a is only supported in the 32-bits binaries
-IMAGE_INSTALL:remove:i300a = "mtk-vpud"
-IMAGE_INSTALL:append:i300a = "lib32-mtk-vpud"
+#IMAGE_INSTALL:remove:i300a = "mtk-vpud"
+#IMAGE_INSTALL:append:i300a = "lib32-mtk-vpud"
 
 # Device-Tree overlays to autoload at boot. Device-Tree overlays are used to
 # customized features at build time. For instance not all the i500-evb
