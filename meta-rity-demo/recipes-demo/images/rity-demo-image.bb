@@ -8,6 +8,7 @@ DESCRIPTION = "Rity Demo Image"
 IMAGE_INSTALL += "\
 	packagegroup-rity-demo-qt \
 	packagegroup-rity-ai-ml \
+	packagegroup-rity-graphics \
 	rity-demo-opencl \
 	python3-pip \
 	python3-opencv \
