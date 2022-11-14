@@ -9,6 +9,7 @@ IMAGE_INSTALL += "\
 	packagegroup-core-full-cmdline \
 	packagegroup-rity-debug \
 	packagegroup-rity-tools \
+	u-boot-env \
 "
 
 require recipes-rity/images/rity-image.inc
