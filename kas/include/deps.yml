@@ -39,6 +39,7 @@ repos:
       meta:
       meta-rity-demo:
       meta-rity-bringup:
+      meta-rity-bsp:
 
   meta-mediatek-bsp:
     url: https://gitlab.com/mediatek/aiot/rity/meta-mediatek-bsp.git
