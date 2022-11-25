@@ -9,9 +9,8 @@ inherit base
 SRC_URI = " \
     ${AIOT_BSP_URI}/benchmark_suite;branch=main \
     file://COPYING \
-    file://skip-tests.patch \
 "
-SRCREV = "a56726b5f489b3889976f118c48417008be28de8"
+SRCREV = "bdae0c842683073af520a7c11610dac7558359d5"
 
 S = "${WORKDIR}/git"
 
@@ -29,6 +28,7 @@ do_configure () {
     fi
 
     echo "export NUM_CORES=$NUM_CORES" >> ${S}/common
+    echo "export USE_PREBUILT_BINARIES=1" >> ${S}/common
 }
 
 do_compile () {
@@ -52,5 +52,8 @@ RDEPENDS:${PN} = " \
 "
 
 FILES:${PN} = "${ROOT_HOME}/benchmark_suite"
+
+# Skip package QA of checking runtime dependencies on prebuilt binaries
+INSANE_SKIP:${PN} += "file-rdeps"
 
 addtask do_copy_license after do_unpack before do_populate_lic
