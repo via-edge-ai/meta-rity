@@ -29,7 +29,7 @@ filename = sys.argv[1]
 if filename.isdigit():
     filename = int(sys.argv[1])
 
-video_capture = cv2.VideoCapture(filename)
+video_capture = cv2.VideoCapture(filename, cv2.CAP_V4L2)
 if video_capture.isOpened() != True:
     print("Open video failed")
     exit(-1)
