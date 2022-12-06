@@ -1,4 +1,5 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
+FILESEXTRAPATHS:prepend:genio-700-evk := "${THISDIR}/files/genio-700-evk:"
 
 inherit systemd
 
@@ -9,6 +10,10 @@ SRC_URI:append = " \
 	file://usbgadget.service \
 	file://eth.network \
 	file://wireless.network \
+"
+
+SRC_URI:append:genio-700-evk = " \
+	file://usbgadget.conf \
 "
 
 # Create symlink to /lib if multilib support is disabled
@@ -38,6 +43,10 @@ do_install:append() {
 	fi
 }
 
+do_install:append:genio-700-evk() {
+	install -m 0644 ${WORKDIR}/usbgadget.conf ${D}${sysconfdir}/usbgadget.conf
+}
+
 SYSTEMD_PACKAGES = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '${PN}', '', d)}"
 SYSTEMD_SERVICE:${PN} = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'usbgadget.service', '', d)}"
 FILES:${PN} += " \
@@ -49,3 +58,4 @@ FILES:${PN} += " \
 	${sysconfdir}/systemd/network/wireless.network \
 	${sysconfdir}/udhcpd.conf \
 "
+FILES:${PN}:append:genio-700-evk = "${sysconfdir}/usbgadget.conf"
