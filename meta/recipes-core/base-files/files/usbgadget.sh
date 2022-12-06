@@ -13,6 +13,7 @@ USB_GADGET_PID=0x2005
 USB_GADGET_SN=0123456789
 USB_GADGET_MANUFACT="Mediatek Inc."
 USB_GADGET_PRODUCT="AIOT"
+FILE=/etc/usbgadget.conf
 
 create_gadget()
 {
@@ -64,7 +65,12 @@ start()
 
     start-stop-daemon --start --background --oknodo --quiet --exec /usr/bin/adbd
     sleep 1
-    echo $(ls /sys/class/udc) > $USB_GADGET_G1/UDC
+
+    if [ -f "$FILE" ]; then
+        cat $FILE > $USB_GADGET_G1/UDC
+    else
+        echo $(ls /sys/class/udc) > $USB_GADGET_G1/UDC
+    fi
 }
 
 stop()

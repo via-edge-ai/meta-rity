@@ -25,4 +25,5 @@ RDEPENDS:${PN} = " \
 
 RDEPENDS:${PN}-extended = " \
 	${PN} \
+	genio-devtools \
 "

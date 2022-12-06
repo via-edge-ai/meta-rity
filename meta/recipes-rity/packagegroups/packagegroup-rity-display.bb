@@ -23,10 +23,6 @@ WAYLAND_PKGS = " \
 "
 
 RDEPENDS:${PN} = " \
-	dmidecode \
-	evtest \
-	libdrm-tests \
-	read-edid \
 	kmscube \
 	${@bb.utils.contains("DISTRO_FEATURES", "vulkan", "${VULKAN_PKGS}", "", d)} \
 	${@bb.utils.contains("DISTRO_FEATURES", "wayland", "${WAYLAND_PKGS}", "", d)} \

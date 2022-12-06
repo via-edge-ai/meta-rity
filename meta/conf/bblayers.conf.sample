@@ -13,13 +13,17 @@ BBLAYERS ?= " \
   ##OEROOT##/../meta-arm/meta-arm-toolchain \
   ##OEROOT##/../meta-clang \
   ##OEROOT##/../meta-mediatek-bsp \
+  ##OEROOT##/../meta-mediatek-tsn \
+  ##OEROOT##/../meta-mediatek-demo \
   ##OEROOT##/../meta-nn \
+  ##OEROOT##/../meta-stress-test \
   ##OEROOT##/../meta-openembedded/meta-multimedia \
   ##OEROOT##/../meta-openembedded/meta-networking \
   ##OEROOT##/../meta-openembedded/meta-oe \
   ##OEROOT##/../meta-openembedded/meta-python \
   ##OEROOT##/../meta-rity/meta \
   ##OEROOT##/../meta-rity/meta-rity-bringup \
+  ##OEROOT##/../meta-rity/meta-rity-bsp \
   ##OEROOT##/../meta-rity/meta-rity-demo \
   ##OEROOT##/../meta-tensorflow \
   ##OEROOT##/../meta-qt5 \

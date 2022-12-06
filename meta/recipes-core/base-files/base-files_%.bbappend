@@ -11,6 +11,13 @@ SRC_URI:append = " \
 	file://wireless.network \
 "
 
+# Create symlink to /lib if multilib support is disabled
+python () {
+    d.setVar('SYMLIB64', '0')
+    if not d.getVar('MULTILIBS', True):
+        d.setVar('SYMLIB64', '1')
+}
+
 do_install:append() {
 	install -d ${D}${systemd_unitdir}/system
 	install -d ${D}${sysconfdir}/init.d
@@ -25,6 +32,10 @@ do_install:append() {
 	install -m 0755 ${WORKDIR}/usbgadget.sh ${D}${systemd_unitdir}
 
 	install -m 0644 ${WORKDIR}/udhcpd.conf ${D}${sysconfdir}/udhcpd.conf
+
+	if [ "${SYMLIB64}" = "1" ]; then
+		ln -sf lib/ ${D}/lib64
+	fi
 }
 
 SYSTEMD_PACKAGES = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '${PN}', '', d)}"

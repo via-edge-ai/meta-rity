@@ -11,7 +11,7 @@ PACKAGES = " \
 "
 
 RDEPENDS:${PN} = " \
-	tensorflow-lite \
+	${@bb.utils.contains('TFLITE_PREBUILT', '1', 'tensorflowlite-prebuilt', 'tensorflow-lite', d)}  \
 	armnn \
 "
 
