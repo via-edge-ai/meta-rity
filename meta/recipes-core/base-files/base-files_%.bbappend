@@ -14,6 +14,8 @@ SRC_URI:append = " \
 
 SRC_URI:append:genio-700-evk = " \
 	file://usbgadget.conf \
+	file://usbhub.sh \
+	file://usbhub.service \
 "
 
 # Create symlink to /lib if multilib support is disabled
@@ -45,6 +47,12 @@ do_install:append() {
 
 do_install:append:genio-700-evk() {
 	install -m 0644 ${WORKDIR}/usbgadget.conf ${D}${sysconfdir}/usbgadget.conf
+
+	install -m 0644 ${WORKDIR}/usbhub.service ${D}${systemd_unitdir}/system/
+	install -m 0755 ${WORKDIR}/usbhub.sh ${D}${sysconfdir}/init.d/
+	install -m 0755 ${WORKDIR}/usbhub.sh ${D}${systemd_unitdir}
+	install -d ${D}/${sysconfdir}/systemd/system/multi-user.target.wants/
+	ln -sfr ${D}/${systemd_system_unitdir}/usbhub.service ${D}/${sysconfdir}/systemd/system/multi-user.target.wants/usbhub.service
 }
 
 SYSTEMD_PACKAGES = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '${PN}', '', d)}"
@@ -58,4 +66,8 @@ FILES:${PN} += " \
 	${sysconfdir}/systemd/network/wireless.network \
 	${sysconfdir}/udhcpd.conf \
 "
-FILES:${PN}:append:genio-700-evk = "${sysconfdir}/usbgadget.conf"
+FILES:${PN}:append:genio-700-evk = " \
+	${sysconfdir}/usbgadget.conf \
+	${systemd_unitdir}/system/usbhub.service \
+	${sysconfdir}/systemd/system/multi-user.target.wants/usbhub.service \
+"
