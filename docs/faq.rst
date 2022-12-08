@@ -57,3 +57,33 @@ and Windows built-in `rndis` driver.
 For more information you can check the `Get the Google USB Driver`_.
 
 .. _Get the Google USB Driver: https://developer.android.com/studio/run/win-usb
+
+5. Configuring an USB gadget port for debugging
+-----------------------------------------------
+
+Since some boards support multiple gadget ports, such as the Genio 700
+which has two udc device nodes in the
+`/sys/class/udc` path (e.g. 11201000.usb1 and 112b1000.usb),
+we need to specify a default interface to enable the `adb` functionality.
+For this, we have introduced a new mechanism that allows `usbgadget.service`
+to set the correct port according to the configuration file.
+Users can specify the default gadget port by configuring `/etc/usbgadget.conf`.
+
+.. code::
+
+    example:
+        File: /etc/usbgadget.conf
+        Content: 112b1000.usb ($BASEADDR.$NODENAME)
+
+6. System service for resetting USB hub on genio-700-evk board
+--------------------------------------------------------------
+
+According to the datasheet, the Genio 700 USB hub requires a minimum reset time of 3ms.
+this can be generated using a programmable delay supervision device.
+To meet this requirement, we have added a new startup service `usbhub.service`,
+which uses the command `gpioset` to control gpio enable/disable to reset
+the USB hub so that the usb hub can be run successfully.
+
+For more information you can check the `TUSB8020B Two-Port USB 3.0 Hub datasheet`_.
+
+.. _TUSB8020B Two-Port USB 3.0 Hub datasheet: https://www.ti.com/lit/gpn/tusb8020b
