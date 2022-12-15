@@ -87,3 +87,16 @@ the USB hub so that the usb hub can be run successfully.
 For more information you can check the `TUSB8020B Two-Port USB 3.0 Hub datasheet`_.
 
 .. _TUSB8020B Two-Port USB 3.0 Hub datasheet: https://www.ti.com/lit/gpn/tusb8020b
+
+6. System service for wwan-5g card on genio-700-evk board
+---------------------------------------------------------
+
+The wwan-5g and usbhub services are used to manage a WWAN 5G card (Quectel
+RM500K) that is connected to the system via an M.2 slot. The wwan-5g service
+is responsible for controlling the WWAN 5G card, while the usbhub service
+manages the USB hub that the card is connected to. A startup service
+`wwan-5g.service` uses the command `gpioset` to control `RESET` and
+`FULL_CARD_POWER_OFF` pins to enable/disable the card.
+
+The wwan5g service depends on the usbhub service in order to function properly.
+Please ensure that they are running in the correct order.
