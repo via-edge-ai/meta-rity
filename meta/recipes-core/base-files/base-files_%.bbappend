@@ -16,6 +16,8 @@ SRC_URI:append:genio-700-evk = " \
 	file://usbgadget.conf \
 	file://usbhub.sh \
 	file://usbhub.service \
+	file://wwan-5g.sh \
+	file://wwan-5g.service \
 "
 
 # Create symlink to /lib if multilib support is disabled
@@ -55,6 +57,13 @@ do_install:append:genio-700-evk() {
 	install -m 0755 ${WORKDIR}/usbhub.sh ${D}${systemd_unitdir}
 	install -d ${D}/${sysconfdir}/systemd/system/multi-user.target.wants/
 	ln -sfr ${D}/${systemd_system_unitdir}/usbhub.service ${D}/${sysconfdir}/systemd/system/multi-user.target.wants/usbhub.service
+
+	# WWAN 5G Card service
+	install -m 0644 ${WORKDIR}/wwan-5g.service ${D}${systemd_unitdir}/system/
+	install -m 0755 ${WORKDIR}/wwan-5g.sh ${D}${sysconfdir}/init.d/
+	install -m 0755 ${WORKDIR}/wwan-5g.sh ${D}${systemd_unitdir}
+	install -d ${D}/${sysconfdir}/systemd/system/multi-user.target.wants/
+	ln -sfr ${D}/${systemd_system_unitdir}/wwan-5g.service ${D}/${sysconfdir}/systemd/system/multi-user.target.wants/wwan-5g.service
 }
 
 SYSTEMD_PACKAGES = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '${PN}', '', d)}"
@@ -72,4 +81,6 @@ FILES:${PN}:append:genio-700-evk = " \
 	${sysconfdir}/usbgadget.conf \
 	${systemd_unitdir}/system/usbhub.service \
 	${sysconfdir}/systemd/system/multi-user.target.wants/usbhub.service \
+	${systemd_unitdir}/system/wwan-5g.service \
+	${sysconfdir}/systemd/system/multi-user.target.wants/wwan-5g.service \
 "
