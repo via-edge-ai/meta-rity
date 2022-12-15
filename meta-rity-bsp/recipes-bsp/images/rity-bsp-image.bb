@@ -27,6 +27,8 @@ IMAGE_INSTALL += " \
 	gstreamer1.0-meta-video \
 	gstreamer1.0-python \
 	e2fsprogs-resize2fs \
+	iproute2 \
+	can-utils \
 "
 
 IMAGE_INSTALL:remove:i300b = " \

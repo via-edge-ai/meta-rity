@@ -12,7 +12,6 @@ PACKAGES = "${PN}"
 
 RDEPENDS:${PN} = " \
 	linuxptp \
-	iproute2 \
 	iproute2-tc \
 	tcpdump \
 	scheduled-tx-tools \
