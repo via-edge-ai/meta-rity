@@ -46,8 +46,10 @@ do_install:append() {
 }
 
 do_install:append:genio-700-evk() {
+	# Define default USB gadget port (ADB)
 	install -m 0644 ${WORKDIR}/usbgadget.conf ${D}${sysconfdir}/usbgadget.conf
 
+	# USB Hub service
 	install -m 0644 ${WORKDIR}/usbhub.service ${D}${systemd_unitdir}/system/
 	install -m 0755 ${WORKDIR}/usbhub.sh ${D}${sysconfdir}/init.d/
 	install -m 0755 ${WORKDIR}/usbhub.sh ${D}${systemd_unitdir}
