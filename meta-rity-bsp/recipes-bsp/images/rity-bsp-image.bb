@@ -50,3 +50,6 @@ IMAGE_INSTALL:append:i350 = " \
 	packagegroup-rity-mtk-video \
 "
 
+IMAGE_INSTALL:append:genio-700 = " \
+	${@bb.utils.contains("DISTRO_FEATURES", "nda-mtk", "packagegroup-rity-mtk-neuropilot", "", d)} \
+"
