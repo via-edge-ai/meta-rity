@@ -19,3 +19,8 @@ RDEPENDS:${PN}:mt8195 = " \
 	mtk-vcu-driver \
 	mtk-vcodec-driver \
 "
+
+RDEPENDS:${PN}:mt8188 = " \
+	mtk-vcu-driver \
+	mtk-vcodec-driver \
+"
