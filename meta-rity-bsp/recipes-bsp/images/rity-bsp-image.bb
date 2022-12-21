@@ -31,6 +31,10 @@ IMAGE_INSTALL += " \
 	can-utils \
 "
 
+IMAGE_INSTALL:append:genio-700 = " \
+	packagegroup-rity-mtk-video \
+"
+
 IMAGE_INSTALL:remove:i300b = " \
 	packagegroup-display \
 	packagegroup-multimedia \
