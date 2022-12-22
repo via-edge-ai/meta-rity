@@ -81,7 +81,10 @@ fitimage_assemble() {
 	fi
 
 	if [ "${INITRAMFS_IMAGE_BUNDLE}" = "1" ]; then
-		initramfs_bundle_path="arch/"${UBOOT_ARCH}"/boot/"${KERNEL_IMAGETYPE_REPLACEMENT}".initramfs"
+		# By default we look for Image.gz under the build folder.
+		# To change compression format, in addition to changing the script here,
+		# you also need to update KERNEL_EXTRA_ARGS in kernel recipe.
+		initramfs_bundle_path="arch/"${UBOOT_ARCH}"/boot/"${KERNEL_IMAGETYPE_REPLACEMENT}".gz"
 		if [ -e "${initramfs_bundle_path}" ]; then
 
 			#
