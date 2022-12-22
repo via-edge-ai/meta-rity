@@ -1,5 +1,6 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 FILESEXTRAPATHS:prepend:genio-700-evk := "${THISDIR}/files/genio-700-evk:"
+FILESEXTRAPATHS:prepend:genio-1200-evk := "${THISDIR}/files/genio-1200-evk:"
 
 inherit systemd
 
@@ -18,6 +19,10 @@ SRC_URI:append:genio-700-evk = " \
 	file://usbhub.service \
 	file://wwan-5g.sh \
 	file://wwan-5g.service \
+"
+
+SRC_URI:append:genio-1200-evk = " \
+	file://usbgadget.conf \
 "
 
 # Create symlink to /lib if multilib support is disabled
@@ -66,6 +71,11 @@ do_install:append:genio-700-evk() {
 	ln -sfr ${D}/${systemd_system_unitdir}/wwan-5g.service ${D}/${sysconfdir}/systemd/system/multi-user.target.wants/wwan-5g.service
 }
 
+do_install:append:genio-1200-evk() {
+	# Define default USB gadget port (ADB)
+	install -m 0644 ${WORKDIR}/usbgadget.conf ${D}${sysconfdir}/usbgadget.conf
+}
+
 SYSTEMD_PACKAGES = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '${PN}', '', d)}"
 SYSTEMD_SERVICE:${PN} = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'usbgadget.service', '', d)}"
 FILES:${PN} += " \
@@ -83,4 +93,7 @@ FILES:${PN}:append:genio-700-evk = " \
 	${sysconfdir}/systemd/system/multi-user.target.wants/usbhub.service \
 	${systemd_unitdir}/system/wwan-5g.service \
 	${sysconfdir}/systemd/system/multi-user.target.wants/wwan-5g.service \
+"
+FILES:${PN}:append:genio-1200-evk = " \
+	${sysconfdir}/usbgadget.conf \
 "
