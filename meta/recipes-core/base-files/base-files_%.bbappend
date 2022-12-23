@@ -23,6 +23,8 @@ SRC_URI:append:genio-700-evk = " \
 
 SRC_URI:append:genio-1200-evk = " \
 	file://usbgadget.conf \
+	file://usbmass.sh \
+	file://usbmass.service \
 "
 
 # Create symlink to /lib if multilib support is disabled
@@ -74,6 +76,13 @@ do_install:append:genio-700-evk() {
 do_install:append:genio-1200-evk() {
 	# Define default USB gadget port (ADB)
 	install -m 0644 ${WORKDIR}/usbgadget.conf ${D}${sysconfdir}/usbgadget.conf
+
+	# USB Mass Storage service
+	install -m 0644 ${WORKDIR}/usbmass.service ${D}${systemd_unitdir}/system/
+	install -m 0755 ${WORKDIR}/usbmass.sh ${D}${sysconfdir}/init.d/
+	install -m 0755 ${WORKDIR}/usbmass.sh ${D}${systemd_unitdir}
+	install -d ${D}/${sysconfdir}/systemd/system/multi-user.target.wants/
+	ln -sfr ${D}/${systemd_system_unitdir}/usbmass.service ${D}/${sysconfdir}/systemd/system/multi-user.target.wants/usbmass.service
 }
 
 SYSTEMD_PACKAGES = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '${PN}', '', d)}"
@@ -96,4 +105,6 @@ FILES:${PN}:append:genio-700-evk = " \
 "
 FILES:${PN}:append:genio-1200-evk = " \
 	${sysconfdir}/usbgadget.conf \
+	${systemd_unitdir}/system/usbmass.service \
+	${sysconfdir}/systemd/system/multi-user.target.wants/usbmass.service \
 "
