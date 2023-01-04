@@ -7,6 +7,7 @@ INITRAMFS_SCRIPTS ?= "\
                       initramfs-framework-base \
                       initramfs-module-debug \
                       initramfs-module-simple-rootfs \
+                      ${@bb.utils.contains('DISTRO_FEATURES', 'modimg', 'initramfs-module-modpart', '', d)} \
                      "
 
 PACKAGE_INSTALL = "${INITRAMFS_SCRIPTS} ${VIRTUAL-RUNTIME_base-utils} base-passwd ${ROOTFS_BOOTSTRAP_INSTALL}"
