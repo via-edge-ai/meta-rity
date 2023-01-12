@@ -88,8 +88,8 @@ For more information you can check the `TUSB8020B Two-Port USB 3.0 Hub datasheet
 
 .. _TUSB8020B Two-Port USB 3.0 Hub datasheet: https://www.ti.com/lit/gpn/tusb8020b
 
-6. System service for wwan-5g card on genio-700-evk board
----------------------------------------------------------
+6. System service for wwan-5g card on genio-700-evk and genio-1200-evk board
+----------------------------------------------------------------------------
 
 The wwan-5g and usbhub services are used to manage a WWAN 5G card (Quectel
 RM500K) that is connected to the system via an M.2 slot. The wwan-5g service
@@ -100,3 +100,7 @@ manages the USB hub that the card is connected to. A startup service
 
 The wwan5g service depends on the usbhub service in order to function properly.
 Please ensure that they are running in the correct order.
+
+Note: genio-1200-evk uses 2 transisters to control the module instead of using
+direct pin control as genio-700-evk. The enable/disable definition of pinctrls
+were different from each board.
