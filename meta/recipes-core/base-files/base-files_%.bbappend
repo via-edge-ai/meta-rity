@@ -79,12 +79,21 @@ do_install:append:genio-1200-evk() {
 	# Define default USB gadget port (ADB)
 	install -m 0644 ${WORKDIR}/usbgadget.conf ${D}${sysconfdir}/usbgadget.conf
 
+	# Create folder for services enabled by default
+	install -d ${D}/${sysconfdir}/systemd/system/multi-user.target.wants/
+
 	# USB Mass Storage service
 	install -m 0644 ${WORKDIR}/usbmass.service ${D}${systemd_unitdir}/system/
 	install -m 0755 ${WORKDIR}/usbmass.sh ${D}${sysconfdir}/init.d/
 	install -m 0755 ${WORKDIR}/usbmass.sh ${D}${systemd_unitdir}
-	install -d ${D}/${sysconfdir}/systemd/system/multi-user.target.wants/
 	ln -sfr ${D}/${systemd_system_unitdir}/usbmass.service ${D}/${sysconfdir}/systemd/system/multi-user.target.wants/usbmass.service
+
+	# WWAN 5G Card service
+	install -m 0644 ${WORKDIR}/wwan-5g.service ${D}${systemd_unitdir}/system/
+	install -m 0755 ${WORKDIR}/wwan-5g.sh ${D}${sysconfdir}/init.d/
+	install -m 0755 ${WORKDIR}/wwan-5g.sh ${D}${systemd_unitdir}
+	# User should enable it manually or they sure it can be enabled by default.
+	# ln -sfr ${D}/${systemd_system_unitdir}/wwan-5g.service ${D}/${sysconfdir}/systemd/system/multi-user.target.wants/wwan-5g.service
 }
 
 SYSTEMD_PACKAGES = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '${PN}', '', d)}"
@@ -108,6 +117,7 @@ FILES:${PN}:append:genio-1200-evk = " \
 	${sysconfdir}/usbgadget.conf \
 	${systemd_unitdir}/system/usbmass.service \
 	${sysconfdir}/systemd/system/multi-user.target.wants/usbmass.service \
+	${systemd_unitdir}/system/wwan-5g.service \
 "
 
 # WWAN 5G Card service section:
@@ -115,5 +125,10 @@ FILES:${PN}:append:genio-1200-evk = " \
 
 # genio-700-evk
 # FILES:${PN}:append:genio-700-evk += " \
+# 	${sysconfdir}/systemd/system/multi-user.target.wants/wwan-5g.service \
+# "
+#
+# genio-i1200-evk
+# FILES:${PN}:append:genio-1200-evk += " \
 # 	${sysconfdir}/systemd/system/multi-user.target.wants/wwan-5g.service \
 # "
