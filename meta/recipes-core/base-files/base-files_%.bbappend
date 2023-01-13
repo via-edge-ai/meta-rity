@@ -58,19 +58,21 @@ do_install:append:genio-700-evk() {
 	# Define default USB gadget port (ADB)
 	install -m 0644 ${WORKDIR}/usbgadget.conf ${D}${sysconfdir}/usbgadget.conf
 
+	# Create folder for services enabled by default
+	install -d ${D}/${sysconfdir}/systemd/system/multi-user.target.wants/
+
 	# USB Hub service
 	install -m 0644 ${WORKDIR}/usbhub.service ${D}${systemd_unitdir}/system/
 	install -m 0755 ${WORKDIR}/usbhub.sh ${D}${sysconfdir}/init.d/
 	install -m 0755 ${WORKDIR}/usbhub.sh ${D}${systemd_unitdir}
-	install -d ${D}/${sysconfdir}/systemd/system/multi-user.target.wants/
 	ln -sfr ${D}/${systemd_system_unitdir}/usbhub.service ${D}/${sysconfdir}/systemd/system/multi-user.target.wants/usbhub.service
 
 	# WWAN 5G Card service
 	install -m 0644 ${WORKDIR}/wwan-5g.service ${D}${systemd_unitdir}/system/
 	install -m 0755 ${WORKDIR}/wwan-5g.sh ${D}${sysconfdir}/init.d/
 	install -m 0755 ${WORKDIR}/wwan-5g.sh ${D}${systemd_unitdir}
-	install -d ${D}/${sysconfdir}/systemd/system/multi-user.target.wants/
-	ln -sfr ${D}/${systemd_system_unitdir}/wwan-5g.service ${D}/${sysconfdir}/systemd/system/multi-user.target.wants/wwan-5g.service
+	# User should enable it manually or they sure it can be enabled by default.
+	# ln -sfr ${D}/${systemd_system_unitdir}/wwan-5g.service ${D}/${sysconfdir}/systemd/system/multi-user.target.wants/wwan-5g.service
 }
 
 do_install:append:genio-1200-evk() {
@@ -101,10 +103,17 @@ FILES:${PN}:append:genio-700-evk = " \
 	${systemd_unitdir}/system/usbhub.service \
 	${sysconfdir}/systemd/system/multi-user.target.wants/usbhub.service \
 	${systemd_unitdir}/system/wwan-5g.service \
-	${sysconfdir}/systemd/system/multi-user.target.wants/wwan-5g.service \
 "
 FILES:${PN}:append:genio-1200-evk = " \
 	${sysconfdir}/usbgadget.conf \
 	${systemd_unitdir}/system/usbmass.service \
 	${sysconfdir}/systemd/system/multi-user.target.wants/usbmass.service \
 "
+
+# WWAN 5G Card service section:
+#   User should enable it manually or they sure it can be enabled by default.
+
+# genio-700-evk
+# FILES:${PN}:append:genio-700-evk += " \
+# 	${sysconfdir}/systemd/system/multi-user.target.wants/wwan-5g.service \
+# "
