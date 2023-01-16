@@ -3,12 +3,16 @@
 # Note: genio-1200-evk uses 2 transisters to control the module
 #       instead of using direct pin control as genio-700-evk.
 
-# define GPIO number for pin RESET and FULL_CARD_POWER_OFF
+# define GPIO number for pin RESET, FULL_CARD_POWER_OFF, DPR
+# DPR pin is used for SAR check and adjustment TX power.
 RESET=53
 FULL_CARD_POWER_OFF=15
+DPR=14
 
 start()
 {
+    # Set DPR high
+    gpioset 0 $DPR=1
     # Wait 50ms after VCC and USB hub is ready
     sleep 0.05
     # RESET pull high
@@ -21,6 +25,8 @@ start()
 
 stop()
 {
+    # Set DPR low
+    gpioset 0 $DPR=0
     # Wait 100ms after USB hub is removed
     sleep 0.1
     # FULL_CARD_POWER_OFF pull low
