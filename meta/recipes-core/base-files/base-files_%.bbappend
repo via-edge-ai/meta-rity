@@ -25,6 +25,8 @@ SRC_URI:append:genio-1200-evk = " \
 	file://usbgadget.conf \
 	file://usbmass.sh \
 	file://usbmass.service \
+	file://wwan-5g.sh \
+	file://wwan-5g.service \
 "
 
 # Create symlink to /lib if multilib support is disabled
