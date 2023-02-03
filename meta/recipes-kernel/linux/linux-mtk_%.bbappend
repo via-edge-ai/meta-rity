@@ -6,4 +6,5 @@ SRC_URI:append=  " \
 	file://overlayfs.cfg \
 	${@bb.utils.contains('DISTRO_FEATURES', 'nfs', 'file://nfs.cfg', '', d)} \
 	${@bb.utils.contains('DISTRO_FEATURES', 'ubsan', 'file://ubsan.cfg', '', d)} \
+	${@bb.utils.contains('DISTRO_FEATURES', 'kcov', 'file://kcov.cfg', '', d)} \
 "
