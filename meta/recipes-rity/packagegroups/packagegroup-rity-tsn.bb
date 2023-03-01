@@ -6,13 +6,12 @@ SUMMARY = "Rity TSN package"
 
 inherit packagegroup
 
-COMPATIBLE_MACHINE = "(i1200-demo|genio-700-evk)"
+COMPATIBLE_MACHINE = "(mt8395|mt8390)"
 
 PACKAGES = "${PN}"
 
 RDEPENDS:${PN} = " \
 	linuxptp \
-	iproute2 \
 	iproute2-tc \
 	tcpdump \
 	scheduled-tx-tools \

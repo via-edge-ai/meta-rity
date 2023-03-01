@@ -8,7 +8,8 @@
     "mmc0boot1": "u-boot-env.bin",
     "bootloaders": "fip.bin",
     "kernel": "fitImage",
-    "rootfs": null
+    "rootfs": null,
+    "modules": null
   },
   "groups": {
     "all": {

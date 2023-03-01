@@ -17,8 +17,11 @@
 # You need to select a specific machine to target the build with. There are a selection
 # of emulated machines available which can boot and run in the QEMU emulator:
 #
+#MACHINE ??= "genio-1200-evk"
+#MACHINE ??= "genio-350-evk"
+MACHINE ??= "genio-700-evk"
 #MACHINE ??= "i300a-coral"
-MACHINE ??= "i300a-pumpkin"
+#MACHINE ??= "i300a-pumpkin"
 #MACHINE ??= "i300a-sb30"
 #MACHINE ??= "i300b-pumpkin"
 #MACHINE ??= "i350-evk"
@@ -26,6 +29,7 @@ MACHINE ??= "i300a-pumpkin"
 #MACHINE ??= "i350-sb35"
 #MACHINE ??= "i500-evb"
 #MACHINE ??= "i500-pumpkin"
+#MACHINE ??= "i1200-demo"
 
 #
 # Where to place downloads

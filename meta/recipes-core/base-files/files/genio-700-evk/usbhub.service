@@ -1,0 +1,10 @@
+[Unit]
+Description=USB hub reset
+
+[Service]
+ExecStart=/lib/systemd/usbhub.sh --start
+RemainAfterExit=true
+ExecStop=/lib/systemd/usbhub.sh --stop
+
+[Install]
+WantedBy=multi-user.target

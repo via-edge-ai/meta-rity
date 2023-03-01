@@ -19,6 +19,8 @@ IMAGE_INSTALL += "\
 
 IMAGE_INSTALL:append:genio-700 = " \
 	packagegroup-rity-tsn \
+	r2inference \
+	gstinference \
 "
 
 IMAGE_INSTALL:remove:i300b = " \

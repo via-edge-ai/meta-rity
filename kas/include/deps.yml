@@ -51,7 +51,7 @@ repos:
     path: layers/meta-mediatek-tsn
     refspec: kirkstone
 
-   meta-mediatek-demo:
+  meta-mediatek-demo:
     url: https://gitlab.com/mediatek/aiot/rity/meta-mediatek-demo.git
     path: layers/meta-mediatek-demo
     refspec: main

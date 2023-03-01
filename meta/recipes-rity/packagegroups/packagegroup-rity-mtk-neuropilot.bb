@@ -7,7 +7,7 @@ inherit packagegroup
 inherit features_check
 REQUIRED_DISTRO_FEATURES = "nda-mtk"
 
-COMPATIBLE_MACHINE = "(i1200-demo|genio-700-evk)"
+COMPATIBLE_MACHINE = "(mt8395|mt8390)"
 
 PACKAGES = " \
 	${PN} \

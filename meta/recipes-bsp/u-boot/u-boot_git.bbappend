@@ -49,6 +49,9 @@ EOC
 	        echo storage=$storage >> ${DEPLOYDIR}/u-boot-initial-env
 	        echo storage_dev=$storage_dev >> ${DEPLOYDIR}/u-boot-initial-env
 	        echo "boot_scripts=fitImage" >> ${DEPLOYDIR}/u-boot-initial-env
+	        # Use ascii code of '$' character to prevent from being interpreted by bitbake
+	        /bin/echo -e 'mmc_boot=force_mmcboot=1;mmc dev \x24{devnum}; part start mmc \x24{devnum} kernel spa; part size mmc \x24{devnum}  kernel sps; mmc read \x24{scriptaddr} \x24{spa} \x24{sps}; source \x24{scriptaddr}' >> ${DEPLOYDIR}/u-boot-initial-env
+	        /bin/echo -e 'scsi_boot=force_scsiboot=1;run scsi_init; scsi dev \x24{devnum}; part start scsi \x24{devnum} kernel spa; part size scsi \x24{devnum} kernel sps; scsi read \x24{scriptaddr} \x24{spa} \x24{sps}; source \x24{scriptaddr}' >> ${DEPLOYDIR}/u-boot-initial-env
 	fi
 }
 

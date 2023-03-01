@@ -4,7 +4,14 @@ inherit systemd
 
 SRC_URI:append = " \
 	file://wpa_supplicant-wlan0.conf \
+	file://defconfig.wpa3 \
 "
+
+do_configure:prepend() {
+	# Enable WPA3 by default, if you don't want support WPA3,
+	# Please comment out do_configure:prepend().
+	cp ${WORKDIR}/defconfig.wpa3 ${WORKDIR}/defconfig
+}
 
 do_install:append() {
 	install -d ${D}${sysconfdir}/wpa_supplicant

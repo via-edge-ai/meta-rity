@@ -27,6 +27,12 @@ IMAGE_INSTALL += " \
 	gstreamer1.0-meta-video \
 	gstreamer1.0-python \
 	e2fsprogs-resize2fs \
+	iproute2 \
+	can-utils \
+"
+
+IMAGE_INSTALL:append:genio-700 = " \
+	packagegroup-rity-mtk-video \
 "
 
 IMAGE_INSTALL:remove:i300b = " \
@@ -44,3 +50,6 @@ IMAGE_INSTALL:append:i350 = " \
 	packagegroup-rity-mtk-video \
 "
 
+IMAGE_INSTALL:append:genio-700 = " \
+	${@bb.utils.contains("DISTRO_FEATURES", "nda-mtk", "packagegroup-rity-mtk-neuropilot", "", d)} \
+"
