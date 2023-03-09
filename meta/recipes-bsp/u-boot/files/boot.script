@@ -16,8 +16,6 @@ setenv tftp_srv_ipaddr 192.168.96.20
 
 if test "${force_tftpboot}" -eq 1; then
 	tftpboot ${kerneladdr} ${tftp_srv_ipaddr}:fitImage
-elif test "${force_mmcboot}" -eq 1 || test "${force_scsiboot}" -eq 1; then
-	setenv kerneladdr ${scriptaddr}
 else
 	${storage} dev ${storage_dev}
 	part start ${storage} ${storage_dev} kernel kernel_part_addr
