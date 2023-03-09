@@ -10,7 +10,7 @@ USB_GADGET_BCDUSB=0x0200
 USB_GADGET_BCDDEV=0x0233
 USB_GADGET_VID=0x0e8d
 USB_GADGET_PID=0x2005
-USB_GADGET_SN=0123456789
+USB_GADGET_DEFAULT_SN=0123456789
 USB_GADGET_MANUFACT="Mediatek Inc."
 USB_GADGET_PRODUCT="Genio"
 FILE=/etc/usbgadget.conf
@@ -30,17 +30,49 @@ create_gadget()
     mkdir $USB_GADGET_DEV/adb -m 770
 }
 
+set_gadget_sn()
+{
+    # Priority:
+    #  1. Use `aiot-flash --serialno` first
+    #  2. Load hardware id from optee-ewriter if possible
+    #  3. Use static default
+
+    # load from uboot env
+    local uboot_serial=`fw_printenv -n serial#`
+
+    # Grab 8-byte hardware identifier with the "ewriter" utility.
+    # this requires OP-TEE and optee-ewriter package.
+    # The offset 12 and 13 are applicable to Genio SoCs only.
+    local optee_hwid=`for i in {12..13}; do ewriter 0 $i 4 | head -n 2 | tail -n 1 | head -c -1; done`
+
+    if [ -n "$uboot_serial" ]
+    then
+        echo "$uboot_serial" > strings/0x409/serialnumber
+        return 0
+    fi
+
+    if [ -n "$optee_hwid" ]
+    then
+        echo "$optee_hwid" > strings/0x409/serialnumber
+        return 0
+    fi
+
+    echo "$USB_GADGET_DEFAULT_SN" > strings/0x409/serialnumber
+}
+
 set_gadget()
 {
-    cd $USB_GADGET_G1 
+    cd $USB_GADGET_G1
 
     echo "$USB_GADGET_BCDUSB" > bcdUSB
     echo "$USB_GADGET_BCDDEV" > bcdDevice
-    echo "$USB_GADGET_VID" > idVendor 
+    echo "$USB_GADGET_VID" > idVendor
     echo "$USB_GADGET_PID" > idProduct
-    echo "$USB_GADGET_SN" > strings/0x409/serialnumber
+
     echo "$USB_GADGET_MANUFACT" > strings/0x409/manufacturer
     echo "$USB_GADGET_PRODUCT" > strings/0x409/product
+
+    set_gadget_sn
 
     echo 1 > os_desc/use
     echo "MSFT100" > os_desc/qw_sign
@@ -57,7 +89,7 @@ set_gadget()
 start()
 {
     if [ ! -f "$USB_GADGET_G1/UDC" ]
-    then 
+    then
         create_gadget
     fi
 
