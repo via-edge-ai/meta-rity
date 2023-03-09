@@ -1,0 +1,20 @@
+/dts-v1/;
+
+/ {
+        description = "Boot script to be embedded";
+        #address-cells = <1>;
+
+        images {
+                default = "bootscr-boot.script";
+                bootscr-boot.script {
+                        description = "U-boot script";
+                        data = /incbin/("boot.script");
+                        type = "script";
+                        arch = "arm64";
+                        compression = "none";
+                        hash-1 {
+                                algo = "sha256";
+                        };
+                };
+	};
+};

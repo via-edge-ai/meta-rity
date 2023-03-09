@@ -6,6 +6,8 @@ SRC_URI += " \
 	file://boot.script \
 	${@bb.utils.contains("DISTRO_FEATURES", "secure-boot", "file://secure-boot.cfg", "", d)} \
 	file://fdt-env.cfg \
+	file://0001-cmd-Add-new-command-to-source-embedded-script.patch \
+	file://boot.script.its \
 "
 
 
@@ -49,16 +51,24 @@ EOC
 	        echo storage=$storage >> ${DEPLOYDIR}/u-boot-initial-env
 	        echo storage_dev=$storage_dev >> ${DEPLOYDIR}/u-boot-initial-env
 	        echo "boot_scripts=fitImage" >> ${DEPLOYDIR}/u-boot-initial-env
-	        # Use ascii code of '$' character to prevent from being interpreted by bitbake
-	        /bin/echo -e 'mmc_boot=force_mmcboot=1;mmc dev \x24{devnum}; part start mmc \x24{devnum} kernel spa; part size mmc \x24{devnum}  kernel sps; mmc read \x24{scriptaddr} \x24{spa} \x24{sps}; source \x24{scriptaddr}' >> ${DEPLOYDIR}/u-boot-initial-env
-	        /bin/echo -e 'scsi_boot=force_scsiboot=1;run scsi_init; scsi dev \x24{devnum}; part start scsi \x24{devnum} kernel spa; part size scsi \x24{devnum} kernel sps; scsi read \x24{scriptaddr} \x24{spa} \x24{sps}; source \x24{scriptaddr}' >> ${DEPLOYDIR}/u-boot-initial-env
+	        echo boot_targets=embedded >> ${DEPLOYDIR}/u-boot-initial-env
 	fi
+}
+
+do_install:append() {
+	# Append boot script binary to the end of u-boot binary
+	cd ${WORKDIR}
+	${UBOOT_MKIMAGE} -f ${WORKDIR}/boot.script.its ${WORKDIR}/boot.script.bin
+	cat ${B}/${UBOOT_BINARY} ${WORKDIR}/boot.script.bin > ${D}/boot/${UBOOT_IMAGE}
 }
 
 do_deploy:append() {
 	if [ ${@bb.utils.contains("DISTRO_FEATURES", "secure-boot", "1", "0", d)} = "0" ]; then
 		do_uboot_env "u-boot-initial-env"
 	fi
+
+	# Append boot script binary to the end of u-boot binary
+	cat ${B}/${UBOOT_BINARY} ${WORKDIR}/boot.script.bin > ${DEPLOYDIR}/${UBOOT_IMAGE}
 }
 
 do_add_env_to_dtb() {
