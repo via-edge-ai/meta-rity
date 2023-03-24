@@ -7,6 +7,7 @@ SRC_URI += " \
 	${@bb.utils.contains("DISTRO_FEATURES", "secure-boot", "file://secure-boot.cfg", "", d)} \
 	file://fdt-env.cfg \
 	file://0001-cmd-Add-new-command-to-source-embedded-script.patch \
+	file://0001-cmd-Add-new-command-dtbprobe.patch \
 	file://boot.script.its \
 	${@bb.utils.contains("DISTRO_FEATURES", "secure-boot", "file://secure-cap.dts", "", d)} \
 	${@bb.utils.contains("DISTRO_FEATURES", "secure-boot", "file://u-boot-cap.key", "", d)} \
@@ -57,12 +58,17 @@ EOC
         fi
 
 	if [ "${1}" = "u-boot-initial-env" ]; then
-	        echo check_fastboot_entry=$fastboot_entry >> ${DEPLOYDIR}/u-boot-initial-env
-	        echo boot_conf=$boot_conf >> ${DEPLOYDIR}/u-boot-initial-env
-	        echo storage=$storage >> ${DEPLOYDIR}/u-boot-initial-env
-	        echo storage_dev=$storage_dev >> ${DEPLOYDIR}/u-boot-initial-env
-	        echo "boot_scripts=fitImage" >> ${DEPLOYDIR}/u-boot-initial-env
-	        echo boot_targets=embedded >> ${DEPLOYDIR}/u-boot-initial-env
+		echo dtb_path="/FIRMWARE/mediatek/${MACHINE}/" >> ${DEPLOYDIR}/u-boot-initial-env
+		echo efi_dtb_prefixes="\${dtb_path} / /dtb/ /dtb/current/" >> ${DEPLOYDIR}/u-boot-initial-env
+		echo check_fastboot_entry=$fastboot_entry >> ${DEPLOYDIR}/u-boot-initial-env
+		echo boot_conf=$boot_conf >> ${DEPLOYDIR}/u-boot-initial-env
+		echo "list_dtbo=${KERNEL_DEVICETREE_OVERLAYS_AUTOLOAD}" >> ${DEPLOYDIR}/u-boot-initial-env
+		echo storage=$storage >> ${DEPLOYDIR}/u-boot-initial-env
+		echo storage_dev=$storage_dev >> ${DEPLOYDIR}/u-boot-initial-env
+		echo "boot_scripts=fitImage" >> ${DEPLOYDIR}/u-boot-initial-env
+		echo boot_targets=embedded >> ${DEPLOYDIR}/u-boot-initial-env
+		/bin/echo -e "distro_bootcmd=for target in \x24{boot_targets}; do if test \"\x24{target}\" != \"embedded\"; then dtbprobe \x24{storage} \x24{storage_dev} \x24{dtb_path}; fi; run bootcmd_\x24{target}; done" >> ${DEPLOYDIR}/u-boot-initial-env
+		/bin/echo -e "scan_dev_for_efi=run boot_efi_bootmgr;if test -e \x24{devtype} \x24{devnum}:\x24{distro_bootpart} efi/boot/bootaa64.efi; then echo Found EFI removable media binary efi/boot/bootaa64.efi; run boot_efi_binary; echo EFI LOAD FAILED: continuing...; fi" >> ${DEPLOYDIR}/u-boot-initial-env
 	fi
 }
 
