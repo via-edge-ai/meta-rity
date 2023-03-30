@@ -29,4 +29,5 @@ RDEPENDS:${PN}-extended = " \
 	ffmpeg \
 	mpg123 \
 	x264 \
+	mtk-hdmirx-tool \
 "
