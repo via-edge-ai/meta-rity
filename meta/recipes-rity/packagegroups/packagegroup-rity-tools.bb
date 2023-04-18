@@ -26,6 +26,7 @@ RDEPENDS:${PN} = " \
 	evtest \
 	libdrm-tests \
 	read-edid \
+	dosfstools \
 "
 
 RDEPENDS:${PN}-extended = " \
