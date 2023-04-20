@@ -19,6 +19,7 @@ RDEPENDS:${PN} = " \
 	os-release \
 	strace \
 	stress-ng \
+	stressapptest \
 	powertop \
 	perf \
 "
