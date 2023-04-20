@@ -27,6 +27,7 @@ RDEPENDS:${PN} = " \
 	libdrm-tests \
 	read-edid \
 	dosfstools \
+	fio \
 "
 
 RDEPENDS:${PN}-extended = " \
