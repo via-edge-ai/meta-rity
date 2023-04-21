@@ -9,7 +9,7 @@ PACKAGES = " \
 	${PN} \
 "
 
-RDEPENDS:${PN}:mt8195 = " \
+RDEPENDS:${PN} = " \
 	mtk-vcu-driver \
 	mtk-camisp-driver \
 	mtk-camisp-prebuilts \
