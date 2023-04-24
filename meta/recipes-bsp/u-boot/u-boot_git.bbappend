@@ -67,6 +67,13 @@ do_deploy:append() {
 		do_uboot_env "u-boot-initial-env"
 	fi
 
+	# Sometimes the boot.script.bin might not exist since artifacts of do_install
+	# have been cached and won't be regenerated. In this case, we need to check
+	# existence and regenerate it if necessary.
+	if [ ! -e "${WORKDIR}/boot.script.bin" ]; then
+		cd ${WORKDIR}
+		${UBOOT_MKIMAGE} -f ${WORKDIR}/boot.script.its ${WORKDIR}/boot.script.bin
+	fi
 	# Append boot script binary to the end of u-boot binary
 	cat ${B}/${UBOOT_BINARY} ${WORKDIR}/boot.script.bin > ${DEPLOYDIR}/${UBOOT_IMAGE}
 }
