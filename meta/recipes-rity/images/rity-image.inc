@@ -14,4 +14,19 @@ my_postprocess_rootfs() {
 	fi
 }
 
+my_preprocess_image() {
+	if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
+		# Disable systemd-networkd
+		rm -rf ${IMAGE_ROOTFS}/etc/systemd/system/sockets.target.wants/systemd-networkd.socket
+		rm -rf ${IMAGE_ROOTFS}/etc/systemd/system/multi-user.target.wants/systemd-networkd.service
+		rm -rf ${IMAGE_ROOTFS}/etc/systemd/system/network-online.target.wants/systemd-networkd-wait-online.service
+		rm -rf ${IMAGE_ROOTFS}/etc/systemd/system/sysinit.target.wants/systemd-network-generator.service
+		rm -rf ${IMAGE_ROOTFS}/etc/systemd/system/dbus-org.freedesktop.network1.service
+	fi
+}
+
 ROOTFS_POSTPROCESS_COMMAND += "my_postprocess_rootfs; "
+
+# Note 'my_preprocess_image' must be run after 'systemd_preset_all' (in image.bbclass).
+# After preprocessing, run 'reproducible_final_image_task' to reset mtime.
+IMAGE_PREPROCESS_COMMAND:append = " my_preprocess_image; reproducible_final_image_task;"
