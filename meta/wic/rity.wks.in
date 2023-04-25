@@ -2,7 +2,17 @@
 # long-description: Creates a partitioned image for MediaTek SoC based boards.
 
 bootloader --ptable gpt --timeout=0
+# firmware ralated partitions
 part --source rawcopy --sourceparams="file=fip.bin" --part-name bootloaders --align 512 --fixed-size 4M
+part --source rawcopy --sourceparams="file=fip.bin" --part-name bootloaders_b --align 512 --fixed-size 4M
+part --source empty --part-name firmware --fixed-size 32M
+part --source empty --part-name firmware_b --fixed-size 32M
+part --source empty --part-name dramk --size 512K
+part --source empty --part-name misc --fixed-size 1M
+part --source empty --part-name capsule --fixed-size 32M
+part --source empty --part-name bootassets --fixed-size 32M
+
+# OS related partitions
 part --source rawcopy --sourceparams="file=fitImage" --part-name kernel --size 20M
 # Add new partition if module partition support is enabled
 ${@['part --source rawcopy --sourceparams="file=modules-${MACHINE}.modimg.ext4" --part-name modules --size 350M', ''][bb.utils.contains('DISTRO_FEATURES', 'modimg', 0, 1, d)]}
