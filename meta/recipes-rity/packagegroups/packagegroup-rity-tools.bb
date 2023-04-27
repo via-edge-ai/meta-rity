@@ -28,6 +28,9 @@ RDEPENDS:${PN} = " \
 	read-edid \
 	dosfstools \
 	fio \
+	init-ifupdown \
+	networkmanager \
+	networkmanager-nmcli \
 "
 
 RDEPENDS:${PN}-extended = " \
