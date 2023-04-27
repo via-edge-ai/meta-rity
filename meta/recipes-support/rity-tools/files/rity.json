@@ -7,7 +7,7 @@
     "mmc0boot0": "bl2.img",
     "mmc0boot1": "u-boot-env.bin",
     "bootloaders": "fip.bin",
-    "bootloaders_b": null,
+    "bootloaders_b": "fip.bin",
     "kernel": "fitImage",
     "rootfs": null,
     "modules": null,
@@ -15,8 +15,8 @@
     "firmware_b": null,
     "dramk": null,
     "misc": null,
-    "capsule": null,
-    "bootassets": null
+    "capsule": "capsule.vfat",
+    "bootassets": "bootassets.vfat"
   },
   "groups": {
     "all": {
