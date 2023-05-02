@@ -1,5 +1,6 @@
 [Unit]
 Description=USB gadget (ADB+RNDIS) interface
+After=NetworkManager.service
 
 [Service]
 ExecStart=/lib/systemd/usbgadget.sh --start

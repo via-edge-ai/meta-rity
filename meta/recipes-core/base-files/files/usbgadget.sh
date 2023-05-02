@@ -103,11 +103,16 @@ start()
     else
         echo $(ls /sys/class/udc) > $USB_GADGET_G1/UDC
     fi
+
+    nmcli connection up usb0
+    start-stop-daemon --start --pidfile /run/udhcpd.pid udhcpd /etc/udhcpd.conf
 }
 
 stop()
 {
     echo "" > $USB_GADGET_G1/UDC
+    nmcli connection down usb0
+    start-stop-daemon --stop --pidfile /run/udhcpd.pid udhcpd /etc/udhcpd.conf
     start-stop-daemon --stop --oknodo --quiet --exec /usr/bin/adbd
 
     rm $USB_GADGET_G1_CONF/rndis.usb0
