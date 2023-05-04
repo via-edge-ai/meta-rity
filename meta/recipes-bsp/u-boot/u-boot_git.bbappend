@@ -14,6 +14,7 @@ SRC_URI += " \
 	${@bb.utils.contains("DISTRO_FEATURES", "secure-boot", "file://u-boot-cap", "", d)} \
 "
 
+UBOOT_MKIMAGE_CMD = "${@bb.utils.contains("DISTRO_FEATURES", "secure-boot", "${UBOOT_MKIMAGE_SIGN} -F -k ${UBOOT_SIGN_KEYDIR}", "${UBOOT_MKIMAGE}", d)}"
 
 do_uboot_env() {
         boot_conf=`echo "#conf-${KERNEL_DEVICETREE}" | tr '/' '_'`
@@ -68,7 +69,7 @@ EOC
 do_install:append() {
 	# Append boot script binary to the end of u-boot binary
 	cd ${WORKDIR}
-	${UBOOT_MKIMAGE} -f ${WORKDIR}/boot.script.its ${WORKDIR}/boot.script.bin
+	${UBOOT_MKIMAGE_CMD} -f ${WORKDIR}/boot.script.its ${WORKDIR}/boot.script.bin
 	cat ${B}/${UBOOT_BINARY} ${WORKDIR}/boot.script.bin > ${D}/boot/${UBOOT_IMAGE}
 }
 
@@ -86,7 +87,7 @@ do_deploy:append() {
 	# existence and regenerate it if necessary.
 	if [ ! -e "${WORKDIR}/boot.script.bin" ]; then
 		cd ${WORKDIR}
-		${UBOOT_MKIMAGE} -f ${WORKDIR}/boot.script.its ${WORKDIR}/boot.script.bin
+		${UBOOT_MKIMAGE_CMD} -f ${WORKDIR}/boot.script.its ${WORKDIR}/boot.script.bin
 	fi
 	# Append boot script binary to the end of u-boot binary
 	cat ${B}/${UBOOT_BINARY} ${WORKDIR}/boot.script.bin > ${DEPLOYDIR}/${UBOOT_IMAGE}
