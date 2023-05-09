@@ -17,7 +17,4 @@ RDEPENDS:${PN} = " \
 
 RDEPENDS:${PN}-extended = " \
 	${PN} \
-	onnxruntime-staticdev \
-	onnxruntime-examples \
-	onnxruntime \
 "
