@@ -31,6 +31,7 @@ RDEPENDS:${PN} = " \
 	init-ifupdown \
 	networkmanager \
 	networkmanager-nmcli \
+	dtc \
 "
 
 RDEPENDS:${PN}-extended = " \
