@@ -1,4 +1,4 @@
-From 801e5bbcf401982487afa89052c551e2797c08d5 Mon Sep 17 00:00:00 2001
+From aa873e8bc2eaf356bd9fab926d5387dfb1efceb8 Mon Sep 17 00:00:00 2001
 From: Howard Lin <howard-yh.lin@mediatek.com>
 Date: Fri, 26 May 2023 18:59:08 +0800
 Subject: [PATCH] GENIO: board: mediatek: add AB firmware updates support
@@ -13,9 +13,12 @@ Signed-off-by: Howard Lin <howard-yh.lin@mediatek.com>
  board/mediatek/mt8188/mt8390_evk.c     | 20 ++++++++++++++++++++
  board/mediatek/mt8195/mt8195_demo.c    | 20 ++++++++++++++++++++
  board/mediatek/mt8365/mt8365_pumpkin.c | 20 ++++++++++++++++++++
+ cmd/Makefile                           |  2 ++
+ cmd/iot_ab_cmd.c                       | 26 ++++++++++++++++++++++++++
  common/main.c                          |  3 +++
  lib/efi_loader/efi_capsule.c           | 17 ++++++++++++++++-
- 6 files changed, 82 insertions(+), 1 deletion(-)
+ 8 files changed, 110 insertions(+), 1 deletion(-)
+ create mode 100644 cmd/iot_ab_cmd.c
 
 diff --git a/arch/arm/lib/bootm.c b/arch/arm/lib/bootm.c
 index 9f086f3b90..71c730415e 100644
@@ -172,6 +175,51 @@ index 39d2e352aa..1202bd117a 100644
  #endif /* CONFIG_EFI_HAVE_CAPSULE_SUPPORT && CONFIG_EFI_PARTITION */
  
  /**
+diff --git a/cmd/Makefile b/cmd/Makefile
+index 6e87522b62..c06ff48fa1 100644
+--- a/cmd/Makefile
++++ b/cmd/Makefile
+@@ -194,6 +194,8 @@ obj-$(CONFIG_CMD_ETHSW) += ethsw.o
+ obj-$(CONFIG_CMD_AXI) += axi.o
+ obj-$(CONFIG_CMD_PVBLOCK) += pvblock.o
+ 
++obj-$(CONFIG_MEDIATEK_IOT_AB_BOOT_SUPPORT) += iot_ab_cmd.o
++
+ # Power
+ obj-$(CONFIG_CMD_PMIC) += pmic.o
+ obj-$(CONFIG_CMD_REGULATOR) += regulator.o
+diff --git a/cmd/iot_ab_cmd.c b/cmd/iot_ab_cmd.c
+new file mode 100644
+index 0000000000..ccbe23ed21
+--- /dev/null
++++ b/cmd/iot_ab_cmd.c
+@@ -0,0 +1,26 @@
++// SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
++/*
++ * Copyright (C) 2023 MediaTek Inc.
++ * Author: Howard Lin <howard-yh.lin@mediatek.com>
++ */
++
++#include <common.h>
++#include <command.h>
++
++static int do_iot_ab_cmd(struct cmd_tbl *cmdtp, int flag, int argc,
++			char *const argv[])
++{
++	if (argc != 1)
++		return CMD_RET_USAGE;
++
++	iot_ab_boot_select();
++
++	printf("The slot is changed successfully!\n");
++	return CMD_RET_SUCCESS;
++}
++
++U_BOOT_CMD(iot_ab, 1, 0, do_iot_ab_cmd,
++	   "Change boot slot to A or B for MediaTek IoT Yocto.",
++	   "\n"
++	   "    - Change boot slot of boot_ctrl data from metadata on the device.\n"
++);
 diff --git a/common/main.c b/common/main.c
 index 682f3359ea..baa2ddb7b4 100644
 --- a/common/main.c
