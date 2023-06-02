@@ -31,11 +31,6 @@ IMAGE_INSTALL += " \
 	can-utils \
 "
 
-IMAGE_INSTALL:append:genio-700 = " \
-	packagegroup-rity-mtk-video \
-	autotest-suite \
-"
-
 IMAGE_INSTALL:remove:i300b = " \
 	packagegroup-display \
 	packagegroup-multimedia \
@@ -54,6 +49,8 @@ IMAGE_INSTALL:append:i350 = " \
 "
 
 IMAGE_INSTALL:append:genio-700 = " \
+	packagegroup-rity-mtk-video \
+	autotest-suite \
 	${@bb.utils.contains("DISTRO_FEATURES", "nda-mtk", "packagegroup-rity-mtk-neuropilot", "", d)} \
 	${@bb.utils.contains("DISTRO_FEATURES", "nda-mtk", "packagegroup-rity-mtk-camisp", "", d)} \
 "
