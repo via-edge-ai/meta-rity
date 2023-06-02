@@ -1,4 +1,8 @@
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
+
+# TODO: Currently we reuse config files from genio-700-evk.
+#       It's subject to change in the future.
+FILESEXTRAPATHS:prepend:genio-510-evk := "${THISDIR}/files/genio-700-evk:"
 FILESEXTRAPATHS:prepend:genio-700-evk := "${THISDIR}/files/genio-700-evk:"
 FILESEXTRAPATHS:prepend:genio-1200-evk := "${THISDIR}/files/genio-1200-evk:"
 FILESEXTRAPATHS:prepend:genio-1200-evk-p1v1 := "${THISDIR}/files/genio-1200-evk:"
@@ -12,6 +16,12 @@ SRC_URI:append = " \
 	file://usbgadget.service \
 	file://eth.network \
 	file://wireless.network \
+"
+
+SRC_URI:append:genio-510-evk = " \
+	file://usbgadget.conf \
+	file://wwan-5g.sh \
+	file://wwan-5g.service \
 "
 
 SRC_URI:append:genio-700-evk = " \
@@ -63,7 +73,7 @@ do_install:append() {
 	fi
 }
 
-do_install:append:genio-700-evk() {
+install_services_genio_700() {
 	# Define default USB gadget port (ADB)
 	install -m 0644 ${WORKDIR}/usbgadget.conf ${D}${sysconfdir}/usbgadget.conf
 
@@ -76,6 +86,14 @@ do_install:append:genio-700-evk() {
 	install -m 0755 ${WORKDIR}/wwan-5g.sh ${D}${systemd_unitdir}
 	# User should enable it manually or they sure it can be enabled by default.
 	# ln -sfr ${D}/${systemd_system_unitdir}/wwan-5g.service ${D}/${sysconfdir}/systemd/system/multi-user.target.wants/wwan-5g.service
+}
+
+do_install:append:genio-510-evk() {
+	install_services_genio_700
+}
+
+do_install:append:genio-700-evk() {
+	install_services_genio_700
 }
 
 do_install:append:genio-1200-evk() {
@@ -130,6 +148,10 @@ FILES:${PN} += " \
 	${sysconfdir}/systemd/network/eth.network \
 	${sysconfdir}/systemd/network/wireless.network \
 	${sysconfdir}/udhcpd.conf \
+"
+FILES:${PN}:append:genio-510-evk = " \
+	${sysconfdir}/usbgadget.conf \
+	${systemd_unitdir}/system/wwan-5g.service \
 "
 FILES:${PN}:append:genio-700-evk = " \
 	${sysconfdir}/usbgadget.conf \
