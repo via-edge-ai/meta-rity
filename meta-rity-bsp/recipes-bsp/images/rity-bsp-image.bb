@@ -59,3 +59,11 @@ IMAGE_INSTALL:append:genio-700 = " \
 	${@bb.utils.contains("DISTRO_FEATURES", "nda-mtk", "packagegroup-rity-mtk-neuropilot", "", d)} \
 	${@bb.utils.contains("DISTRO_FEATURES", "nda-mtk", "packagegroup-rity-mtk-camisp", "", d)} \
 "
+
+IMAGE_INSTALL:append:genio-510 = " \
+	packagegroup-rity-mtk-video \
+	autotest-suite \
+	${@bb.utils.contains("DISTRO_FEATURES", "nda-mtk", "packagegroup-rity-mtk-neuropilot", "", d)} \
+	${@bb.utils.contains("DISTRO_FEATURES", "nda-mtk", "packagegroup-rity-mtk-camisp", "", d)} \
+"
+
