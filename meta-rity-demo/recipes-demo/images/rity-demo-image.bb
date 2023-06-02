@@ -42,3 +42,10 @@ IMAGE_INSTALL:append:i1200 = " \
 	r2inference \
 	gstinference \
 "
+
+IMAGE_INSTALL:append:genio-510 = " \
+	packagegroup-rity-tsn \
+	r2inference \
+	gstinference \
+"
+
