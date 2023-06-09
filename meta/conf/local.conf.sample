@@ -241,6 +241,15 @@ PACKAGECONFIG:append:pn-qemu-system-native = " sdl"
 #PACKAGECONFIG:append:pn-qemu-system-native = " gtk+"
 
 #
+# security
+#
+# If security is not enabled as a distro feature, the warning is printed at parse time.
+# If you do not need the 'security' enabled in DISTRO_FEATURES, the warning message can
+# be disabled by setting the following:
+#
+SKIP_META_SECURITY_SANITY_CHECK = "1"
+
+#
 # Hash Equivalence
 #
 # Enable support for automatically running a local hash equivalence server and
