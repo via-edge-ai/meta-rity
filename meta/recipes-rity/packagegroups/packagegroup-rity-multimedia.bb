@@ -23,6 +23,7 @@ RDEPENDS:${PN} = " \
 	libcamera-gst \
 	v4l-utils \
 	yavta \
+	uvc-gadget \
 "
 
 RDEPENDS:${PN}-extended = " \
