@@ -50,6 +50,7 @@ IMAGE_INSTALL:append:i350 = " \
 
 IMAGE_INSTALL:append:i500 = " \
 	packagegroup-rity-mtk-video \
+	autotest-suite \
 "
 
 IMAGE_INSTALL:append:genio-700 = " \
