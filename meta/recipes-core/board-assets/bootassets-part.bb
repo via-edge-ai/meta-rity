@@ -10,9 +10,9 @@ BOOTASSETS_IMAGE_FS = "${WORKDIR}/bootassetsimage"
 
 #
 # It's always recommended to create bootassets-part.bbappend in your custom
-# layer and add your files. But for testing purpose, you can modify the recipe
-# to put your boot assets (e.g. boot_logo.bin) under the 'files' folder,
-# and add the file names in 'SRC_URI'.
+# layer and add your files. But for testing purpose, you can put your boot
+# assets (e.g. boot_logo.bin) under the 'files' folder, and modify the
+# recipe to add the file names in 'SRC_URI'.
 #
 SRC_URI = " \
     file://logo.bmp \
@@ -40,7 +40,7 @@ do_deploy() {
 	BOOTASSETS_IMAGE="${WORKDIR}/bootassets.vfat"
 
 	test -e $BOOTASSETS_IMAGE && rm -f $BOOTASSETS_IMAGE
-	mkfs.vfat -n "firmware" -S 512 -C $BOOTASSETS_IMAGE ${BLK_NUM}
+	mkfs.vfat -n "bootassets" -S 512 -C $BOOTASSETS_IMAGE ${BLK_NUM}
 	mcopy -i $BOOTASSETS_IMAGE -s ${WORKDIR}/bootassetsimage/* ::/
 	cp $BOOTASSETS_IMAGE ${DEPLOYDIR}
 }
