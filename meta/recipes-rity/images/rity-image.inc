@@ -4,6 +4,8 @@
 inherit core-image
 inherit image-buildinfo
 
+do_image_wic[depends] += "bootassets-part:do_deploy"
+
 IMAGE_INSTALL:append = " mtk-vpud"
 
 my_postprocess_rootfs() {
