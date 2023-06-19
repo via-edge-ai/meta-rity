@@ -14,9 +14,9 @@ BOOTASSETS_IMAGE_FS = "${WORKDIR}/bootassetsimage"
 # to put your boot assets (e.g. boot_logo.bin) under the 'files' folder,
 # and add the file names in 'SRC_URI'.
 #
-#SRC_URI = " \
-#    file://boot_logo.bin \
-#"
+SRC_URI = " \
+    file://logo.bmp \
+"
 
 #
 # The default bootassets partition size is 32MB.
@@ -29,7 +29,7 @@ BLK_NUM = "32768"
 # Put your boot assets copying scripts here
 #
 collect_artifacts() {
-	#cp ${WORKDIR}/boot_logo.bin ${BOOTASSETS_IMAGE_FS}
+	cp ${WORKDIR}/logo.bmp ${BOOTASSETS_IMAGE_FS}
 	echo "Put boot assets here" > ${BOOTASSETS_IMAGE_FS}/note
 }
 
