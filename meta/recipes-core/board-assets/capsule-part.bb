@@ -9,7 +9,7 @@ DEPENDS = "dosfstools-native mtools-native"
 CAPSULE_IMAGE_FS = "${WORKDIR}/capsule/EFI/UpdateCapsule"
 
 #
-# The default firmware partition size is 32MB.
+# The default capsule partition size is 32MB.
 # After changing the value, please also update rity.wks.in
 # to reflect the change.
 #
