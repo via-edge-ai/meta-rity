@@ -9,7 +9,7 @@ part --source empty --part-name firmware --fixed-size 32M
 part --source empty --part-name firmware_b --fixed-size 32M
 part --source empty --part-name dramk --size 512K
 part --source empty --part-name misc --fixed-size 1M
-part --source empty --part-name capsule --fixed-size 32M
+part --source rawcopy --sourceparams="file=capsule.vfat" --part-name capsule --part-type C12A7328-F81F-11D2-BA4B-00A0C93EC93B --fixed-size 32M
 part --source rawcopy --sourceparams="file=bootassets.vfat" --part-name bootassets --fixed-size 32M
 
 # OS related partitions

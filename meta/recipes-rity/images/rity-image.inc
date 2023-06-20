@@ -4,7 +4,7 @@
 inherit core-image
 inherit image-buildinfo
 
-do_image_wic[depends] += "bootassets-part:do_deploy"
+do_image_wic[depends] += "bootassets-part:do_deploy capsule-part:do_deploy"
 
 IMAGE_INSTALL:append = " mtk-vpud"
 
