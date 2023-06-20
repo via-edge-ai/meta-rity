@@ -11,9 +11,9 @@ USE_YOCTO_DTB = "${@bb.utils.contains('DISTRO_FEATURES', 'prebuilt-dtb', '0', '1
 
 #
 # It's always recommended to create firmware-part.bbappend in your custom
-# layer and add your files. But for testing purpose, you can modify the recipe
-# to put your device tree files (*.dtb/*.dtbo) under the 'files' folder,
-# and add the file names in 'SRC_URI'.
+# layer and add your files. But for testing purpose, you can put your device
+# tree files (*.dtb/*.dtbo) under the 'files' folder, and modify the
+# recipe to add the file names in 'SRC_URI'.
 #
 #SRC_URI = " \
 #    file://foo.dtbo \
