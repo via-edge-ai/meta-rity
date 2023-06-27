@@ -11,10 +11,10 @@ SRC_URI += " \
 	file://boot.script.its \
 	${@bb.utils.contains("AB_FWUPDATE_ENABLE", "1", "file://ab-fwupdate.cfg", "", d)} \
 	${@bb.utils.contains("AB_FWUPDATE_ENABLE", "1", "file://0001-GENIO-board-mediatek-add-AB-firmware-updates-support.patch", "", d)} \
-	${@bb.utils.contains("DISTRO_FEATURES", "secure-boot", "file://secure-cap.dts", "", d)} \
-	${@bb.utils.contains("DISTRO_FEATURES", "secure-boot", "file://u-boot-cap.key", "", d)} \
-	${@bb.utils.contains("DISTRO_FEATURES", "secure-boot", "file://u-boot-cap.crt", "", d)} \
-	${@bb.utils.contains("DISTRO_FEATURES", "secure-boot", "file://u-boot-cap", "", d)} \
+	${@bb.utils.contains("DISTRO_FEATURES", "fwupdate", "file://secure-cap.dts", "", d)} \
+	${@bb.utils.contains("DISTRO_FEATURES", "fwupdate", "file://u-boot-cap.key", "", d)} \
+	${@bb.utils.contains("DISTRO_FEATURES", "fwupdate", "file://u-boot-cap.crt", "", d)} \
+	${@bb.utils.contains("DISTRO_FEATURES", "fwupdate", "file://u-boot-cap", "", d)} \
 "
 
 UBOOT_MKIMAGE_CMD = "${@bb.utils.contains("DISTRO_FEATURES", "secure-boot", "${UBOOT_MKIMAGE_SIGN} -F -k ${UBOOT_SIGN_KEYDIR}", "${UBOOT_MKIMAGE}", d)}"
@@ -86,8 +86,16 @@ do_deploy:append() {
 		do_uboot_env "u-boot-initial-env"
 	fi
 
-	if [ ${@bb.utils.contains("DISTRO_FEATURES", "secure-boot", "1", "0", d)} = "1" ]; then
+	if [ ${@bb.utils.contains("DISTRO_FEATURES", "fwupdate", "1", "0", d)} = "1" ]; then
 		cp ${WORKDIR}/u-boot-cap.* ${DEPLOYDIR}
+
+		if [ ${@bb.utils.contains("DISTRO_FEATURES", "secure-boot", "1", "0", d)} = "0" ]; then
+			dtc -I dts -O dtb -o ${B}/secure-cap.dtbo ${WORKDIR}/secure-cap.dts
+			fdtoverlay -i ${B}/${UBOOT_DTB_BINARY} -o ${B}/${UBOOT_DTB_BINARY} -v ${B}/secure-cap.dtbo
+
+			# Combine u-boot-nodtb binary with u-boot dtb binary for secure capsule
+			cat ${B}/${UBOOT_NODTB_BINARY} ${B}/${UBOOT_DTB_BINARY} > ${B}/${UBOOT_BINARY}
+		fi
 	fi
 
 	# Sometimes the boot.script.bin might not exist since artifacts of do_install
