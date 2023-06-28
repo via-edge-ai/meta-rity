@@ -22,6 +22,11 @@ do_install:append:genio-1200-evk() {
 	install -m 0644 ${WORKDIR}/genio-1200-evk-interfaces ${D}${sysconfdir}/network/interfaces
 }
 
+do_install:append:genio-1200-evk-p1v1() {
+	install -d ${D}${sysconfdir}/network/
+	install -m 0644 ${WORKDIR}/genio-1200-evk-interfaces ${D}${sysconfdir}/network/interfaces
+}
+
 do_install:append:genio-1200-evk-ufs() {
 	install -d ${D}${sysconfdir}/network/
 	install -m 0644 ${WORKDIR}/genio-1200-evk-interfaces ${D}${sysconfdir}/network/interfaces
