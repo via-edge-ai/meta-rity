@@ -4,9 +4,10 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
 
 inherit deploy
+require board-assets-common.inc
 
 DEPENDS = "dosfstools-native mtools-native"
-FW_IMAGE_FS = "${WORKDIR}/fwimage/FIRMWARE/mediatek/${MACHINE}"
+FW_IMAGE_FS = "${WORKDIR}/fwimage/${DTB_PATH}"
 USE_YOCTO_DTB = "${@bb.utils.contains('DISTRO_FEATURES', 'prebuilt-dtb', '0', '1', d)}"
 
 #
