@@ -3,6 +3,7 @@ a tarball, which is used for flashing individual partition."
 LICENSE = "MIT"
 
 inherit deploy
+require board-assets-common.inc
 
 ASSETS_DIR = "${WORKDIR}/board-assets"
 
@@ -13,6 +14,14 @@ collect_artifacts() {
 	cp ${DEPLOY_DIR_IMAGE}/lk.bin ${ASSETS_DIR}
 	cp ${DEPLOY_DIR_IMAGE}/firmware.vfat ${ASSETS_DIR}
 	cp ${DEPLOY_DIR_IMAGE}/bootassets.vfat ${ASSETS_DIR}
+
+	if [ -n "${MACHINE_DTB}" ]; then
+		sed -i -e 's#^fdtfile=.\+#fdtfile=${MACHINE_DTB}#' ${ASSETS_DIR}/u-boot-initial-env
+	fi
+
+	if [ -n "${DTB_PATH}" ]; then
+		sed -i -e 's#^dtb_path=.\+#dtb_path=${DTB_PATH}#' ${ASSETS_DIR}/u-boot-initial-env
+	fi
 }
 
 do_deploy() {
