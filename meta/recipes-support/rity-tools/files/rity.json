@@ -24,6 +24,10 @@
       "flash": ["mmc0", "mmc0boot0", "mmc0boot1"]
     },
 
+    "erase-mmc": {
+      "erase": ["mmc0", "mmc0boot0", "mmc0boot1"]
+    },
+
     "system": {
       "flash": ["kernel", "rootfs"]
     }
