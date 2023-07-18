@@ -16,8 +16,6 @@ SRC_URI:append = " \
 
 SRC_URI:append:genio-700-evk = " \
 	file://usbgadget.conf \
-	file://usbhub.sh \
-	file://usbhub.service \
 	file://wwan-5g.sh \
 	file://wwan-5g.service \
 "
@@ -71,12 +69,6 @@ do_install:append:genio-700-evk() {
 
 	# Create folder for services enabled by default
 	install -d ${D}/${sysconfdir}/systemd/system/multi-user.target.wants/
-
-	# USB Hub service
-	install -m 0644 ${WORKDIR}/usbhub.service ${D}${systemd_unitdir}/system/
-	install -m 0755 ${WORKDIR}/usbhub.sh ${D}${sysconfdir}/init.d/
-	install -m 0755 ${WORKDIR}/usbhub.sh ${D}${systemd_unitdir}
-	ln -sfr ${D}/${systemd_system_unitdir}/usbhub.service ${D}/${sysconfdir}/systemd/system/multi-user.target.wants/usbhub.service
 
 	# WWAN 5G Card service
 	install -m 0644 ${WORKDIR}/wwan-5g.service ${D}${systemd_unitdir}/system/
@@ -141,8 +133,6 @@ FILES:${PN} += " \
 "
 FILES:${PN}:append:genio-700-evk = " \
 	${sysconfdir}/usbgadget.conf \
-	${systemd_unitdir}/system/usbhub.service \
-	${sysconfdir}/systemd/system/multi-user.target.wants/usbhub.service \
 	${systemd_unitdir}/system/wwan-5g.service \
 "
 FILES:${PN}:append:genio-1200-evk = " \
