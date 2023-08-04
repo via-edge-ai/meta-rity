@@ -9,11 +9,12 @@ DEPENDS = "dosfstools-native mtools-native"
 CAPSULE_IMAGE_FS = "${WORKDIR}/capsule/EFI/UpdateCapsule"
 
 #
-# The default capsule partition size is 32MB.
-# After changing the value, please also update rity.wks.in
-# to reflect the change.
+# The default capsule filesystem size is 100MB.
+# Currently capsule is designed to be stored in the EFI system
+# partition (ESP), so after changing the value, please also
+# update rity.wks.in to reflect the change.
 #
-BLK_NUM = "32768"
+BLK_NUM = "102400"
 
 add_capsule() {
 	mkdir -p ${CAPSULE_IMAGE_FS}
