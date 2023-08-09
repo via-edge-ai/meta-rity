@@ -22,6 +22,8 @@ RDEPENDS:${PN} = " \
 	stressapptest \
 	powertop \
 	perf \
+	bcc \
+	bpftrace \
 "
 
 RDEPENDS:${PN}-extended = " \
