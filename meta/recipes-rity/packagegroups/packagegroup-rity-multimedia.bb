@@ -18,10 +18,12 @@ RDEPENDS:${PN} = " \
 	gstreamer1.0-plugins-good \
 	gstreamer1.0-plugins-bad \
 	gstreamer1.0-libav \
+	gst-instruments \
 	libcamera \
 	libcamera-gst \
 	v4l-utils \
 	yavta \
+	uvc-gadget \
 "
 
 RDEPENDS:${PN}-extended = " \
@@ -29,4 +31,6 @@ RDEPENDS:${PN}-extended = " \
 	ffmpeg \
 	mpg123 \
 	x264 \
+	mtk-hdmirx-tool \
+	graphviz \
 "

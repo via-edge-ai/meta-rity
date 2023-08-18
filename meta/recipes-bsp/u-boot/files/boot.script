@@ -16,8 +16,6 @@ setenv tftp_srv_ipaddr 192.168.96.20
 
 if test "${force_tftpboot}" -eq 1; then
 	tftpboot ${kerneladdr} ${tftp_srv_ipaddr}:fitImage
-elif test "${force_mmcboot}" -eq 1 || test "${force_scsiboot}" -eq 1; then
-	setenv kerneladdr ${scriptaddr}
 else
 	${storage} dev ${storage_dev}
 	part start ${storage} ${storage_dev} kernel kernel_part_addr
@@ -31,5 +29,5 @@ if test "${force_nfsboot}" -eq 1; then
 	setenv bootargs "${bootargs} root=/dev/nfs rw ip=${ipaddr}:::::usb0 g_ether.dev_addr=${g_ether_dev_addr} g_ether.host_addr=${g_ether_host_addr} nfsroot=${tftp_srv_ipaddr}:${nfs_export},nfsvers=3"
 fi
 
-env exists boot_conf || setenv boot_conf ${fdt_boot_conf}
+env exists boot_conf || setenv boot_conf "${fdt_boot_conf}"
 bootm ${kerneladdr}${boot_conf}

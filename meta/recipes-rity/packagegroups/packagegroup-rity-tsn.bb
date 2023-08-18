@@ -6,7 +6,7 @@ SUMMARY = "Rity TSN package"
 
 inherit packagegroup
 
-COMPATIBLE_MACHINE = "(mt8395|mt8390)"
+COMPATIBLE_MACHINE = "(mt8395|mt8390|mt8370)"
 
 PACKAGES = "${PN}"
 

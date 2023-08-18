@@ -51,6 +51,11 @@ repos:
     path: layers/meta-mediatek-tsn
     refspec: kirkstone
 
+  meta-mediatek-bluedroid:
+    url: https://gitlab.com/mediatek/aiot/rity/meta-mediatek-bluedroid.git
+    path: layers/meta-mediatek-bluedroid
+    refspec: kirkstone
+
   meta-mediatek-demo:
     url: https://gitlab.com/mediatek/aiot/rity/meta-mediatek-demo.git
     path: layers/meta-mediatek-demo

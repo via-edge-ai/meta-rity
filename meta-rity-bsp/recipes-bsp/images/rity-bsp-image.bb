@@ -31,10 +31,6 @@ IMAGE_INSTALL += " \
 	can-utils \
 "
 
-IMAGE_INSTALL:append:genio-700 = " \
-	packagegroup-rity-mtk-video \
-"
-
 IMAGE_INSTALL:remove:i300b = " \
 	packagegroup-display \
 	packagegroup-multimedia \
@@ -42,14 +38,32 @@ IMAGE_INSTALL:remove:i300b = " \
 
 IMAGE_INSTALL:append:i1200 = " \
 	packagegroup-rity-mtk-video \
+	autotest-suite \
 	${@bb.utils.contains("DISTRO_FEATURES", "nda-mtk", "packagegroup-rity-mtk-neuropilot", "", d)} \
 	${@bb.utils.contains("DISTRO_FEATURES", "nda-mtk", "packagegroup-rity-mtk-camisp", "", d)} \
 "
 
 IMAGE_INSTALL:append:i350 = " \
 	packagegroup-rity-mtk-video \
+	autotest-suite \
+"
+
+IMAGE_INSTALL:append:i500 = " \
+	packagegroup-rity-mtk-video \
+	autotest-suite \
 "
 
 IMAGE_INSTALL:append:genio-700 = " \
+	packagegroup-rity-mtk-video \
+	autotest-suite \
 	${@bb.utils.contains("DISTRO_FEATURES", "nda-mtk", "packagegroup-rity-mtk-neuropilot", "", d)} \
+	${@bb.utils.contains("DISTRO_FEATURES", "nda-mtk", "packagegroup-rity-mtk-camisp", "", d)} \
 "
+
+IMAGE_INSTALL:append:genio-510 = " \
+	packagegroup-rity-mtk-video \
+	autotest-suite \
+	${@bb.utils.contains("DISTRO_FEATURES", "nda-mtk", "packagegroup-rity-mtk-neuropilot", "", d)} \
+	${@bb.utils.contains("DISTRO_FEATURES", "nda-mtk", "packagegroup-rity-mtk-camisp", "", d)} \
+"
+

@@ -9,18 +9,10 @@ PACKAGES = " \
 	${PN} \
 "
 
-RDEPENDS:${PN}:mt8365 = " \
-	mtk-vcu-driver \
-	mtk-vcodec-driver \
-	mtk-mdp-driver \
-"
-
-RDEPENDS:${PN}:mt8195 = " \
-	mtk-vcu-driver \
-	mtk-vcodec-driver \
-"
-
-RDEPENDS:${PN}:mt8188 = " \
-	mtk-vcu-driver \
-	mtk-vcodec-driver \
+RDEPENDS:${PN} = " \
+	mtk-vcu-driver-mt8395 \
+	mtk-vcu-driver-mt8365 \
+	mtk-vcodec-driver-mt8395 \
+	mtk-vcodec-driver-mt8365 \
+	mtk-mdp-driver-mt8365 \
 "

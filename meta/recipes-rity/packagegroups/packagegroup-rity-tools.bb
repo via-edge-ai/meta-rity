@@ -26,6 +26,12 @@ RDEPENDS:${PN} = " \
 	evtest \
 	libdrm-tests \
 	read-edid \
+	dosfstools \
+	fio \
+	init-ifupdown \
+	networkmanager \
+	networkmanager-nmcli \
+	dtc \
 "
 
 RDEPENDS:${PN}-extended = " \
