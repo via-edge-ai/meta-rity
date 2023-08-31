@@ -46,6 +46,7 @@ cat >> ${B}/u-boot-mtk-config.dts <<- EOC
                         storage = "$storage";
                         storage_dev = "$storage_dev";
                         boot_scripts = "fitImage";
+                        boot_targets = "embedded";
                 };
         };
 };
