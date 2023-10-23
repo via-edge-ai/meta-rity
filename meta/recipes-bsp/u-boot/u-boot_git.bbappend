@@ -8,6 +8,7 @@ SRC_URI += " \
 	file://fdt-env.cfg \
 	file://0001-cmd-Add-new-command-to-source-embedded-script.patch \
 	file://0001-cmd-Add-new-command-dtbprobe.patch \
+	file://0001-GENIO-cmd-add-support-for-fdtprobe-command.patch \
 	file://boot.script.its \
 	${@bb.utils.contains("AB_FWUPDATE_ENABLE", "1", "file://ab-fwupdate.cfg", "", d)} \
 	${@bb.utils.contains("AB_FWUPDATE_ENABLE", "1", "file://0001-GENIO-board-mediatek-add-AB-firmware-updates-support.patch", "", d)} \
