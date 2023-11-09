@@ -4,7 +4,6 @@
 SUMMARY = "Mediatek Neuropilot packages"
 
 inherit packagegroup
-inherit features_check
 
 COMPATIBLE_MACHINE = "(mt8395|mt8390|mt8370)"
 
