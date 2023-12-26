@@ -8,6 +8,57 @@ USB_GADGET_ADB=adb
 USB_GADGET_RNDIS=rndis
 USB_GADGET_BCDUSB=0x0200
 USB_GADGET_BCDDEV=0x0233
+
+# The VID 0x0e8d is MediaTek.
+#
+# Note:
+# - The PID MUST match its functions,
+#   if you add a new USB gadget function implementation
+#   without changing
+#   the USB PID, host pc drivers may behave incorrectly.
+#
+#   For example, if you choose to remove the ADB(MI_02)
+#   gadget function but keep the RNDIS function,
+#   you should change the PID from
+#   0x2005 (RNDIS+ADB) to 0x2004(RNDIS).
+#
+# - Changing the PID itself does not enable USB gadget
+#   functions magically. You need to implement the USB
+#   gadget function first, and then change the PID accordingly
+#
+# - The PID anv VID are solely provided by MediaTek for engineering
+#   development & evaluation purposes. You should apply your own
+#   PID and VID as required by USB-IF (https://usb.org)
+#
+# Known registered MediaTek-only PID & its mapped functions,
+# including products that are not developed by IoT Yocto.
+#
+# 0x2002    UMS (Mass storage)
+# 0x2003    UMS (MI_00) + ADB (MI_01)
+# 0x2004    RNDIS
+# 0x2005    RNDIS (MI_00) + ADB (MI_02)
+# 0x2006    UMS (MI_00) + ADB (MI_01) + ACM (MI_02)
+# 0x2007    ACM
+# 0x2008    MTP
+# 0x2009    MTP (MI_00) + ADB (MI_01)
+# 0x200A    MTP (MI_00) + ADB (MI_01) + ACM (MI_02)
+# 0x200B    PTP
+# 0x200C    PTP (MI_00) + ADB (MI_01)
+# 0x200D    PTP (MI_00) + ADB (MI_01) + ACM (MI_02)
+# 0x200E    ADB (MI_00) + ACM (MI_01)
+# 0x200F    UMS (MI_00) + ACM (MI_01)
+# 0x2010    RNDIS (MI_00) + ADB (MI_02) + ACM (MI_03)
+# 0x2011    RNDIS (MI_00) + ACM (MI_02)
+# 0x2012    MTP (MI_00) + ACM (MI_01)
+# 0x2013    PTP (MI_00) + ACM (MI_01)
+# 0x2014    PTP (MI_00) + UMS (MI_01) + ADB (MI_02)
+# 0x2015    PTP (MI_00) + UMS (MI_01)
+# 0x2016    MTP (MI_00) + UMS (MI_01)
+# 0x2017    MTP (MI_00) + UMS (MI_01) + ADB (MI_02)
+# 0x2018    MTP (MI_00) + UMS (MI_01) + ACM (MI_02)
+# 0x2019    MTP (MI_00) + UMS (MI_01) + ADB (MI_02) + ACM (MI_03)
+# 0x201A    PTP (MI_00) + UMS (MI_01) + ACM (MI_02)
+# 0x201B    PTP (MI_00) + UMS (MI_01) + ADB (MI_02) + ACM (MI_03)
 USB_GADGET_VID=0x0e8d
 USB_GADGET_PID=0x2005
 USB_GADGET_DEFAULT_SN=0123456789
@@ -17,8 +68,11 @@ FILE=/etc/usbgadget.conf
 
 create_gadget()
 {
-    mkdir -p $USB_GADGET_G1
+    modprobe libcomposite
+    modprobe usb_f_rndis
+    modprobe g_ffs
 
+    mkdir -p $USB_GADGET_G1
     mkdir -p $USB_GADGET_G1/strings/0x409
     mkdir $USB_GADGET_G1_FUNC/rndis.usb0
     mkdir $USB_GADGET_G1_FUNC/ffs.adb
@@ -101,18 +155,18 @@ start()
     if [ -f "$FILE" ]; then
         cat $FILE > $USB_GADGET_G1/UDC
     else
-        echo $(ls /sys/class/udc) > $USB_GADGET_G1/UDC
+        echo `ls -1 /sys/class/udc | head -1 | tr -d '\r\n|\n\r|\n|\r'` > $USB_GADGET_G1/UDC
     fi
 
     nmcli connection up usb0
-    start-stop-daemon --start --pidfile /run/udhcpd.pid udhcpd /etc/udhcpd.conf
+    start-stop-daemon --start --pidfile /run/udhcpd.pid --exec /usr/sbin/udhcpd -- /etc/udhcpd.conf
 }
 
 stop()
 {
     echo "" > $USB_GADGET_G1/UDC
     nmcli connection down usb0
-    start-stop-daemon --stop --pidfile /run/udhcpd.pid udhcpd /etc/udhcpd.conf
+    start-stop-daemon --stop --pidfile /run/udhcpd.pid --exec /usr/sbin/udhcpd -- /etc/udhcpd.conf
     start-stop-daemon --stop --oknodo --quiet --exec /usr/bin/adbd
 
     rm $USB_GADGET_G1_CONF/rndis.usb0

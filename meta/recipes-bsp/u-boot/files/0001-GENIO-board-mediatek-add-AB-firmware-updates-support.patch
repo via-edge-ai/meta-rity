@@ -1,23 +1,25 @@
-From aa873e8bc2eaf356bd9fab926d5387dfb1efceb8 Mon Sep 17 00:00:00 2001
+From c942817f500410bf111528289d61a0274c0779e8 Mon Sep 17 00:00:00 2001
 From: Howard Lin <howard-yh.lin@mediatek.com>
-Date: Mon, 3 Jul 2023 17:45:01 +0800
+Date: Fri, 15 Sep 2023 19:22:23 +0800
 Subject: [PATCH] GENIO: board: mediatek: add AB firmware updates support
 
 This allows the EFI capsule to select which slot would be updated and
 booted by firmware updates when the 'MEDIATEK_IOT_AB_BOOT_SUPPORT'
 is enabled.
 
+Change-Id: Ia0aadf2782f3ee5d9b0808546674810b0965b7d2
 Signed-off-by: Howard Lin <howard-yh.lin@mediatek.com>
 ---
  arch/arm/lib/bootm.c                   |  3 +++
- board/mediatek/mt8188/mt8390_evk.c     | 20 ++++++++++++++++++++
- board/mediatek/mt8195/mt8195_demo.c    | 20 ++++++++++++++++++++
- board/mediatek/mt8365/mt8365_pumpkin.c | 20 ++++++++++++++++++++
+ board/mediatek/mt8188/mt8390_evk.c     | 25 +++++++++++++++++++++
+ board/mediatek/mt8195/mt8195_demo.c    | 30 ++++++++++++++++++++++++++
+ board/mediatek/mt8365/mt8365_pumpkin.c | 25 +++++++++++++++++++++
+ board/mediatek/mt8370/mt8370_evk.c     | 25 +++++++++++++++++++++
  cmd/Makefile                           |  2 ++
- cmd/iot_ab_cmd.c                       | 26 ++++++++++++++++++++++++++
+ cmd/iot_ab_cmd.c                       | 26 ++++++++++++++++++++++
  common/main.c                          |  3 +++
- lib/efi_loader/efi_capsule.c           | 17 ++++++++++++++++-
- 8 files changed, 110 insertions(+), 1 deletion(-)
+ lib/efi_loader/efi_capsule.c           | 17 ++++++++++++++-
+ 9 files changed, 155 insertions(+), 1 deletion(-)
  create mode 100644 cmd/iot_ab_cmd.c
 
 diff --git a/arch/arm/lib/bootm.c b/arch/arm/lib/bootm.c
@@ -35,7 +37,7 @@ index 9f086f3b90..71c730415e 100644
  
  	if (!fake) {
 diff --git a/board/mediatek/mt8188/mt8390_evk.c b/board/mediatek/mt8188/mt8390_evk.c
-index 968c95a96c..67b207f104 100644
+index b007563d5e..947e6cd14e 100644
 --- a/board/mediatek/mt8188/mt8390_evk.c
 +++ b/board/mediatek/mt8188/mt8390_evk.c
 @@ -11,6 +11,7 @@
@@ -51,16 +53,16 @@ index 968c95a96c..67b207f104 100644
  
  struct efi_capsule_update_info update_info = {
 +#if defined(CONFIG_MEDIATEK_IOT_AB_BOOT_SUPPORT)
-+	.dfu_string = "mmc 0=bl2.img raw 0x0 0x400000 mmcpart 1;"
-+			"fip.bin part 0 %d;firmware.vfat part 0 %d;u-boot-env.bin raw 0x0 0x400000 mmcpart 2",
++	.dfu_string = "mmc 0=bl2.img raw 0x0 0x2000 mmcpart 1;"
++			"fip.bin part 0 %d;firmware.vfat part 0 %d;u-boot-env.bin raw 0x0 0x2000 mmcpart 2",
 +#else
- 	.dfu_string = "mmc 0=bl2.img raw 0x0 0x400000 mmcpart 1;"
- 			"fip.bin part 0 1;firmware.vfat part 0 3;u-boot-env.bin raw 0x0 0x400000 mmcpart 2",
+ 	.dfu_string = "mmc 0=bl2.img raw 0x0 0x2000 mmcpart 1;"
+ 			"fip.bin part 0 1;firmware.vfat part 0 3;u-boot-env.bin raw 0x0 0x2000 mmcpart 2",
 +#endif
  	.images = fw_images,
  };
  
-@@ -69,6 +75,20 @@ void mediatek_capsule_update_board_setup(void)
+@@ -69,6 +75,25 @@ void mediatek_capsule_update_board_setup(void)
  		fw_images[4].fw_name = u"GENIO-700-EVK-ENV";
  	}
  }
@@ -69,20 +71,25 @@ index 968c95a96c..67b207f104 100644
 +void set_dfu_alt_info(char *interface, char *devstr)
 +{
 +	char alt[BOOTCTRL_DFU_ALT_LEN] = {0};
++	const char *s = env_get(BOOTCTRL_ENV);
 +
-+	if (strcmp(env_get(BOOTCTRL_ENV), "a"))
-+		sprintf(alt, update_info.dfu_string, BOOTCTRL_FIP_NUM, BOOTCTRL_FW_NUM);
-+	else
-+		sprintf(alt, update_info.dfu_string, BOOTCTRL_FIP_NUM + PART_BOOT_B, BOOTCTRL_FW_NUM + PART_BOOT_B);
-+
-+	env_set("dfu_alt_info", alt);
++	if (s) {
++		if (!strcmp(s, "a")) {
++			if (sprintf(alt, update_info.dfu_string, BOOTCTRL_FIP_NUM + PART_BOOT_B, BOOTCTRL_FW_NUM + PART_BOOT_B) < 0)
++				return;
++		} else if(!strcmp(s, "b")) {
++			if (sprintf(alt, update_info.dfu_string, BOOTCTRL_FIP_NUM, BOOTCTRL_FW_NUM) < 0)
++				return;
++		}
++		env_set("dfu_alt_info", alt);
++	}
 +}
 +#endif
  #endif /* CONFIG_EFI_HAVE_CAPSULE_SUPPORT && CONFIG_EFI_PARTITION */
  
  int board_init(void)
 diff --git a/board/mediatek/mt8195/mt8195_demo.c b/board/mediatek/mt8195/mt8195_demo.c
-index 767754c1a8..4fd4ecd72c 100644
+index 9edddd3088..3f0e12db80 100644
 --- a/board/mediatek/mt8195/mt8195_demo.c
 +++ b/board/mediatek/mt8195/mt8195_demo.c
 @@ -11,6 +11,7 @@
@@ -93,21 +100,30 @@ index 767754c1a8..4fd4ecd72c 100644
  
  #define MT8195_UPDATABLE_IMAGES	5
  
-@@ -18,8 +19,13 @@
+@@ -18,12 +19,22 @@
  static struct efi_fw_image fw_images[MT8195_UPDATABLE_IMAGES] = {0};
  
  struct efi_capsule_update_info update_info = {
 +#if defined(CONFIG_MEDIATEK_IOT_AB_BOOT_SUPPORT)
-+	.dfu_string = "mmc 0=bl2.img raw 0x0 0x400000 mmcpart 1;"
-+			"fip.bin part 0 %d;firmware.vfat part 0 %d;u-boot-env.bin raw 0x0 0x400000 mmcpart 2",
++#if defined(CONFIG_UFS_MEDIATEK)
++	.dfu_string = "ufs 0=bl2.img raw 0x0 0x400 dev 0;"
++			"fip.bin part 2 %d;firmware.vfat part 2 %d;u-boot-env.bin raw 0x0 0x400 dev 1",
 +#else
- 	.dfu_string = "mmc 0=bl2.img raw 0x0 0x400000 mmcpart 1;"
- 			"fip.bin part 0 1;firmware.vfat part 0 3;u-boot-env.bin raw 0x0 0x400000 mmcpart 2",
++	.dfu_string = "mmc 0=bl2.img raw 0x0 0x2000 mmcpart 1;"
++			"fip.bin part 0 %d;firmware.vfat part 0 %d;u-boot-env.bin raw 0x0 0x2000 mmcpart 2",
 +#endif
++#else
+ #if defined(CONFIG_UFS_MEDIATEK)
+ 	.dfu_string = "ufs 0=bl2.img raw 0x0 0x400 dev 0;"
+ 			"fip.bin part 2 1;firmware.vfat part 2 3;u-boot-env.bin raw 0x0 0x400 dev 1",
+ #else
+ 	.dfu_string = "mmc 0=bl2.img raw 0x0 0x2000 mmcpart 1;"
+ 			"fip.bin part 0 1;firmware.vfat part 0 3;u-boot-env.bin raw 0x0 0x2000 mmcpart 2",
++#endif
+ #endif
  	.images = fw_images,
  };
- 
-@@ -117,6 +123,20 @@ void mediatek_capsule_update_board_setup(void)
+@@ -122,6 +133,25 @@ void mediatek_capsule_update_board_setup(void)
  		fw_images[4].fw_name = u"GENIO-1200-EVK-UFS-ENV";
  	}
  }
@@ -116,20 +132,25 @@ index 767754c1a8..4fd4ecd72c 100644
 +void set_dfu_alt_info(char *interface, char *devstr)
 +{
 +	char alt[BOOTCTRL_DFU_ALT_LEN] = {0};
++	const char *s = env_get(BOOTCTRL_ENV);
 +
-+	if (strcmp(env_get(BOOTCTRL_ENV), "a"))
-+		sprintf(alt, update_info.dfu_string, BOOTCTRL_FIP_NUM, BOOTCTRL_FW_NUM);
-+	else
-+		sprintf(alt, update_info.dfu_string, BOOTCTRL_FIP_NUM + PART_BOOT_B, BOOTCTRL_FW_NUM + PART_BOOT_B);
-+
-+	env_set("dfu_alt_info", alt);
++	if (s) {
++		if (!strcmp(s, "a")) {
++			if (sprintf(alt, update_info.dfu_string, BOOTCTRL_FIP_NUM + PART_BOOT_B, BOOTCTRL_FW_NUM + PART_BOOT_B) < 0)
++				return;
++		} else if(!strcmp(s, "b")) {
++			if (sprintf(alt, update_info.dfu_string, BOOTCTRL_FIP_NUM, BOOTCTRL_FW_NUM) < 0)
++				return;
++		}
++		env_set("dfu_alt_info", alt);
++	}
 +}
 +#endif
  #endif /* CONFIG_EFI_HAVE_CAPSULE_SUPPORT && CONFIG_EFI_PARTITION */
  
  int board_init(void)
 diff --git a/board/mediatek/mt8365/mt8365_pumpkin.c b/board/mediatek/mt8365/mt8365_pumpkin.c
-index c5329061b2..7418e22b99 100644
+index 3804a14cfb..f094d56a5f 100644
 --- a/board/mediatek/mt8365/mt8365_pumpkin.c
 +++ b/board/mediatek/mt8365/mt8365_pumpkin.c
 @@ -11,6 +11,7 @@
@@ -145,16 +166,16 @@ index c5329061b2..7418e22b99 100644
  
  struct efi_capsule_update_info update_info = {
 +#if defined(CONFIG_MEDIATEK_IOT_AB_BOOT_SUPPORT)
-+	.dfu_string = "mmc 0=bl2.img raw 0x0 0x400000 mmcpart 1;"
-+			"fip.bin part 0 %d;firmware.vfat part 0 %d;u-boot-env.bin raw 0x0 0x400000 mmcpart 2",
++	.dfu_string = "mmc 0=bl2.img raw 0x0 0x2000 mmcpart 1;"
++			"fip.bin part 0 %d;firmware.vfat part 0 %d;u-boot-env.bin raw 0x0 0x2000 mmcpart 2",
 +#else
- 	.dfu_string = "mmc 0=bl2.img raw 0x0 0x400000 mmcpart 1;"
- 			"fip.bin part 0 1;firmware.vfat part 0 3;u-boot-env.bin raw 0x0 0x400000 mmcpart 2",
+ 	.dfu_string = "mmc 0=bl2.img raw 0x0 0x2000 mmcpart 1;"
+ 			"fip.bin part 0 1;firmware.vfat part 0 3;u-boot-env.bin raw 0x0 0x2000 mmcpart 2",
 +#endif
  	.images = fw_images,
  };
  
-@@ -69,6 +75,20 @@ void mediatek_capsule_update_board_setup(void)
+@@ -69,6 +75,25 @@ void mediatek_capsule_update_board_setup(void)
  		fw_images[4].fw_name = u"GENIO-350-EVK-ENV";
  	}
  }
@@ -163,23 +184,80 @@ index c5329061b2..7418e22b99 100644
 +void set_dfu_alt_info(char *interface, char *devstr)
 +{
 +	char alt[BOOTCTRL_DFU_ALT_LEN] = {0};
++	const char *s = env_get(BOOTCTRL_ENV);
 +
-+	if (strcmp(env_get(BOOTCTRL_ENV), "a"))
-+		sprintf(alt, update_info.dfu_string, BOOTCTRL_FIP_NUM, BOOTCTRL_FW_NUM);
-+	else
-+		sprintf(alt, update_info.dfu_string, BOOTCTRL_FIP_NUM + PART_BOOT_B, BOOTCTRL_FW_NUM + PART_BOOT_B);
++	if (s) {
++		if (!strcmp(s, "a")) {
++			if (sprintf(alt, update_info.dfu_string, BOOTCTRL_FIP_NUM + PART_BOOT_B, BOOTCTRL_FW_NUM + PART_BOOT_B) < 0)
++				return;
++		} else if(!strcmp(s, "b")) {
++			if (sprintf(alt, update_info.dfu_string, BOOTCTRL_FIP_NUM, BOOTCTRL_FW_NUM) < 0)
++				return;
++		}
++		env_set("dfu_alt_info", alt);
++	}
++}
++#endif
+ #endif /* CONFIG_EFI_HAVE_CAPSULE_SUPPORT && CONFIG_EFI_PARTITION */
+ 
+ int board_init(void)
+diff --git a/board/mediatek/mt8370/mt8370_evk.c b/board/mediatek/mt8370/mt8370_evk.c
+index d3fdc42aa0..00e943b67c 100644
+--- a/board/mediatek/mt8370/mt8370_evk.c
++++ b/board/mediatek/mt8370/mt8370_evk.c
+@@ -11,6 +11,7 @@
+ #include <asm/io.h>
+ #include <linux/kernel.h>
+ #include <linux/arm-smccc.h>
++#include <iot_ab.h>
+ 
+ #define MT8370_UPDATABLE_IMAGES	5
+ 
+@@ -18,8 +19,13 @@
+ static struct efi_fw_image fw_images[MT8370_UPDATABLE_IMAGES] = {0};
+ 
+ struct efi_capsule_update_info update_info = {
++#if defined(CONFIG_MEDIATEK_IOT_AB_BOOT_SUPPORT)
++	.dfu_string = "mmc 0=bl2.img raw 0x0 0x2000 mmcpart 1;"
++			"fip.bin part 0 %d;firmware.vfat part 0 %d;u-boot-env.bin raw 0x0 0x2000 mmcpart 2",
++#else
+ 	.dfu_string = "mmc 0=bl2.img raw 0x0 0x2000 mmcpart 1;"
+ 			"fip.bin part 0 1;firmware.vfat part 0 3;u-boot-env.bin raw 0x0 0x2000 mmcpart 2",
++#endif
+ 	.images = fw_images,
+ };
+ 
+@@ -69,6 +75,25 @@ void mediatek_capsule_update_board_setup(void)
+ 		fw_images[4].fw_name = u"GENIO-510-EVK-ENV";
+ 	}
+ }
 +
-+	env_set("dfu_alt_info", alt);
++#if defined(CONFIG_MEDIATEK_IOT_AB_BOOT_SUPPORT)
++void set_dfu_alt_info(char *interface, char *devstr)
++{
++	char alt[BOOTCTRL_DFU_ALT_LEN] = {0};
++	const char *s = env_get(BOOTCTRL_ENV);
++
++	if (s) {
++		if (!strcmp(s, "a")) {
++			if (sprintf(alt, update_info.dfu_string, BOOTCTRL_FIP_NUM + PART_BOOT_B, BOOTCTRL_FW_NUM + PART_BOOT_B) < 0)
++				return;
++		} else if(!strcmp(s, "b")) {
++			if (sprintf(alt, update_info.dfu_string, BOOTCTRL_FIP_NUM, BOOTCTRL_FW_NUM) < 0)
++				return;
++		}
++		env_set("dfu_alt_info", alt);
++	}
 +}
 +#endif
  #endif /* CONFIG_EFI_HAVE_CAPSULE_SUPPORT && CONFIG_EFI_PARTITION */
  
  int board_init(void)
 diff --git a/cmd/Makefile b/cmd/Makefile
-index 6a8829b59a..db513d21c1 100644
+index 6e87522b62..c06ff48fa1 100644
 --- a/cmd/Makefile
 +++ b/cmd/Makefile
-@@ -196,6 +196,8 @@ obj-$(CONFIG_CMD_ETHSW) += ethsw.o
+@@ -194,6 +194,8 @@ obj-$(CONFIG_CMD_ETHSW) += ethsw.o
  obj-$(CONFIG_CMD_AXI) += axi.o
  obj-$(CONFIG_CMD_PVBLOCK) += pvblock.o
  

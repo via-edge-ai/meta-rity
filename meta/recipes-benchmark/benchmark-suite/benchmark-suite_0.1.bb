@@ -23,8 +23,10 @@ do_copy_license () {
 do_configure () {
     PLAT="${SOC_FAMILY}"
     NUM_CORES=4
-    if [ "$PLAT" = "mt8195" ]; then
+    if [ "$PLAT" = "mt8195" ] || [ "$PLAT" = "mt8188" ]; then
         NUM_CORES=8
+    elif [ "$PLAT" = "mt8370" ]; then
+        NUM_CORES=6
     fi
 
     echo "export NUM_CORES=$NUM_CORES" >> ${S}/common

@@ -7,8 +7,21 @@ inherit deploy
 require board-assets-common.inc
 
 DEPENDS = "dosfstools-native mtools-native"
+
+DEPENDS += " \
+	${@bb.utils.contains("DISTRO_FEATURES", "secure-boot", "dtc-native u-boot-tools-native", "", d)} \
+"
+
+SRC_URI += " \
+	${@bb.utils.contains("DISTRO_FEATURES", "secure-boot", "file://fdt.its", "", d)} \
+"
+
 FW_IMAGE_FS = "${WORKDIR}/fwimage/${DTB_PATH}"
 USE_YOCTO_DTB = "${@bb.utils.contains('DISTRO_FEATURES', 'prebuilt-dtb', '0', '1', d)}"
+
+FW_FDT_ITS = "${FW_IMAGE_FS}/fdt.its"
+UBOOT_MKIMAGE ?= "uboot-mkimage"
+UBOOT_MKIMAGE_CMD = "${@bb.utils.contains("DISTRO_FEATURES", "secure-boot", "${UBOOT_MKIMAGE} -F -k ${UBOOT_SIGN_KEYDIR}", "${UBOOT_MKIMAGE}", d)}"
 
 #
 # It's always recommended to create firmware-part.bbappend in your custom
@@ -36,6 +49,20 @@ collect_artifacts() {
 			cp ${WORKDIR}/$f ${FW_IMAGE_FS}
 		done
 	fi
+
+	if [ ${@bb.utils.contains("DISTRO_FEATURES", "secure-boot", "1", "0", d)} = "1" ]; then
+		generate_fdt
+	fi
+}
+
+generate_fdt() {
+	for f in `ls ${FW_IMAGE_FS} | grep "\.dtb\|\.dtbo"`; do
+		cp ${WORKDIR}/fdt.its ${FW_FDT_ITS}
+		sed -i 's/FDTBIN/'"$f"'/g' ${FW_FDT_ITS}
+		${UBOOT_MKIMAGE_CMD} -f ${FW_FDT_ITS} ${FW_IMAGE_FS}/$f
+	done
+
+	test -e ${FW_FDT_ITS} && rm -f ${FW_FDT_ITS}
 }
 
 do_deploy() {

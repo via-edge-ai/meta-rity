@@ -18,7 +18,7 @@ BLK_NUM = "102400"
 
 add_capsule() {
 	mkdir -p ${CAPSULE_IMAGE_FS}
-	mkfs.vfat -n "capsule" -S 512 -C ${WORKDIR}/capsule.vfat ${BLK_NUM}
+	mkfs.vfat -n "capsule" -S ${WIC_SECTOR_SIZE} -C ${WORKDIR}/capsule.vfat ${BLK_NUM}
 	mcopy -i ${WORKDIR}/capsule.vfat -s ${WORKDIR}/capsule/* ::/
 	mv ${WORKDIR}/capsule.vfat ${DEPLOYDIR}
 }
