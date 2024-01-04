@@ -40,7 +40,7 @@ IMAGE_INSTALL:append:i1200 = " \
 	packagegroup-rity-mtk-video \
 	autotest-suite \
 	packagegroup-rity-mtk-neuropilot \
-	${@bb.utils.contains("DISTRO_FEATURES", "nda-mtk", "packagegroup-rity-mtk-camisp", "", d)} \
+	packagegroup-rity-mtk-camisp \
 "
 
 IMAGE_INSTALL:append:i350 = " \
@@ -57,13 +57,13 @@ IMAGE_INSTALL:append:genio-700 = " \
 	packagegroup-rity-mtk-video \
 	autotest-suite \
 	packagegroup-rity-mtk-neuropilot \
-	${@bb.utils.contains("DISTRO_FEATURES", "nda-mtk", "packagegroup-rity-mtk-camisp", "", d)} \
+	packagegroup-rity-mtk-camisp \
 "
 
 IMAGE_INSTALL:append:genio-510 = " \
 	packagegroup-rity-mtk-video \
 	autotest-suite \
 	packagegroup-rity-mtk-neuropilot \
-	${@bb.utils.contains("DISTRO_FEATURES", "nda-mtk", "packagegroup-rity-mtk-camisp", "", d)} \
+	packagegroup-rity-mtk-camisp \
 "
 
