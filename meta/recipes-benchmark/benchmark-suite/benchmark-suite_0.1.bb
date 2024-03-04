@@ -51,6 +51,7 @@ DEPENDS = " \
 RDEPENDS:${PN} = " \
     bash \
     perf \
+    python3-numpy \
 "
 
 FILES:${PN} = "${ROOT_HOME}/benchmark_suite"
