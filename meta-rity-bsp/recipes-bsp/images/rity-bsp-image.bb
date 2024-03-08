@@ -29,6 +29,7 @@ IMAGE_INSTALL += " \
 	e2fsprogs-resize2fs \
 	iproute2 \
 	can-utils \
+	ite-it6510-driver \
 "
 
 IMAGE_INSTALL:remove:i300b = " \
