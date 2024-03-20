@@ -30,6 +30,7 @@ IMAGE_INSTALL += " \
 	iproute2 \
 	can-utils \
 	ite-it6510-driver \
+	lontium-lt6911-driver \
 "
 
 IMAGE_INSTALL:remove:i300b = " \
