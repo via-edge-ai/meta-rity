@@ -19,6 +19,7 @@
 #
 #MACHINE ??= "genio-1200-evk"
 #MACHINE ??= "genio-350-evk"
+#MACHINE ??= "genio-510-evk"
 MACHINE ??= "genio-700-evk"
 #MACHINE ??= "i300a-coral"
 #MACHINE ??= "i300a-pumpkin"
