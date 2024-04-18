@@ -11,6 +11,7 @@ PACKAGES = " \
 "
 
 RDEPENDS:${PN} = " \
+	binutils \
 	devmem2 \
 	gdb \
 	i2c-tools \
