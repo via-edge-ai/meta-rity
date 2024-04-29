@@ -25,7 +25,13 @@ SRC_URI += " \
 UBOOT_MKIMAGE_CMD = "${@bb.utils.contains("DISTRO_FEATURES", "secure-boot", "${UBOOT_MKIMAGE_SIGN} -F -k ${UBOOT_SIGN_KEYDIR}", "${UBOOT_MKIMAGE}", d)}"
 
 do_uboot_env() {
-        boot_conf=`echo "#conf-${KERNEL_DEVICETREE}" | tr '/' '_'`
+        # Use the first element as the default board devicetree.
+        # If it's not overwritten by other scripts/functions,
+        # then it will be passed to the kernel.
+        for d in ${KERNEL_DEVICETREE}; do
+                boot_conf=`echo "#conf-$d" | tr '/' '_'`
+                break
+        done
         fastboot_entry="setenv fastboot_entry 0"
         storage="mmc"
         storage_dev="0"
