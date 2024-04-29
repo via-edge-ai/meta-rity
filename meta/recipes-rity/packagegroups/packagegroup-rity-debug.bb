@@ -21,6 +21,7 @@ RDEPENDS:${PN} = " \
 	strace \
 	stress-ng \
 	stressapptest \
+	genio-stress-gpu \
 	powertop \
 	perf \
 	bcc \
