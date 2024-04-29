@@ -42,7 +42,9 @@ BLK_NUM = "32768"
 
 collect_artifacts() {
 	if [ "${USE_YOCTO_DTB}" = "1" ]; then
-		cp ${DEPLOY_DIR_IMAGE}/`basename ${KERNEL_DEVICETREE}` ${FW_IMAGE_FS}
+		for d in ${KERNEL_DEVICETREE}; do
+			cp ${DEPLOY_DIR_IMAGE}/`basename $d` ${FW_IMAGE_FS}
+		done
 		cp ${DEPLOY_DIR_IMAGE}/devicetree/*.dtbo ${FW_IMAGE_FS}
 	else
 		for f in `ls ${WORKDIR} | grep "\.dtb\|\.dtbo"`; do
