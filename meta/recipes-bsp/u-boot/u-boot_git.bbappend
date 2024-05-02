@@ -5,6 +5,10 @@ DEPENDS += "bc-native dtc-native u-boot-tools-native"
 SRC_URI += " \
 	file://boot.script \
 	${@bb.utils.contains("DISTRO_FEATURES", "secure-boot", "file://secure-boot.cfg", "", d)} \
+	${@bb.utils.contains("DISTRO_FEATURES", "secure-boot", "file://u-boot-img.key", "", d)} \
+	${@bb.utils.contains("DISTRO_FEATURES", "secure-boot", "file://u-boot-img.crt", "", d)} \
+	${@bb.utils.contains("DISTRO_FEATURES", "secure-boot", "file://u-boot.key", "", d)} \
+	${@bb.utils.contains("DISTRO_FEATURES", "secure-boot", "file://u-boot.crt", "", d)} \
 	file://fdt-env.cfg \
 	file://0001-cmd-Add-new-command-to-source-embedded-script.patch \
 	file://0001-cmd-Add-new-command-dtbprobe.patch \
@@ -119,6 +123,11 @@ do_deploy:append() {
 do_add_env_to_dtb() {
 	if [ ${@bb.utils.contains("DISTRO_FEATURES", "secure-boot", "1", "0", d)} = "1" ]; then
 		do_uboot_env "u-boot.dtb"
+		install -d ${UBOOT_SIGN_KEYDIR}
+		install -m 644 ${WORKDIR}/u-boot-img.key ${UBOOT_SIGN_KEYDIR}
+		install -m 644 ${WORKDIR}/u-boot-img.crt ${UBOOT_SIGN_KEYDIR}
+		install -m 644 ${WORKDIR}/u-boot.key ${UBOOT_SIGN_KEYDIR}
+		install -m 644 ${WORKDIR}/u-boot.crt ${UBOOT_SIGN_KEYDIR}
 	fi
 }
 
