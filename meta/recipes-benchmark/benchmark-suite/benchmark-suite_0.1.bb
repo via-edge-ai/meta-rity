@@ -10,7 +10,7 @@ SRC_URI = " \
     ${AIOT_BSP_URI}/benchmark_suite;branch=main \
     file://COPYING \
 "
-SRCREV = "e819452a83047b5cef4d15e6a63fbef5a5daa074"
+SRCREV = "d0850fc2b2ea0942dfa2ae07be7ae3d19a2ed312"
 
 S = "${WORKDIR}/git"
 
