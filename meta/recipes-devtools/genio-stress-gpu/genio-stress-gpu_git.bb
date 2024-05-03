@@ -5,6 +5,7 @@ SRC_URI = "${AIOT_RITY_URI}/genio-stress-gpu;protocol=https;branch=main"
 SRCREV = "b0b90942ae8531d2da1cc98305fea6c059a7f001"
 
 S = "${WORKDIR}/git"
+PV = "git${SRCPV}"
 
 # opencl-icd-loader: for linking to libOpenCL.so
 # opencl-headers: for OpenCL header files (CL/OpenCL.h)
