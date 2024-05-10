@@ -4,7 +4,16 @@ DISTRO = "rity"
 DISTRO_NAME = "Rity"
 DISTRO_VERSION = "24.0-dev"
 
-WKS_FILE = "rity.wks.in"
+# set WKS_FILE according to features
+python() {
+    if bb.utils.contains('MACHINE_FEATURES', 'efi', True, False, d):
+        wks_file = "rity-efi.wks.in"
+    else:
+        wks_file = "rity.wks.in"
+
+    # Set the WKS_FILE variable in the BitBake environment
+    d.setVar('WKS_FILE', wks_file)
+}
 IMAGE_HOME_SIZE = "200M"
 
 # Boot configuration tweaks
