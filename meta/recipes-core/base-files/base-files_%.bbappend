@@ -73,6 +73,10 @@ do_install:append() {
 	if [ "${SYMLIB64}" = "1" ]; then
 		ln -sf lib/ ${D}/lib64
 	fi
+
+	if ${@bb.utils.contains('MACHINE_FEATURES', 'efi', 'true', 'false', d)}; then
+		echo "LABEL=BOOT /boot vfat defaults 0 0" >> ${D}/${sysconfdir}/fstab
+	fi
 }
 
 install_services_genio_700() {
