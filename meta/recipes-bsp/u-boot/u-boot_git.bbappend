@@ -74,9 +74,16 @@ EOC
 		echo storage=$storage >> ${DEPLOYDIR}/u-boot-initial-env
 		echo storage_dev=$storage_dev >> ${DEPLOYDIR}/u-boot-initial-env
 		echo "boot_scripts=fitImage" >> ${DEPLOYDIR}/u-boot-initial-env
-		echo boot_targets=embedded >> ${DEPLOYDIR}/u-boot-initial-env
 		/bin/echo -e "distro_bootcmd=for target in \x24{boot_targets}; do if test \"\x24{target}\" != \"embedded\"; then dtbprobe \x24{storage} \x24{storage_dev} \x24{dtb_path}; fi; run bootcmd_\x24{target}; done" >> ${DEPLOYDIR}/u-boot-initial-env
 		/bin/echo -e "scan_dev_for_efi=run boot_efi_bootmgr;if test -e \x24{devtype} \x24{devnum}:\x24{distro_bootpart} efi/boot/bootaa64.efi; then echo Found EFI removable media binary efi/boot/bootaa64.efi; run boot_efi_binary; echo EFI LOAD FAILED: continuing...; fi" >> ${DEPLOYDIR}/u-boot-initial-env
+
+		# check if EFI boot is enabled
+		MACHINE_FEATURE_EFI="${@bb.utils.contains('MACHINE_FEATURES', 'efi', 'true', 'false', d)}"
+		if [ "$MACHINE_FEATURE_EFI" = "true" ]; then
+			echo boot_targets=mmc0 >> ${DEPLOYDIR}/u-boot-initial-env
+		else
+			echo boot_targets=embedded >> ${DEPLOYDIR}/u-boot-initial-env
+		fi
 	fi
 }
 
