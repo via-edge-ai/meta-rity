@@ -8,7 +8,7 @@ SRC_URI = " \
     ${AIOT_BSP_URI}/genio-linux-test;branch=main \
     file://COPYING \
 "
-SRCREV = "cef9229b12ab374d44ecbe3d118705959513a9cd"
+SRCREV = "df72338c5d8b8aea39e3c9e9aee303a96fb04862"
 
 S = "${WORKDIR}/git"
 
