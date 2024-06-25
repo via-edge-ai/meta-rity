@@ -29,6 +29,8 @@ IMAGE_INSTALL += " \
 	e2fsprogs-resize2fs \
 	iproute2 \
 	can-utils \
+	ite-it6510-driver \
+	lontium-lt6911-driver \
 "
 
 IMAGE_INSTALL:remove:i300b = " \
@@ -40,7 +42,7 @@ IMAGE_INSTALL:append:i1200 = " \
 	packagegroup-rity-mtk-video \
 	autotest-suite \
 	packagegroup-rity-mtk-neuropilot \
-	${@bb.utils.contains("DISTRO_FEATURES", "nda-mtk", "packagegroup-rity-mtk-camisp", "", d)} \
+	packagegroup-rity-mtk-camisp \
 "
 
 IMAGE_INSTALL:append:i350 = " \
@@ -57,13 +59,13 @@ IMAGE_INSTALL:append:genio-700 = " \
 	packagegroup-rity-mtk-video \
 	autotest-suite \
 	packagegroup-rity-mtk-neuropilot \
-	${@bb.utils.contains("DISTRO_FEATURES", "nda-mtk", "packagegroup-rity-mtk-camisp", "", d)} \
+	packagegroup-rity-mtk-camisp \
 "
 
 IMAGE_INSTALL:append:genio-510 = " \
 	packagegroup-rity-mtk-video \
 	autotest-suite \
 	packagegroup-rity-mtk-neuropilot \
-	${@bb.utils.contains("DISTRO_FEATURES", "nda-mtk", "packagegroup-rity-mtk-camisp", "", d)} \
+	packagegroup-rity-mtk-camisp \
 "
 

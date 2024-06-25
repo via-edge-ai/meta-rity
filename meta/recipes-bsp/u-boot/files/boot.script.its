@@ -16,7 +16,7 @@
                                 algo = "sha256";
                         };
                         signature-1 {
-                                algo = "sha256,rsa2048";
+                                algo = "sha256,rsa3072";
                                 key-name-hint = "u-boot-img";
                         };
                 };
@@ -32,7 +32,7 @@
                                 algo = "sha256";
                         };
                         signature-1 {
-                                algo = "sha256,rsa2048";
+                                algo = "sha256,rsa3072";
                                 key-name-hint = "u-boot";
                                 padding = "pkcs-1.5";
                                 sign-images = "bootscr";

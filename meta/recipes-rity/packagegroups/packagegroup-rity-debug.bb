@@ -11,6 +11,7 @@ PACKAGES = " \
 "
 
 RDEPENDS:${PN} = " \
+	binutils \
 	devmem2 \
 	gdb \
 	i2c-tools \
@@ -20,8 +21,11 @@ RDEPENDS:${PN} = " \
 	strace \
 	stress-ng \
 	stressapptest \
+	genio-stress-gpu \
 	powertop \
 	perf \
+	bcc \
+	bpftrace \
 "
 
 RDEPENDS:${PN}-extended = " \

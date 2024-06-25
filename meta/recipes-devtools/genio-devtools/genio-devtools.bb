@@ -5,6 +5,7 @@ DESCRIPTION = "Genio Debug Tools and Scripts"
 
 SRC_URI = " \
 	file://genio-display-debug-dump.sh \
+	file://genio-enter-perf-mode.sh \
 "
 
 
@@ -15,6 +16,7 @@ RDEPENDS:${PN} = " \
 do_install() {
 	install -d -m 0755 ${D}${ROOT_HOME}/debug/
 	install -m 0755 ${WORKDIR}/genio-display-debug-dump.sh ${D}${ROOT_HOME}/debug/
+	install -m 0755 ${WORKDIR}/genio-enter-perf-mode.sh ${D}${ROOT_HOME}/debug/
 }
 
 FILES:${PN} = "${ROOT_HOME}/debug/*"

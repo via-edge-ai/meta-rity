@@ -10,7 +10,7 @@ SRC_URI = " \
     ${AIOT_BSP_URI}/benchmark_suite;branch=main \
     file://COPYING \
 "
-SRCREV = "cd52e3721187511428f4f4904512420b1db96809"
+SRCREV = "d0850fc2b2ea0942dfa2ae07be7ae3d19a2ed312"
 
 S = "${WORKDIR}/git"
 
@@ -51,6 +51,7 @@ DEPENDS = " \
 RDEPENDS:${PN} = " \
     bash \
     perf \
+    python3-numpy \
 "
 
 FILES:${PN} = "${ROOT_HOME}/benchmark_suite"

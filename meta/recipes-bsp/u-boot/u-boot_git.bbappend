@@ -5,6 +5,10 @@ DEPENDS += "bc-native dtc-native u-boot-tools-native"
 SRC_URI += " \
 	file://boot.script \
 	${@bb.utils.contains("DISTRO_FEATURES", "secure-boot", "file://secure-boot.cfg", "", d)} \
+	${@bb.utils.contains("DISTRO_FEATURES", "secure-boot", "file://u-boot-img.key", "", d)} \
+	${@bb.utils.contains("DISTRO_FEATURES", "secure-boot", "file://u-boot-img.crt", "", d)} \
+	${@bb.utils.contains("DISTRO_FEATURES", "secure-boot", "file://u-boot.key", "", d)} \
+	${@bb.utils.contains("DISTRO_FEATURES", "secure-boot", "file://u-boot.crt", "", d)} \
 	file://fdt-env.cfg \
 	file://0001-cmd-Add-new-command-to-source-embedded-script.patch \
 	file://0001-cmd-Add-new-command-dtbprobe.patch \
@@ -21,7 +25,13 @@ SRC_URI += " \
 UBOOT_MKIMAGE_CMD = "${@bb.utils.contains("DISTRO_FEATURES", "secure-boot", "${UBOOT_MKIMAGE_SIGN} -F -k ${UBOOT_SIGN_KEYDIR}", "${UBOOT_MKIMAGE}", d)}"
 
 do_uboot_env() {
-        boot_conf=`echo "#conf-${KERNEL_DEVICETREE}" | tr '/' '_'`
+        # Use the first element as the default board devicetree.
+        # If it's not overwritten by other scripts/functions,
+        # then it will be passed to the kernel.
+        for d in ${KERNEL_DEVICETREE}; do
+                boot_conf=`echo "#conf-$d" | tr '/' '_'`
+                break
+        done
         fastboot_entry="setenv fastboot_entry 0"
         storage="mmc"
         storage_dev="0"
@@ -70,9 +80,16 @@ EOC
 		echo storage=$storage >> ${DEPLOYDIR}/u-boot-initial-env
 		echo storage_dev=$storage_dev >> ${DEPLOYDIR}/u-boot-initial-env
 		echo "boot_scripts=fitImage" >> ${DEPLOYDIR}/u-boot-initial-env
-		echo boot_targets=embedded >> ${DEPLOYDIR}/u-boot-initial-env
 		/bin/echo -e "distro_bootcmd=for target in \x24{boot_targets}; do if test \"\x24{target}\" != \"embedded\"; then dtbprobe \x24{storage} \x24{storage_dev} \x24{dtb_path}; fi; run bootcmd_\x24{target}; done" >> ${DEPLOYDIR}/u-boot-initial-env
 		/bin/echo -e "scan_dev_for_efi=run boot_efi_bootmgr;if test -e \x24{devtype} \x24{devnum}:\x24{distro_bootpart} efi/boot/bootaa64.efi; then echo Found EFI removable media binary efi/boot/bootaa64.efi; run boot_efi_binary; echo EFI LOAD FAILED: continuing...; fi" >> ${DEPLOYDIR}/u-boot-initial-env
+
+		# check if EFI boot is enabled
+		MACHINE_FEATURE_EFI="${@bb.utils.contains('MACHINE_FEATURES', 'efi', 'true', 'false', d)}"
+		if [ "$MACHINE_FEATURE_EFI" = "true" ]; then
+			echo boot_targets=mmc0 >> ${DEPLOYDIR}/u-boot-initial-env
+		else
+			echo boot_targets=embedded >> ${DEPLOYDIR}/u-boot-initial-env
+		fi
 	fi
 }
 
@@ -119,6 +136,11 @@ do_deploy:append() {
 do_add_env_to_dtb() {
 	if [ ${@bb.utils.contains("DISTRO_FEATURES", "secure-boot", "1", "0", d)} = "1" ]; then
 		do_uboot_env "u-boot.dtb"
+		install -d ${UBOOT_SIGN_KEYDIR}
+		install -m 644 ${WORKDIR}/u-boot-img.key ${UBOOT_SIGN_KEYDIR}
+		install -m 644 ${WORKDIR}/u-boot-img.crt ${UBOOT_SIGN_KEYDIR}
+		install -m 644 ${WORKDIR}/u-boot.key ${UBOOT_SIGN_KEYDIR}
+		install -m 644 ${WORKDIR}/u-boot.crt ${UBOOT_SIGN_KEYDIR}
 	fi
 }
 
