@@ -10,12 +10,6 @@ PACKAGES = " \
 	${PN}-extended \
 "
 
-RDEPENDS:${PN} = " \
-	${@bb.utils.contains('TFLITE_PREBUILT', '1', 'tensorflowlite-prebuilt', 'tensorflow-lite', d)}  \
-	armnn \
-	nnstreamer \
-"
-
 RDEPENDS:${PN}-extended = " \
 	${PN} \
 "

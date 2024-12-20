@@ -20,6 +20,5 @@ PACKAGES = " \
 
 RDEPENDS:${PN} = " \
 	mtk-camisp-driver \
-	${@bb.utils.contains("DISTRO_FEATURES", "nda-mtk", "mtk-camisp-prebuilts", "", d)} \
 	${@bb.utils.contains("DISTRO_FEATURES", "nda-mtk", "mtk-vcu-driver-mt8395", "", d)} \
 "
