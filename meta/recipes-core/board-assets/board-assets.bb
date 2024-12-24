@@ -11,7 +11,6 @@ collect_artifacts() {
 	cp ${DEPLOY_DIR_IMAGE}/bl2.img ${ASSETS_DIR}
 	cp ${DEPLOY_DIR_IMAGE}/fip.bin ${ASSETS_DIR}
 	cp ${DEPLOY_DIR_IMAGE}/u-boot-initial-env ${ASSETS_DIR}
-	cp ${DEPLOY_DIR_IMAGE}/lk.bin ${ASSETS_DIR}
 	cp ${DEPLOY_DIR_IMAGE}/firmware.vfat ${ASSETS_DIR}
 	cp ${DEPLOY_DIR_IMAGE}/bootassets.vfat ${ASSETS_DIR}
 
@@ -34,7 +33,6 @@ do_deploy() {
 }
 
 do_deploy[depends] += " \
-    virtual/lk:do_deploy \
     virtual/bl2:do_deploy \
     virtual/bootloader:do_deploy \
     trusted-firmware-a:do_deploy \
