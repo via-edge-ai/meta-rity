@@ -20,7 +20,7 @@
 #MACHINE ??= "genio-1200-evk"
 #MACHINE ??= "genio-350-evk"
 #MACHINE ??= "genio-510-evk"
-MACHINE ??= "genio-700-evk"
+#MACHINE ??= "genio-700-evk"
 #MACHINE ??= "i300a-coral"
 #MACHINE ??= "i300a-pumpkin"
 #MACHINE ??= "i300a-sb30"
@@ -31,6 +31,7 @@ MACHINE ??= "genio-700-evk"
 #MACHINE ??= "i500-evb"
 #MACHINE ??= "i500-pumpkin"
 #MACHINE ??= "i1200-demo"
+MACHINE ??= "vab-5000"
 
 #
 # Where to place downloads
@@ -83,7 +84,9 @@ MACHINE ??= "genio-700-evk"
 #
 #DISTRO ?= "poky"
 #DISTRO ?= "rity-bringup"
-DISTRO ?= "rity-demo"
+#DISTRO ?= "rity-demo"
+DISTRO ?= "rity-vis"
+
 # As an example of a subclass there is a "bleeding" edge policy configuration
 # where many versions are set to the absolute latest code from the upstream 
 # source control systems. This is just mentioned here as an example, its not
@@ -333,4 +336,5 @@ KERNEL_DEVICETREE_OVERLAYS_AUTOLOAD:genio-350 += "gpu-mali.dtbo video.dtbo"
 KERNEL_DEVICETREE_OVERLAYS_AUTOLOAD:genio-700 += "gpu-mali.dtbo video.dtbo apusys.dtbo"
 KERNEL_DEVICETREE_OVERLAYS_AUTOLOAD:genio-510 += "gpu-mali.dtbo video.dtbo apusys.dtbo"
 KERNEL_DEVICETREE_OVERLAYS_AUTOLOAD:genio-1200 += "gpu-mali.dtbo video.dtbo apusys.dtbo"
+KERNEL_DEVICETREE_OVERLAYS_AUTOLOAD:append:vab-5000 = " camera-rn6752-csi0-std.dtbo"
 

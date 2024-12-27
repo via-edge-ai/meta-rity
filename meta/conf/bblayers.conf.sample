@@ -28,6 +28,8 @@ BBLAYERS ?= " \
   ##OEROOT##/../meta-rity/meta-rity-bringup \
   ##OEROOT##/../meta-rity/meta-rity-bsp \
   ##OEROOT##/../meta-rity/meta-rity-demo \
+  ##OEROOT##/../meta-rity/meta-rity-vis \
   ##OEROOT##/../meta-tensorflow \
   ##OEROOT##/../meta-qt5 \
+  ##OEROOT##/../meta-via \
   "

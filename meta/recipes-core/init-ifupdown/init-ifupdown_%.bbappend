@@ -4,6 +4,7 @@ SRC_URI:append = " \
 	file://genio-350-evk-interfaces \
 	file://genio-510-evk-interfaces \
 	file://genio-700-evk-interfaces \
+	file://vab-5000-interfaces \
 	file://genio-1200-evk-interfaces \
 	file://i1200-demo-interfaces \
 "
@@ -21,6 +22,11 @@ do_install:append:genio-510-evk() {
 do_install:append:genio-700-evk() {
 	install -d ${D}${sysconfdir}/network/
 	install -m 0644 ${WORKDIR}/genio-700-evk-interfaces ${D}${sysconfdir}/network/interfaces
+}
+
+do_install:append:vab-5000() {
+	install -d ${D}${sysconfdir}/network/
+	install -m 0644 ${WORKDIR}/vab-5000-interfaces ${D}${sysconfdir}/network/interfaces
 }
 
 do_install:append:genio-1200-evk() {

@@ -4,6 +4,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 #       It's subject to change in the future.
 FILESEXTRAPATHS:prepend:genio-510-evk := "${THISDIR}/files/genio-700-evk:"
 FILESEXTRAPATHS:prepend:genio-700-evk := "${THISDIR}/files/genio-700-evk:"
+FILESEXTRAPATHS:prepend:vab-5000 := "${THISDIR}/files/genio-700-evk:"
 FILESEXTRAPATHS:prepend:genio-1200-evk := "${THISDIR}/files/genio-1200-evk:"
 FILESEXTRAPATHS:prepend:genio-1200-evk-p1v1 := "${THISDIR}/files/genio-1200-evk:"
 
@@ -25,6 +26,12 @@ SRC_URI:append:genio-510-evk = " \
 "
 
 SRC_URI:append:genio-700-evk = " \
+	file://usbgadget.conf \
+	file://wwan-5g.sh \
+	file://wwan-5g.service \
+"
+
+SRC_URI:append:vab-5000 = " \
 	file://usbgadget.conf \
 	file://wwan-5g.sh \
 	file://wwan-5g.service \
@@ -102,6 +109,10 @@ do_install:append:genio-700-evk() {
 	install_services_genio_700
 }
 
+do_install:append:vab-5000() {
+	install_services_genio_700
+}
+
 do_install:append:genio-1200-evk() {
 	# Define default USB gadget port (ADB)
 	install -m 0644 ${WORKDIR}/usbgadget.conf ${D}${sysconfdir}/usbgadget.conf
@@ -168,6 +179,10 @@ FILES:${PN}:append:genio-510-evk = " \
 	${systemd_unitdir}/system/wwan-5g.service \
 "
 FILES:${PN}:append:genio-700-evk = " \
+	${sysconfdir}/usbgadget.conf \
+	${systemd_unitdir}/system/wwan-5g.service \
+"
+FILES:${PN}:append:vab-5000 = " \
 	${sysconfdir}/usbgadget.conf \
 	${systemd_unitdir}/system/wwan-5g.service \
 "
