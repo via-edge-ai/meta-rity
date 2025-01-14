@@ -4,6 +4,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 #       It's subject to change in the future.
 FILESEXTRAPATHS:prepend:genio-510-evk := "${THISDIR}/files/genio-700-evk:"
 FILESEXTRAPATHS:prepend:genio-700-evk := "${THISDIR}/files/genio-700-evk:"
+FILESEXTRAPATHS:prepend:som-7000 := "${THISDIR}/files/genio-1200-evk:"
 FILESEXTRAPATHS:prepend:genio-1200-evk := "${THISDIR}/files/genio-1200-evk:"
 FILESEXTRAPATHS:prepend:genio-1200-evk-p1v1 := "${THISDIR}/files/genio-1200-evk:"
 
@@ -31,6 +32,15 @@ SRC_URI:append:genio-700-evk = " \
 "
 
 SRC_URI:append:genio-1200-evk = " \
+	file://usbgadget.conf \
+	file://usbmass.sh \
+	file://usbmass.service \
+	file://wwan-5g.sh \
+	file://wwan-5g.service \
+	file://91-caninterface.rules \
+"
+
+SRC_URI:append:som-7000 = " \
 	file://usbgadget.conf \
 	file://usbmass.sh \
 	file://usbmass.service \
@@ -113,7 +123,32 @@ do_install:append:genio-1200-evk() {
 	install -m 0644 ${WORKDIR}/usbmass.service ${D}${systemd_unitdir}/system/
 	install -m 0755 ${WORKDIR}/usbmass.sh ${D}${sysconfdir}/init.d/
 	install -m 0755 ${WORKDIR}/usbmass.sh ${D}${systemd_unitdir}
-	ln -sfr ${D}/${systemd_system_unitdir}/usbmass.service ${D}/${sysconfdir}/systemd/system/multi-user.target.wants/usbmass.service
+	#ln -sfr ${D}/${systemd_system_unitdir}/usbmass.service ${D}/${sysconfdir}/systemd/system/multi-user.target.wants/usbmass.service
+
+	# WWAN 5G Card service
+	install -m 0644 ${WORKDIR}/wwan-5g.service ${D}${systemd_unitdir}/system/
+	install -m 0755 ${WORKDIR}/wwan-5g.sh ${D}${sysconfdir}/init.d/
+	install -m 0755 ${WORKDIR}/wwan-5g.sh ${D}${systemd_unitdir}
+	# User should enable it manually or they sure it can be enabled by default.
+	# ln -sfr ${D}/${systemd_system_unitdir}/wwan-5g.service ${D}/${sysconfdir}/systemd/system/multi-user.target.wants/wwan-5g.service
+
+	# can bus
+	install -D -p -m0644 ${WORKDIR}/91-caninterface.rules \
+		${D}${sysconfdir}/udev/rules.d/91-caninterface.rules
+}
+
+do_install:append:som-7000() {
+	# Define default USB gadget port (ADB)
+	install -m 0644 ${WORKDIR}/usbgadget.conf ${D}${sysconfdir}/usbgadget.conf
+
+	# Create folder for services enabled by default
+	install -d ${D}/${sysconfdir}/systemd/system/multi-user.target.wants/
+
+	# USB Mass Storage service
+	install -m 0644 ${WORKDIR}/usbmass.service ${D}${systemd_unitdir}/system/
+	install -m 0755 ${WORKDIR}/usbmass.sh ${D}${sysconfdir}/init.d/
+	install -m 0755 ${WORKDIR}/usbmass.sh ${D}${systemd_unitdir}
+	#ln -sfr ${D}/${systemd_system_unitdir}/usbmass.service ${D}/${sysconfdir}/systemd/system/multi-user.target.wants/usbmass.service
 
 	# WWAN 5G Card service
 	install -m 0644 ${WORKDIR}/wwan-5g.service ${D}${systemd_unitdir}/system/
@@ -174,13 +209,17 @@ FILES:${PN}:append:genio-700-evk = " \
 FILES:${PN}:append:genio-1200-evk = " \
 	${sysconfdir}/usbgadget.conf \
 	${systemd_unitdir}/system/usbmass.service \
-	${sysconfdir}/systemd/system/multi-user.target.wants/usbmass.service \
 	${systemd_unitdir}/system/wwan-5g.service \
 "
 FILES:${PN}:append:genio-1200-evk-p1v1 = " \
 	${sysconfdir}/usbgadget.conf \
 	${systemd_unitdir}/system/usbmass.service \
 	${sysconfdir}/systemd/system/multi-user.target.wants/usbmass.service \
+	${systemd_unitdir}/system/wwan-5g.service \
+"
+FILES:${PN}:append:som-7000 = " \
+	${sysconfdir}/usbgadget.conf \
+	${systemd_unitdir}/system/usbmass.service \
 	${systemd_unitdir}/system/wwan-5g.service \
 "
 
