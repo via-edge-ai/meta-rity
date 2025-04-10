@@ -44,6 +44,7 @@ IMAGE_INSTALL:append:vab-5000 = " \
 	neuronruntimehelper \
 	modelmark \
 	via-version \
+	vthermal \
 	vplay \
 	vmediaplayer \
 	vtool \
